@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class MenuData {
-  final Icon menuIcon;
+class MenuItem {
+  final Icon icon;
   final String title;
   final VoidCallback onTap;
 
-  MenuData({required this.menuIcon, required this.title, required this.onTap});
+  MenuItem({required this.icon, required this.title, required this.onTap});
 }
 
 class TrainingData {
@@ -31,21 +31,21 @@ class CertificationData {
   CertificationData({required this.name, this.duration, this.description});
 }
 
-List<MenuData> menuData = [
-  MenuData(
-      menuIcon: const Icon(
+List<MenuItem> menuData = [
+  MenuItem(
+      icon: const Icon(
         Icons.home,
       ),
       title: 'Accueil',
       onTap: () {}),
-  MenuData(
-      menuIcon: const Icon(
+  MenuItem(
+      icon: const Icon(
         Icons.group,
       ),
       title: 'Qui Sommes Nous ?',
       onTap: () {}),
-  MenuData(
-      menuIcon: const Icon(
+  MenuItem(
+      icon: const Icon(
         Icons.mail,
       ),
       title: 'Nous Contacter',

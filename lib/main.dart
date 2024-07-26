@@ -22,6 +22,16 @@ class HomePage extends StatelessWidget {
             home: Scaffold(
               appBar: AppBar(
                 title: const Text("Nab Consult"),
+                leading: Builder(
+                  builder: (context) {
+                    return IconButton(
+                      icon: const Icon(Icons.menu),
+                      onPressed: () {
+                        Scaffold.of(context).openDrawer();
+                      },
+                    );
+                  },
+                ),
               ),
               drawer:  const MyDrawer(),
               body:  const MyHomePage(),

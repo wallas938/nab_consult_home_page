@@ -31,6 +31,32 @@ class CertificationData {
   CertificationData({required this.name, this.duration, this.description});
 }
 
+class Testimonial {
+  final String text;
+  final String author;
+  final String position;
+
+  Testimonial({required this.text, required this.author, required this.position});
+}
+
+final List<Testimonial> testimonialData = [
+  Testimonial(
+      text:
+          "Un grand merci à Nabil pour nous avoir encadré ces deux jours à la formation habilitation à l'électricité. Merci : pour son professionnalisme, sa bienveillance, sa patience et son sens de la pédagogie (pas évident d'enseigner des notions d'électricité à des professionnels de santé) .Je vous souhaite une belle continuation.",
+      author: "Alexiane",
+      position: "(Aide-soignante à la clinique Champ Notre Dame à Taverny)"),
+  Testimonial(
+      text:
+      "Merci pour cette formation et pour le questionnaire qui est très formateur",
+      author: "Anonyme",
+      position: "Inconnu"),
+  Testimonial(
+      text:
+      "Bonne ambiance très bonne cohésion de groupe ",
+      author: "Anonyme",
+      position: "(Inconnu)"),
+];
+
 List<MenuItem> menuData = [
   MenuItem(
       icon: const Icon(
@@ -133,6 +159,7 @@ List<TrainingData> trainingData = [
             name:
                 "IRVE – formation de niveau 3 Charge Rapide ou à haute puissance",
             description:
-                "Cette formation vise l’installation d’infrastructure de recharge de véhicule électrique en charge rapide à haute puissance et en courant continu (DC) et de connaître les spécificités de ce type d’installations et les règles de sécurité applicables.", duration: "3"),
+                "Cette formation vise l’installation d’infrastructure de recharge de véhicule électrique en charge rapide à haute puissance et en courant continu (DC) et de connaître les spécificités de ce type d’installations et les règles de sécurité applicables.",
+            duration: "3"),
       ]),
 ];

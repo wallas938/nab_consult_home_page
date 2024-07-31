@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nab_consult_home_page/constantes/app-datas.dart';
 import 'package:nab_consult_home_page/constantes/theme.colors.dart';
@@ -70,12 +70,103 @@ class MyHomePage extends StatelessWidget {
         child: const Column(
           children: [
             /*** HERO_SECTION ***/
-            HeroSection(),
+            // HeroSection(),
             /*** FORMATIONS_SECTION ***/
-            TrainingSection(),
-            /***  ***/
+            // TrainingSection(),
+            /*** TESTIMONIALS_SECTION ***/
+            TestimonialSection()
           ],
         ),
+      ),
+    );
+  }
+}
+
+class HeroSection extends StatelessWidget {
+  const HeroSection({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: double.maxFinite,
+      child: Stack(
+        children: [
+          /*** IMAGE ***/
+          Image.asset(
+            "assets/images/hero_image_4.webp",
+            colorBlendMode: BlendMode.overlay,
+          ),
+          /*** IMAGE_WITH_BLACK_SCREEN_OPACITY ***/
+          Positioned.fill(
+            child: Container(
+              color: Colors.black.withOpacity(.1),
+            ),
+          ),
+          /*** CATCHPHRASE ***/
+          Positioned(
+              top: 45.sp,
+              left: 20.sp,
+              child: RichText(
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: 'Avec ',
+                      style: TextStyle(
+                        fontFamily: "Instrument Sans",
+                        fontStyle: FontStyle.italic,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.white,
+                        fontSize: 14.sp,
+                        shadows: [
+                          Shadow(
+                            offset: const Offset(1.5, 1.5),
+                            blurRadius: 2.0,
+                            color: Colors.black.withOpacity(0.8),
+                          ),
+                        ],
+                      ),
+                    ),
+                    TextSpan(
+                      text: 'NAB Consult\n\n',
+                      style: TextStyle(
+                        fontFamily: "Instrument Sans",
+                        letterSpacing: 1.5,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.grey,
+                        fontSize: 18.sp,
+                        shadows: [
+                          Shadow(
+                            offset: const Offset(1.5, 1.5),
+                            blurRadius: 2.0,
+                            color: Colors.black.withOpacity(0.8),
+                          ),
+                        ],
+                      ),
+                    ),
+                    TextSpan(
+                      text:
+                          'Élevez vos standards\net formez vous à la sécurité électrique\nde vos équipes',
+                      style: TextStyle(
+                        fontFamily: "Instrument Sans",
+                        fontStyle: FontStyle.italic,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
+                        fontSize: 14.sp,
+                        shadows: [
+                          Shadow(
+                            offset: const Offset(1.5, 1.5),
+                            blurRadius: 2.0,
+                            color: Colors.black.withOpacity(0.8),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ))
+        ],
       ),
     );
   }
@@ -91,10 +182,10 @@ class TrainingSection extends StatelessWidget {
       child: SizedBox(
         child: Column(
           children: [
+            /*** SECTION_TITLE ***/
             const SizedBox(
               height: 30,
             ),
-            /*** SECTION_TITLE ***/
             Text(
               "DÉCOUVREZ NOS FORMATIONS",
               style: AppTypography.headingS(Colors.black),
@@ -279,90 +370,102 @@ class TrainingSection extends StatelessWidget {
   }
 }
 
-class HeroSection extends StatelessWidget {
-  const HeroSection({
-    super.key,
-  });
+class TestimonialSection extends StatelessWidget {
+  const TestimonialSection({super.key});
 
   @override
   Widget build(BuildContext context) {
+    TextStyle testimonialStyle = TextStyle(
+        fontSize: 11.5.sp,
+        fontFamily: "Instrument Sans",
+        fontWeight: FontWeight.bold,
+        fontStyle: FontStyle.italic,
+        color: Colors.amberAccent);
+
     return SizedBox(
-      width: double.maxFinite,
-      child: Stack(
+      width: double.infinity,
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
         children: [
-          /*** IMAGE ***/
-          Image.asset(
-            "assets/images/hero_image_4.webp",
-            colorBlendMode: BlendMode.overlay,
+          const SizedBox(
+            height: 30,
           ),
-          /*** IMAGE_WITH_BLACK_SCREEN_OPACITY ***/
-          Positioned.fill(
-            child: Container(
-              color: Colors.black.withOpacity(.1),
-            ),
+          Text(
+            "LEURS TÉMOIGNAGES",
+            style: AppTypography.headingS(Colors.black),
           ),
-          /*** CATCHPHRASE ***/
-          Positioned(
-              top: 45.sp,
-              left: 20.sp,
-              child: RichText(
-                text: TextSpan(
-                  children: [
-                    TextSpan(
-                      text: 'Avec ',
-                      style: TextStyle(
-                        fontFamily: "Instrument Sans",
-                        fontStyle: FontStyle.italic,
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.white,
-                        fontSize: 14.sp,
-                        shadows: [
-                          Shadow(
-                            offset: const Offset(1.5, 1.5),
-                            blurRadius: 2.0,
-                            color: Colors.black.withOpacity(0.8),
+          const SizedBox(
+            height: 5,
+          ),
+          const Divider(
+            height: .1,
+            color: AppColors.grey,
+          ),
+          const SizedBox(
+            height: 50,
+          ),
+          /*** TESTIMONIALS_LIST ***/
+          CarouselSlider(
+              items: testimonialData
+                  .map((t) => Padding(
+                        padding: const EdgeInsets.only(bottom: 10),
+                        child: Container(
+                          width: double.maxFinite,
+                          padding: const EdgeInsets.all(24),
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                  color: Colors.black.withOpacity(.5),
+                                  blurRadius: 2.0,
+                                  offset: const Offset(1, 1))
+                            ],
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(8),
                           ),
-                        ],
-                      ),
-                    ),
-                    TextSpan(
-                      text: 'NAB Consult\n\n',
-                      style: TextStyle(
-                        fontFamily: "Instrument Sans",
-                        letterSpacing: 1.5,
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.grey,
-                        fontSize: 18.sp,
-                        shadows: [
-                          Shadow(
-                            offset: const Offset(1.5, 1.5),
-                            blurRadius: 2.0,
-                            color: Colors.black.withOpacity(0.8),
+                          child: Center(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Icon(
+                                  Icons.format_quote,
+                                  size: 28.0.sp,
+                                  color: Colors.amberAccent,
+                                ),
+                                const SizedBox(
+                                  height: 4,
+                                ),
+                                Expanded(
+                                  child: Text(
+                                    textAlign: TextAlign.justify,
+                                    t.text,
+                                    style: testimonialStyle,
+                                  ),
+                                ),
+                                Expanded(
+                                    child:
+                                        Text(t.author, style: testimonialStyle)),
+                                const SizedBox(
+                                  height: 4,
+                                ),
+                                Expanded(
+                                  child: Text(
+                                    t.position,
+                                    style: testimonialStyle,
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
-                        ],
-                      ),
-                    ),
-                    TextSpan(
-                      text:
-                          'Élevez vos standards\net formez vous à la sécurité électrique\nde vos équipes',
-                      style: TextStyle(
-                        fontFamily: "Instrument Sans",
-                        fontStyle: FontStyle.italic,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white,
-                        fontSize: 14.sp,
-                        shadows: [
-                          Shadow(
-                            offset: const Offset(1.5, 1.5),
-                            blurRadius: 2.0,
-                            color: Colors.black.withOpacity(0.8),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ))
+                        ),
+                      ))
+                  .toList(),
+              options: CarouselOptions(
+                  disableCenter: true,
+                  initialPage: 0,
+                  autoPlay: true,
+                  autoPlayInterval: const Duration(seconds: 4),
+                  enlargeCenterPage: true)),
         ],
       ),
     );

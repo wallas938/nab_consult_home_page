@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nab_consult_home_page/constantes/app-datas.dart';
 import 'package:nab_consult_home_page/constantes/theme.colors.dart';
@@ -9,7 +8,7 @@ TextStyle cardTitleStyle = TextStyle(
     fontStyle: FontStyle.italic,
     color: AppColors.white,
     fontWeight: FontWeight.w700,
-    fontSize: 14.sp,
+    fontSize: 12.sp,
     decorationStyle: TextDecorationStyle.solid);
 
 TextStyle cardDescriptionStyle = TextStyle(
@@ -74,7 +73,9 @@ class MyHomePage extends StatelessWidget {
             /*** FORMATIONS_SECTION ***/
             // TrainingSection(),
             /*** TESTIMONIALS_SECTION ***/
-            TestimonialSection()
+            // TestimonialSection(),
+            /*** FEATURES_SECTION ***/
+            FeatureSection()
           ],
         ),
       ),
@@ -282,12 +283,31 @@ class TrainingSection extends StatelessWidget {
                                       /*** CARD_TITLE ***/
                                       Row(
                                         mainAxisAlignment:
-                                            MainAxisAlignment.start,
+                                            MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.end,
                                         children: [
                                           Expanded(
+                                            flex: 5,
                                             child: Text(
                                               trainingData[index].trainingTitle,
                                               style: cardTitleStyle,
+                                            ),
+                                          ),
+                                          Expanded(
+                                            child: Text(
+                                              trainingData[index].duration !=
+                                                      null
+                                                  ? "${trainingData[index].duration}jour(s)"
+                                                  : "",
+                                              style: TextStyle(
+                                                  fontStyle: FontStyle.italic,
+                                                  color: AppColors.amber,
+                                                  fontWeight: FontWeight.w700,
+                                                  fontSize: 11.5.sp,
+                                                  decorationStyle:
+                                                      TextDecorationStyle
+                                                          .solid),
                                             ),
                                           ),
                                         ],
@@ -382,6 +402,60 @@ class TestimonialSection extends StatelessWidget {
         fontStyle: FontStyle.italic,
         color: Colors.amberAccent);
 
+    List<Widget> buildTestimonialListWidget() {
+      return testimonialData
+          .map((t) => Padding(
+                padding: const EdgeInsets.only(bottom: 10),
+                child: Container(
+                  width: 320,
+                  margin:
+                      const EdgeInsets.symmetric(vertical: 14, horizontal: 18),
+                  padding: const EdgeInsets.all(24),
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.black.withOpacity(.5),
+                          blurRadius: 2.0,
+                          offset: const Offset(1, 1))
+                    ],
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Icon(
+                        Icons.format_quote,
+                        size: 28.0.sp,
+                        color: Colors.amberAccent,
+                      ),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      Text(
+                        textAlign: TextAlign.justify,
+                        t.text,
+                        style: testimonialStyle,
+                      ),
+                      const SizedBox(
+                        height: 12,
+                      ),
+                      Text(t.author, style: testimonialStyle),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                        t.position,
+                        style: testimonialStyle,
+                      )
+                    ],
+                  ),
+                ),
+              ))
+          .toList();
+    }
+
     return SizedBox(
       width: double.infinity,
       child: Column(
@@ -405,69 +479,108 @@ class TestimonialSection extends StatelessWidget {
             height: 50,
           ),
           /*** TESTIMONIALS_LIST ***/
-          CarouselSlider(
-              items: testimonialData
-                  .map((t) => Padding(
-                        padding: const EdgeInsets.only(bottom: 10),
-                        child: Container(
-                          width: double.maxFinite,
-                          padding: const EdgeInsets.all(24),
-                          decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                  color: Colors.black.withOpacity(.5),
-                                  blurRadius: 2.0,
-                                  offset: const Offset(1, 1))
-                            ],
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Center(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Icon(
-                                  Icons.format_quote,
-                                  size: 28.0.sp,
-                                  color: Colors.amberAccent,
-                                ),
-                                const SizedBox(
-                                  height: 4,
-                                ),
-                                Expanded(
-                                  child: Text(
-                                    textAlign: TextAlign.justify,
-                                    t.text,
-                                    style: testimonialStyle,
-                                  ),
-                                ),
-                                Expanded(
-                                    child:
-                                        Text(t.author, style: testimonialStyle)),
-                                const SizedBox(
-                                  height: 4,
-                                ),
-                                Expanded(
-                                  child: Text(
-                                    t.position,
-                                    style: testimonialStyle,
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      ))
-                  .toList(),
-              options: CarouselOptions(
-                  disableCenter: true,
-                  initialPage: 0,
-                  autoPlay: true,
-                  autoPlayInterval: const Duration(seconds: 4),
-                  enlargeCenterPage: true)),
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            children: buildTestimonialListWidget(),
+          ),
         ],
       ),
+    );
+  }
+}
+
+class FeatureSection extends StatelessWidget {
+  const FeatureSection({super.key});
+  List<Widget> buildFeatureListWidget() {
+    return features
+        .map((f) => Container(
+      width: 280,
+      height: 330,
+      margin: const EdgeInsets.only(bottom: 16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(4),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            offset: const Offset(0, 1),
+            blurRadius: 4,
+            spreadRadius: 1,
+          ),
+        ],
+      ),
+      child: Column(
+        children: [
+          Expanded(
+              child: Image.asset(
+                width: double.infinity,
+                f.imagePath,
+                fit: BoxFit.fill,
+                height: 230,
+              )),
+          Expanded(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    Text(
+                      f.name,
+                      style: TextStyle(
+                        fontSize: 14.sp,
+                        fontStyle: FontStyle.italic,
+                        fontFamily: "Instrument Sans",
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 18,
+                    ),
+                    Expanded(
+                      child: Text(
+                          f.description,
+                          style: TextStyle(
+                            fontSize: 12.sp,
+                            fontFamily: "Instrument Sans",
+                            fontWeight: FontWeight.w500,
+                          )),
+                    ),
+                  ],
+                ),
+              ))
+        ],
+      ),
+    ))
+        .toList();
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        const SizedBox(
+          height: 30,
+        ),
+        Text(
+          "VOS OUTILS DU QUOTIDIEN",
+          style: AppTypography.headingS(Colors.black),
+        ),
+        const SizedBox(
+          height: 5,
+        ),
+        const Divider(
+          height: .1,
+          color: AppColors.grey,
+        ),
+        const SizedBox(
+          height: 50,
+        ),
+        Column(
+          children: buildFeatureListWidget(),
+        )
+      ],
     );
   }
 }

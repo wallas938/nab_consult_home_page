@@ -1,5 +1,13 @@
 import 'package:flutter/material.dart';
 
+class FeatureItem {
+  final String name;
+  final String description;
+  final String imagePath;
+
+  FeatureItem({required this.name, required this.description, required this.imagePath});
+}
+
 class MenuItem {
   final Icon icon;
   final String title;
@@ -35,29 +43,47 @@ class Testimonial {
   final String text;
   final String author;
   final String position;
+  final double height;
 
-  Testimonial({required this.text, required this.author, required this.position});
+  Testimonial(
+      {required this.text,
+      required this.author,
+      required this.position,
+      required this.height});
 }
+
+final List<FeatureItem> features = [
+  FeatureItem(name: "Calendrier de gestion des disponibilités", imagePath: "assets/images/image_calendar.webp", description: "Grâce à la synchronisation instantanée de nos agendas, réservez le créneau qui vous convient parmi les disponibilités de nos formateurs"),
+  FeatureItem(name: "Calendrier de gestion des disponibilités", imagePath: "assets/images/image_calendar.webp", description: "Grâce à la synchronisation instantanée de nos agendas, réservez le créneau qui vous convient parmi les disponibilités de nos formateurs"),
+  FeatureItem(name: "Calendrier de gestion des disponibilités", imagePath: "assets/images/image_calendar.webp", description: "Grâce à la synchronisation instantanée de nos agendas, réservez le créneau qui vous convient parmi les disponibilités de nos formateurs"),
+];
 
 final List<Testimonial> testimonialData = [
   Testimonial(
       text:
-          "Un grand merci à Nabil pour nous avoir encadré ces deux jours à la formation habilitation à l'électricité. Merci : pour son professionnalisme, sa bienveillance, sa patience et son sens de la pédagogie (pas évident d'enseigner des notions d'électricité à des professionnels de santé) .Je vous souhaite une belle continuation.",
+          "Un grand merci à Nabil pour nous avoir encadré ces deux jours à la formation habilitation à l'électricité. Merci : pour son professionnalisme, sa bienveillance, sa patience et son sens de la pédagogie (pas évident d'enseigner des notions d'électricité à des professionnels de santé).\n\nJe vous souhaite une belle continuation.",
       author: "Alexiane",
-      position: "(Aide-soignante à la clinique Champ Notre Dame à Taverny)"),
+      position: "(Aide-soignante à la clinique Champ Notre Dame à Taverny)",
+      height: 340),
   Testimonial(
       text:
-      "Merci pour cette formation et pour le questionnaire qui est très formateur",
+          "Merci pour cette formation et pour le questionnaire qui est très formateur.",
       author: "Anonyme",
-      position: "Inconnu"),
+      position: "(Gestionnaire de patrimoine société ESSET HUMAKEY)",
+      height: 180),
   Testimonial(
-      text:
-      "Bonne ambiance très bonne cohésion de groupe ",
+      text: "Formateur professionnel et pédagogue.",
       author: "Anonyme",
-      position: "(Inconnu)"),
+      position: "(Technicien maintenance société TVGO)",
+      height: 180),
+  Testimonial(
+      text: "Parfait, animateur excellent !",
+      author: "Anonyme",
+      position: "(Ingénieur société SANOFI)",
+      height: 180),
 ];
 
-List<MenuItem> menuData = [
+final List<MenuItem> menuData = [
   MenuItem(
       icon: const Icon(
         Icons.home,
@@ -78,12 +104,12 @@ List<MenuItem> menuData = [
       onTap: () {})
 ];
 
-List<TrainingData> trainingData = [
+final List<TrainingData> trainingData = [
   TrainingData(
       trainingTitle: "Habilitation électrique BT/HT : NFC 18-510",
       trainingImagePath: "assets/images/image_bt_ht.webp",
       description:
-          "Les certifications électriques garantissent la conformité aux normes de sécurité, protègent les employés et les clients, et renforcent la réputation de l'entreprise. Elles sont essentielles pour assurer la légalité, la sécurité, et la compétitivité sur le marché.",
+          "Les certifications électriques garantissent la conformité aux normes de sécurité, protègent les employés et les clients, et renforcent la réputation de l'entreprise. Elles sont essentielles pour assurer la légalité, la sécurité, et la compétitivité sur le marché.\n\nL’article 4544-9 du code du travail précise que : « Les opérations sur les installations électriques ou dans leur voisinage ne peuvent être effectuées que par des travailleurs habilités. »\n\nL'article R. 4544-10 du même code prévoit que : « Un travailleur est habilité dans les limites des attributions qui lui sont confiées.",
       certifications: [
         CertificationData(
           name: "B0/H0 – H0V",
@@ -102,19 +128,17 @@ List<TrainingData> trainingData = [
       trainingTitle: "Habilitation véhicule électrique: NFC 18-550",
       trainingImagePath: "assets/images/image_vehicule.webp",
       description:
-          "Les véhicules électriques fonctionnent sous haute tension (400-700V), ce qui présente des risques d'électrocution et de brûlures. Les interventions sur ces véhicules nécessitent une formation spécifique et des précautions particulières. Les employeurs sont tenus de former leurs salariés et de leur délivrer une habilitation pour travailler sur des véhicules électriques, conformément au code du travail.",
+          "La norme NFC-18-550 définit les différents symboles d’habilitation en fonction, entre autres, de la nature de l’opération et de l’environnement électrique.",
       certifications: [
-        CertificationData(name: "B0L"),
-        CertificationData(name: "B1VL/B2VL/BCL/BEL ESSAI/BRL"),
+        CertificationData(name: "B0L", duration: "1"),
         CertificationData(
-            name: "BR/BC/B1V/B2V/BE Essai – Vérification – Mesurage"),
-        CertificationData(name: "B1XL/B2XL")
+            name: "B1VL/B2VL / BCL/ BEL ESSAI/BRL/B1XL/B2XL", duration: "2"),
       ]),
   TrainingData(
       trainingTitle:
           "AIPR (autorisation d’intervention à proximité des réseaux) pour les opérateurs – encadrants et concepteurs",
       description:
-          "Depuis le 1er janvier 2018, l’Autorisation d’Intervention à Proximité des Réseaux (AIPR) est obligatoire pour toute personne travaillant près de réseaux aériens ou enterrés. Délivrée par l’employeur, elle certifie les compétences nécessaires pour éviter les dommages aux infrastructures. L'AIPR, conforme à la réglementation DT-DICT, vise à améliorer la sécurité et prévenir les incidents.",
+          "Obligatoire depuis le 1er janvier 2018, cette formation vous permet d’acquérir des compétences et des connaissances dans la préparation ou l'exécution de travaux à proximité des réseaux.",
       trainingImagePath: "assets/images/image_aipr.webp",
       duration: "1",
       certifications: []),
@@ -123,19 +147,19 @@ List<TrainingData> trainingData = [
           "ATEX (Atmosphère explosive):  sensibilisation au risque ATEX",
       trainingImagePath: "assets/images/image_atex.webp",
       description:
-          "Les dispositions du Code du travail imposent plusieurs obligations aux employeurs vis-à-vis du risque d’atmosphères explosives : l’application des principes généraux de la prévention des risques,l’évaluation des risques dont le risque d’explosion,le classement des lieux de travail (zonage),la rédaction du document relatif à la protection contre les explosions (DRPCE). ",
+          "Les dispositions du Code du travail imposent plusieurs obligations aux employeurs vis-à-vis du risque d’atmosphères explosives à savoir : viser l’application des principes généraux de la prévention des risques,l’évaluation des risques d’explosion, le classement des lieux de travail (zonage) et la rédaction du document relatif à la protection contre les explosions (DRPCE).",
       certifications: []),
   TrainingData(
       trainingTitle: "SST (Sauvetage secourisme du travail)",
       duration: "2",
       trainingImagePath: "assets/images/image_sst.webp",
       description:
-          "Tout salarié peut se former au sauvetage secourisme du travail. Il acquiert ainsi des compétences reconnues pour secourir en cas d’accident et pour être acteur de la prévention dans son entreprise",
+          "Cette formation vise à acquérir des compétences reconnues pour secourir en cas d’accident et pour être acteur de la prévention dans son entreprise.",
       certifications: []),
   TrainingData(
       trainingTitle: "Manutentions manuelles: Gestes et postures",
       description:
-          "La formation SST (Sauvetage Secourisme du Travail) enseigne les techniques de premiers secours et la prévention des risques professionnels. Les participants apprennent à évaluer les situations d'urgence, à effectuer les gestes de secours nécessaires et à alerter les secours. Elle est essentielle pour assurer la sécurité des employés et minimiser les conséquences des accidents au travail.",
+          "Cette formation vise à connaître les techniques, théoriques et pratiques, de manutention manuelle et appliquer les bons gestes et bonnes postures à son poste.",
       trainingImagePath: "assets/images/image_manutention.webp",
       certifications: []),
   TrainingData(
@@ -162,4 +186,14 @@ List<TrainingData> trainingData = [
                 "Cette formation vise l’installation d’infrastructure de recharge de véhicule électrique en charge rapide à haute puissance et en courant continu (DC) et de connaître les spécificités de ce type d’installations et les règles de sécurité applicables.",
             duration: "3"),
       ]),
+  TrainingData(
+      trainingTitle: "Gestion et prévention du risque Chimique",
+      trainingImagePath: "assets/images/image_chimique.webp",
+      certifications: [],
+      description:
+          "Article R4412-1 : Détermine que les règles de prévention des risques chimiques sont fixées par décret en Conseil d'État, prenant en compte les situations de polyexpositions."),
+  TrainingData(
+      trainingTitle: "Risque amiante",
+      trainingImagePath: "assets/images/image_amiante.webp",
+      certifications: []),
 ];

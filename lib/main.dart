@@ -20,7 +20,7 @@ class HomePage extends StatelessWidget {
         builder: (_, child) {
           return MaterialApp(
             home: Scaffold(
-              backgroundColor: Colors.grey[200],
+              backgroundColor: Colors.white,
               appBar: AppBar(
                 title: const Text("Nab Consult"),
                 leading: Builder(

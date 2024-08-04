@@ -53,7 +53,7 @@ class Testimonial {
 }
 
 final List<FeatureItem> features = [
-  FeatureItem(name: "Calendrier de gestion des disponibilités", imagePath: "assets/images/image_calendar.webp", description: "Grâce à la synchronisation instantanée de nos agendas, réservez le créneau qui vous convient parmi les disponibilités de nos formateurs"),
+  FeatureItem(name: "Calendrier de gestion des disponibilités", imagePath: "assets/images/image_calendar.webp", description: "Grâce à la synchronisation instantanée de nos agendas, réservez le créneau qui vous convient parmi les disponibilités de nos formateurs."),
   FeatureItem(name: "Calendrier de gestion des disponibilités", imagePath: "assets/images/image_calendar.webp", description: "Grâce à la synchronisation instantanée de nos agendas, réservez le créneau qui vous convient parmi les disponibilités de nos formateurs"),
   FeatureItem(name: "Calendrier de gestion des disponibilités", imagePath: "assets/images/image_calendar.webp", description: "Grâce à la synchronisation instantanée de nos agendas, réservez le créneau qui vous convient parmi les disponibilités de nos formateurs"),
 ];

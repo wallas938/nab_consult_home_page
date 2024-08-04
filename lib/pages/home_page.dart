@@ -491,71 +491,73 @@ class TestimonialSection extends StatelessWidget {
 
 class FeatureSection extends StatelessWidget {
   const FeatureSection({super.key});
+
   List<Widget> buildFeatureListWidget() {
     return features
         .map((f) => Container(
-      width: 280,
-      height: 330,
-      margin: const EdgeInsets.only(bottom: 16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(4),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
-            offset: const Offset(0, 1),
-            blurRadius: 4,
-            spreadRadius: 1,
-          ),
-        ],
-      ),
-      child: Column(
-        children: [
-          Expanded(
-              child: Image.asset(
-                width: double.infinity,
-                f.imagePath,
-                fit: BoxFit.fill,
-                height: 230,
-              )),
-          Expanded(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    Text(
-                      f.name,
-                      style: TextStyle(
-                        fontSize: 14.sp,
-                        fontStyle: FontStyle.italic,
-                        fontFamily: "Instrument Sans",
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 18,
-                    ),
-                    Expanded(
-                      child: Text(
-                          f.description,
-                          style: TextStyle(
-                            fontSize: 12.sp,
-                            fontFamily: "Instrument Sans",
-                            fontWeight: FontWeight.w500,
-                          )),
-                    ),
-                  ],
-                ),
-              ))
-        ],
-      ),
-    ))
+              width: 300,
+              height: 550,
+              margin: const EdgeInsets.only(bottom: 16),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(4),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    offset: const Offset(0, 1),
+                    blurRadius: 4,
+                    spreadRadius: 1,
+                  ),
+                ],
+              ),
+              child: Column(
+                children: [
+                  Expanded(
+                      flex: 3,
+                      child: Image.asset(
+                        width: double.infinity,
+                        f.imagePath,
+                        fit: BoxFit.fill,
+                      )),
+                  Expanded(
+                      flex: 2,
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(
+                              height: 8,
+                            ),
+                            Text(
+                              f.name,
+                              style: TextStyle(
+                                fontSize: 14.sp,
+                                fontStyle: FontStyle.italic,
+                                fontFamily: "Instrument Sans",
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 18,
+                            ),
+                            Expanded(
+                              child: Text(f.description,
+                                  style: TextStyle(
+                                    fontSize: 14.sp,
+                                    fontFamily: "Instrument Sans",
+                                    fontWeight: FontWeight.w500,
+                                  )),
+                            ),
+                          ],
+                        ),
+                      ))
+                ],
+              ),
+            ))
         .toList();
   }
+
   @override
   Widget build(BuildContext context) {
     return Column(

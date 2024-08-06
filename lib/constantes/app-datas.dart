@@ -5,7 +5,8 @@ class FeatureItem {
   final String description;
   final String imagePath;
 
-  FeatureItem({required this.name, required this.description, required this.imagePath});
+  FeatureItem(
+      {required this.name, required this.description, required this.imagePath});
 }
 
 class MenuItem {
@@ -53,9 +54,26 @@ class Testimonial {
 }
 
 final List<FeatureItem> features = [
-  FeatureItem(name: "Calendrier de gestion des disponibilités", imagePath: "assets/images/image_calendar.webp", description: "Grâce à la synchronisation instantanée de nos agendas, réservez le créneau qui vous convient parmi les disponibilités de nos formateurs."),
-  FeatureItem(name: "Calendrier de gestion des disponibilités", imagePath: "assets/images/image_calendar.webp", description: "Grâce à la synchronisation instantanée de nos agendas, réservez le créneau qui vous convient parmi les disponibilités de nos formateurs"),
-  FeatureItem(name: "Calendrier de gestion des disponibilités", imagePath: "assets/images/image_calendar.webp", description: "Grâce à la synchronisation instantanée de nos agendas, réservez le créneau qui vous convient parmi les disponibilités de nos formateurs"),
+  FeatureItem(
+      name: "Calendrier interactif",
+      imagePath: "assets/images/image_calendar.webp",
+      description:
+          "Grâce à la synchronisation instantanée de votre calendrier interactif, restez informé à tout moment des réservations de vos futurs collaborateurs tout en gardant votre liberté d'accepter selon votre planning personnel."),
+  FeatureItem(
+      name: "QCM Dématerialisé",
+      imagePath: "assets/images/image_calendar.webp",
+      description:
+          "Vous aurez accès à un générateur de QCM sécurisé de dernière génération facilitant ainsi le suivi des compétences nouvellement acquises de vos collaborateurs."),
+  FeatureItem(
+      name: "Questionnaire de satisfaction",
+      imagePath: "assets/images/image_calendar.webp",
+      description:
+          "Toutes nos formations arrivées à terme sont soumises à un formulaire de satisfaction concernant l'environnement, les outils et l'efficacité de nos formateurs afin de pouvoir être en capacité de toujours proposer ce qu'il y a de mieux à nos clients"),
+  FeatureItem(
+      name: "Feuille d'émergement numérique",
+      imagePath: "assets/images/image_calendar.webp",
+      description:
+          "Dites au revoir aux feuilles d'émergements et accueillez les feuilles d'émergements en ligne sécurisées avec signature électronique pour plus de flexibilité et un gain de temps non négligeable."),
 ];
 
 final List<Testimonial> testimonialData = [

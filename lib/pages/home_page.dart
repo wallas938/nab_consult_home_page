@@ -59,6 +59,7 @@ class MyHomePage extends StatelessWidget {
       physics: const BouncingScrollPhysics(),
       child: Container(
         width: screenW,
+        constraints: BoxConstraints.expand(height: double.maxFinite),
         decoration: const BoxDecoration(
             //     gradient: LinearGradient(
             //   colors: [Colors.white12, Colors.white10],
@@ -494,13 +495,15 @@ class FeatureSection extends StatelessWidget {
 
   List<Widget> buildFeatureListWidget() {
     return features
-        .map((f) => Container(
-              width: 300,
-              height: 550,
+        .map((f) =>
+            /*** FEATURE_CARD_CONTAINER ***/
+            Container(
+              width: 280,
+              height: 420,
               margin: const EdgeInsets.only(bottom: 16),
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(4),
+                borderRadius: BorderRadius.circular(8),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.grey.withOpacity(0.5),
@@ -512,46 +515,48 @@ class FeatureSection extends StatelessWidget {
               ),
               child: Column(
                 children: [
+                  /*** FEATURE_IMAGE ***/
                   Expanded(
-                      flex: 3,
-                      child: Image.asset(
-                        width: double.infinity,
-                        f.imagePath,
-                        fit: BoxFit.fill,
-                      )),
+                    child: Image.asset(
+                        width: double.infinity, f.imagePath, fit: BoxFit.fill),
+                  ),
+                  /*** FEATURE_BODY ***/
                   Expanded(
-                      flex: 2,
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const SizedBox(
-                              height: 8,
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(
+                            height: 8,
+                          ),
+                          /*** FEATURE_NAME ***/
+                          Text(
+                            f.name,
+                            style: TextStyle(
+                              fontSize: 15.sp,
+                              decoration: TextDecoration.underline,
+                              fontStyle: FontStyle.italic,
+                              fontFamily: "Instrument Sans",
+                              fontWeight: FontWeight.bold,
                             ),
-                            Text(
-                              f.name,
-                              style: TextStyle(
-                                fontSize: 14.sp,
-                                fontStyle: FontStyle.italic,
-                                fontFamily: "Instrument Sans",
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 18,
-                            ),
-                            Expanded(
-                              child: Text(f.description,
-                                  style: TextStyle(
-                                    fontSize: 14.sp,
-                                    fontFamily: "Instrument Sans",
-                                    fontWeight: FontWeight.w500,
-                                  )),
-                            ),
-                          ],
-                        ),
-                      ))
+                          ),
+                          const SizedBox(
+                            height: 18,
+                          ),
+                          /*** FEATURE_DESCRIPTION ***/
+                          Expanded(
+                            child: Text(f.description,
+                                style: TextStyle(
+                                  fontSize: 13.sp,
+                                  fontFamily: "Instrument Sans",
+                                  fontWeight: FontWeight.w500,
+                                )),
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
                 ],
               ),
             ))
@@ -580,6 +585,7 @@ class FeatureSection extends StatelessWidget {
           height: 50,
         ),
         Column(
+          mainAxisSize: MainAxisSize.max,
           children: buildFeatureListWidget(),
         )
       ],

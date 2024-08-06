@@ -52,10 +52,6 @@ class _MyDrawerState extends State<MyDrawer> {
               onTap: () {
                 Navigator.pop(context);
               },
-              title: const Text("Quitter", style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.redAccent
-              ),),
               trailing: Icon(
                 size: 28,
                 Icons.close,

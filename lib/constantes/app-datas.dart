@@ -127,7 +127,7 @@ final List<TrainingData> trainingData = [
       trainingTitle: "Habilitation électrique BT/HT : NFC 18-510",
       trainingImagePath: "assets/images/image_bt_ht.webp",
       description:
-          "Les certifications électriques garantissent la conformité aux normes de sécurité, protègent les employés et les clients, et renforcent la réputation de l'entreprise. Elles sont essentielles pour assurer la légalité, la sécurité, et la compétitivité sur le marché.\n\nL’article 4544-9 du code du travail précise que : « Les opérations sur les installations électriques ou dans leur voisinage ne peuvent être effectuées que par des travailleurs habilités. »\n\nL'article R. 4544-10 du même code prévoit que : « Un travailleur est habilité dans les limites des attributions qui lui sont confiées.",
+          "L’article 4544-9 du code du travail précise que : « Les opérations sur les installations électriques ou dans leur voisinage ne peuvent être effectuées que par des travailleurs habilités. »\nL'article R. 4544-10 du même code prévoit que : « Un travailleur est habilité dans les limites des attributions qui lui sont confiées.",
       certifications: [
         CertificationData(
           name: "B0/H0 – H0V",

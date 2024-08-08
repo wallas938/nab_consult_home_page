@@ -38,8 +38,8 @@ List<Widget> _buildCertificationList(BuildContext context, int firstIndex) {
     items.add(Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Expanded(
-          flex: 2,
+        Flexible(
+          fit: FlexFit.loose,
           child: Text(
             "- ${trainingData[firstIndex].certifications[index].name}",
             style: TextStyle(
@@ -49,8 +49,8 @@ List<Widget> _buildCertificationList(BuildContext context, int firstIndex) {
             ),
           ),
         ),
-        Expanded(
-          flex: 1,
+        Flexible(
+          fit: FlexFit.loose,
           child: durationText,
         ),
       ],
@@ -196,13 +196,339 @@ class TrainingSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: ResponsiveUtil.isOnMobile(context)
-          ? 458
-          : ResponsiveUtil.isOnTablet(context)
-              ? 891
-              : 1280,
-      color: Colors.redAccent,
+    Widget mobileView = ListView.builder(
+        itemCount: trainingData.length,
+        itemBuilder: (context, index) {
+          return Container(
+            margin: const EdgeInsets.all(16),
+            width: double.infinity,
+            decoration: BoxDecoration(
+              boxShadow: const [
+                BoxShadow(
+                  color: Colors.black26,
+                  blurRadius: 4,
+                  offset: Offset(2, 2),
+                ),
+              ],
+              borderRadius: BorderRadius.circular(8),
+              color: Colors.grey[500],
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                /*** CARD_HEADER ***/
+                Flexible(
+                  fit: FlexFit.loose,
+                  child: Container(
+                    height: 200,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image:
+                            AssetImage(trainingData[index].trainingImagePath),
+                        fit: BoxFit.cover,
+                      ),
+                      borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(8),
+                          topRight: Radius.circular(8)),
+                    ),
+                  ),
+                ),
+                /*** CARD_BODY ***/
+                Flexible(
+                  fit: FlexFit.loose,
+                  child: Container(
+                    width: double.infinity,
+                    decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(8),
+                            bottomRight: Radius.circular(8))),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 16, horizontal: 12),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              /*** TRAINING_TITLE ***/
+                              Expanded(
+                                child: Text(
+                                  trainingData[index].trainingTitle,
+                                  style: TextStyle(
+                                      fontStyle: FontStyle.italic,
+                                      color: AppColors.white,
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: _responsiveFontSize(
+                                          context, 12, 16, 425),
+                                      decorationStyle:
+                                          TextDecorationStyle.solid),
+                                ),
+                              ),
+                              /*** TRAINING_DURATION ***/
+                              Text(
+                                trainingData[index].duration != null
+                                    ? "${trainingData[index].duration} jour(s)"
+                                    : "",
+                                style: TextStyle(
+                                    fontStyle: FontStyle.italic,
+                                    color: AppColors.amber,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: _responsiveFontSize(
+                                        context, 11.5, 14, 425),
+                                    decorationStyle: TextDecorationStyle.solid),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 8),
+                          /*** CARD_DESCRIPTION ***/
+                          Flexible(
+                            fit: FlexFit.loose,
+                            child: Text(
+                              trainingData[index].description ?? "",
+                              style: TextStyle(
+                                  fontStyle: FontStyle.normal,
+                                  color: Colors.white70,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize:
+                                      _responsiveFontSize(context, 12, 16, 425),
+                                  decorationStyle: TextDecorationStyle.solid),
+                            ),
+                          ),
+                          const SizedBox(height: 18),
+                          const Divider(
+                            height: 1,
+                            color: AppColors.grey,
+                          ),
+                          const SizedBox(height: 24),
+                          /*** CERTIFICATIONS ***/
+                          Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: _buildCertificationList(context, index),
+                          ),
+                          const SizedBox(height: 32),
+                          /*** CARD_BUTTON ***/
+                          Flexible(
+                            fit: FlexFit.loose,
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                TextButton(
+                                  onPressed: () {},
+                                  style: TextButton.styleFrom(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 24, horizontal: 24),
+                                    backgroundColor: AppColors.amber,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    elevation: 5,
+                                  ),
+                                  child: const Text(
+                                    "Détails de la formation",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      shadows: [
+                                        Shadow(
+                                          blurRadius: 2.0,
+                                          color: Colors.black54,
+                                          offset: Offset(1.0, 1.0),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
+        });
+    Widget tabletView = Container(
+        color: Colors.blue,
+        child: GridView.builder(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              mainAxisExtent: 900,
+            ),
+            itemCount: trainingData.length,
+            itemBuilder: (context, index) {
+              return Container(
+                margin: const EdgeInsets.all(16),
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Colors.black26,
+                      blurRadius: 4,
+                      offset: Offset(2, 2),
+                    ),
+                  ],
+                  borderRadius: BorderRadius.circular(8),
+                  color: Colors.grey[500],
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    /*** CARD_HEADER ***/
+                    Expanded(
+                      flex: 3,
+                      child: Container(
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage(
+                                trainingData[index].trainingImagePath),
+                            fit: BoxFit.cover,
+                          ),
+                          borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(8),
+                              topRight: Radius.circular(8)),
+                        ),
+                      ),
+                    ),
+                    /*** CARD_BODY ***/
+                    Expanded(
+                      flex: 4,
+                      child: Container(
+                        width: double.infinity,
+                        decoration: const BoxDecoration(
+                            borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(8),
+                                bottomRight: Radius.circular(8))),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 16, horizontal: 12),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  /*** TRAINING_TITLE ***/
+                                  Expanded(
+                                    child: Text(
+                                      trainingData[index].trainingTitle,
+                                      style: TextStyle(
+                                          fontStyle: FontStyle.italic,
+                                          color: AppColors.white,
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: _responsiveFontSize(
+                                              context, 12, 16, 425),
+                                          decorationStyle:
+                                              TextDecorationStyle.solid),
+                                    ),
+                                  ),
+                                  /*** TRAINING_DURATION ***/
+                                  Text(
+                                    trainingData[index].duration != null
+                                        ? "${trainingData[index].duration} jour(s)"
+                                        : "",
+                                    style: TextStyle(
+                                        fontStyle: FontStyle.italic,
+                                        color: AppColors.amber,
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: _responsiveFontSize(
+                                            context, 11.5, 14, 425),
+                                        decorationStyle:
+                                            TextDecorationStyle.solid),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 8),
+                              /*** CARD_DESCRIPTION ***/
+                              Expanded(
+                                child: Text(
+                                  trainingData[index].description ?? "",
+                                  style: TextStyle(
+                                      fontStyle: FontStyle.normal,
+                                      color: Colors.white70,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: _responsiveFontSize(
+                                          context, 12, 16, 425),
+                                      decorationStyle:
+                                          TextDecorationStyle.solid),
+                                ),
+                              ),
+                              const SizedBox(height: 18),
+                              const Divider(
+                                height: 1,
+                                color: AppColors.grey,
+                              ),
+                              const SizedBox(height: 24),
+                              /*** CERTIFICATIONS ***/
+                              Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children:
+                                    _buildCertificationList(context, index),
+                              ),
+                              const SizedBox(height: 32),
+                              /*** CARD_BUTTON ***/
+                              Column(
+                                mainAxisSize: MainAxisSize.min,
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: [
+                                  TextButton(
+                                    onPressed: () {},
+                                    style: TextButton.styleFrom(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 24, horizontal: 24),
+                                      backgroundColor: AppColors.amber,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      elevation: 5,
+                                    ),
+                                    child: const Text(
+                                      "Détails de la formation",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                        shadows: [
+                                          Shadow(
+                                            blurRadius: 2.0,
+                                            color: Colors.black54,
+                                            offset: Offset(1.0, 1.0),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            }));
+
+    return SizedBox(
       height: MediaQuery.of(context).size.height,
       child: Column(
         children: [
@@ -230,170 +556,13 @@ class TrainingSection extends StatelessWidget {
             height: 20,
           ),
           Expanded(
-            child: GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 1,
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10,
-                  mainAxisExtent: 650
-                ),
-                itemCount: trainingData.length,
-                itemBuilder: (context, index) {
-                  return Container(
-                    margin: const EdgeInsets.all(16),
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                            offset: const Offset(1.5, 1.5),
-                            color: Colors.black.withOpacity(.5),
-                            spreadRadius: 2,
-                            blurRadius: 3)
-                      ],
-                      borderRadius: BorderRadius.circular(8),
-                      color: Colors.grey[500],
-                    ),
-                    child: Column(
-                      children: [
-                        /*** CARD_HEADER ***/
-                        Container(
-                          height: 200,
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image: AssetImage(
-                                  trainingData[index].trainingImagePath),
-                              fit: BoxFit.cover,
-                            ),
-                            borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(8),
-                                topRight: Radius.circular(8)),
-                          ),
-                        ),
-                        /*** CARD_BODY ***/
-                        Expanded(
-                          child: Container(
-                            width: double.infinity,
-                            decoration: const BoxDecoration(
-                                borderRadius: BorderRadius.only(
-                                    bottomLeft: Radius.circular(8),
-                                    bottomRight: Radius.circular(8))),
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 16, horizontal: 12),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      /*** TRAINING_TITLE ***/
-                                      Expanded(
-                                        child: Text(
-                                          trainingData[index].trainingTitle,
-                                          style: TextStyle(
-                                              fontStyle: FontStyle.italic,
-                                              color: AppColors.white,
-                                              fontWeight: FontWeight.w700,
-                                              fontSize: _responsiveFontSize(
-                                                  context, 12, 16, 425),
-                                              decorationStyle:
-                                                  TextDecorationStyle.solid),
-                                        ),
-                                      ),
-                                      /*** TRAINING_DURATION ***/
-                                      Text(
-                                        trainingData[index].duration != null
-                                            ? "${trainingData[index].duration} jour(s)"
-                                            : "",
-                                        style: TextStyle(
-                                            fontStyle: FontStyle.italic,
-                                            color: AppColors.amber,
-                                            fontWeight: FontWeight.w700,
-                                            fontSize: _responsiveFontSize(
-                                                context, 11.5, 14, 425),
-                                            decorationStyle:
-                                                TextDecorationStyle.solid),
-                                      ),
-                                    ],
-                                  ),
-                                  const SizedBox(height: 8),
-                                  /*** CARD_DESCRIPTION ***/
-                                  Expanded(
-                                    flex: 2,
-                                    child: Text(
-                                      trainingData[index].description ?? "",
-                                      style: TextStyle(
-                                          fontStyle: FontStyle.normal,
-                                          color: Colors.white70,
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: _responsiveFontSize(
-                                              context, 12, 16, 425),
-                                          decorationStyle:
-                                              TextDecorationStyle.solid),
-                                    ),
-                                  ),
-                                  const SizedBox(height: 8),
-                                  const Divider(
-                                    height: 1,
-                                    color: AppColors.grey,
-                                  ),
-                                  const SizedBox(height: 8),
-                                  /*** CERTIFICATIONS ***/
-                                  Expanded(
-                                    flex: 2,
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children:
-                                          _buildCertificationList(context, index),
-                                    ),
-                                  ),
-                                  /*** CARD_BUTTON ***/
-                                  Align(
-                                    alignment: Alignment.centerRight,
-                                    child: TextButton(
-                                      onPressed: () {},
-                                      style: TextButton.styleFrom(
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 12, horizontal: 24),
-                                        backgroundColor: AppColors.amber,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                        ),
-                                        elevation: 5,
-                                      ),
-                                      child: const Text(
-                                        "Détails de la formation",
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold,
-                                          shadows: [
-                                            Shadow(
-                                              blurRadius: 2.0,
-                                              color: Colors.black54,
-                                              offset: Offset(1.0, 1.0),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                }),
+            child: ResponsiveUtil.isOnMobile(context)
+                ? Container(
+                    constraints: const BoxConstraints(maxWidth: 350),
+                    child: mobileView)
+                : Container(
+                constraints: const BoxConstraints(maxWidth: 850),
+                child: tabletView),
           ),
         ],
       ),

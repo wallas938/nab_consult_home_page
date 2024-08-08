@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nab_consult_home_page/constantes/app-datas.dart';
@@ -91,7 +92,7 @@ class MyHomePage extends StatelessWidget {
             /*** FORMATIONS_SECTION ***/
             TrainingSection(),
             /*** TESTIMONIALS_SECTION ***/
-            // TestimonialSection(),
+            TestimonialSection(),
             /*** FEATURES_SECTION ***/
             // FeatureSection()
           ],
@@ -166,13 +167,13 @@ class HeroSection extends StatelessWidget {
                     ),
                     TextSpan(
                       text:
-                          'Élevez vos standards\net formez vous à la sécurité électrique\nde vos équipes',
+                          'Élevez vos standards\net formez vous et vos équipes\nà la sécurité électrique\n',
                       style: TextStyle(
                         fontFamily: "Instrument Sans",
                         fontStyle: FontStyle.italic,
                         fontWeight: FontWeight.w600,
                         color: Colors.white,
-                        fontSize: 14.sp,
+                        fontSize: 14.spMax,
                         shadows: [
                           Shadow(
                             offset: const Offset(1.5, 1.5),
@@ -359,174 +360,168 @@ class TrainingSection extends StatelessWidget {
             ),
           );
         });
-    Widget tabletView = Container(
-        color: Colors.blue,
-        child: GridView.builder(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              mainAxisExtent: 900,
-            ),
-            itemCount: trainingData.length,
-            itemBuilder: (context, index) {
-              return Container(
-                margin: const EdgeInsets.all(16),
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Colors.black26,
-                      blurRadius: 4,
-                      offset: Offset(2, 2),
-                    ),
-                  ],
-                  borderRadius: BorderRadius.circular(8),
-                  color: Colors.grey[500],
+    Widget tabletView = GridView.builder(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          mainAxisExtent: 900,
+        ),
+        itemCount: trainingData.length,
+        itemBuilder: (context, index) {
+          return Container(
+            margin: const EdgeInsets.all(16),
+            width: double.infinity,
+            decoration: BoxDecoration(
+              boxShadow: const [
+                BoxShadow(
+                  color: Colors.black26,
+                  blurRadius: 4,
+                  offset: Offset(2, 2),
                 ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    /*** CARD_HEADER ***/
-                    Expanded(
-                      flex: 3,
-                      child: Container(
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage(
-                                trainingData[index].trainingImagePath),
-                            fit: BoxFit.cover,
-                          ),
-                          borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(8),
-                              topRight: Radius.circular(8)),
-                        ),
+              ],
+              borderRadius: BorderRadius.circular(8),
+              color: Colors.grey[500],
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                /*** CARD_HEADER ***/
+                Expanded(
+                  flex: 3,
+                  child: Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image:
+                            AssetImage(trainingData[index].trainingImagePath),
+                        fit: BoxFit.cover,
                       ),
+                      borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(8),
+                          topRight: Radius.circular(8)),
                     ),
-                    /*** CARD_BODY ***/
-                    Expanded(
-                      flex: 4,
-                      child: Container(
-                        width: double.infinity,
-                        decoration: const BoxDecoration(
-                            borderRadius: BorderRadius.only(
-                                bottomLeft: Radius.circular(8),
-                                bottomRight: Radius.circular(8))),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 16, horizontal: 12),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.start,
+                  ),
+                ),
+                /*** CARD_BODY ***/
+                Expanded(
+                  flex: 4,
+                  child: Container(
+                    width: double.infinity,
+                    decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(8),
+                            bottomRight: Radius.circular(8))),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 16, horizontal: 12),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  /*** TRAINING_TITLE ***/
-                                  Expanded(
-                                    child: Text(
-                                      trainingData[index].trainingTitle,
-                                      style: TextStyle(
-                                          fontStyle: FontStyle.italic,
-                                          color: AppColors.white,
-                                          fontWeight: FontWeight.w700,
-                                          fontSize: _responsiveFontSize(
-                                              context, 12, 16, 425),
-                                          decorationStyle:
-                                              TextDecorationStyle.solid),
-                                    ),
-                                  ),
-                                  /*** TRAINING_DURATION ***/
-                                  Text(
-                                    trainingData[index].duration != null
-                                        ? "${trainingData[index].duration} jour(s)"
-                                        : "",
-                                    style: TextStyle(
-                                        fontStyle: FontStyle.italic,
-                                        color: AppColors.amber,
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: _responsiveFontSize(
-                                            context, 11.5, 14, 425),
-                                        decorationStyle:
-                                            TextDecorationStyle.solid),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(height: 8),
-                              /*** CARD_DESCRIPTION ***/
+                              /*** TRAINING_TITLE ***/
                               Expanded(
                                 child: Text(
-                                  trainingData[index].description ?? "",
+                                  trainingData[index].trainingTitle,
                                   style: TextStyle(
-                                      fontStyle: FontStyle.normal,
-                                      color: Colors.white70,
-                                      fontWeight: FontWeight.w500,
+                                      fontStyle: FontStyle.italic,
+                                      color: AppColors.white,
+                                      fontWeight: FontWeight.w700,
                                       fontSize: _responsiveFontSize(
                                           context, 12, 16, 425),
                                       decorationStyle:
                                           TextDecorationStyle.solid),
                                 ),
                               ),
-                              const SizedBox(height: 18),
-                              const Divider(
-                                height: 1,
-                                color: AppColors.grey,
+                              /*** TRAINING_DURATION ***/
+                              Text(
+                                trainingData[index].duration != null
+                                    ? "${trainingData[index].duration} jour(s)"
+                                    : "",
+                                style: TextStyle(
+                                    fontStyle: FontStyle.italic,
+                                    color: AppColors.amber,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: _responsiveFontSize(
+                                        context, 11.5, 14, 425),
+                                    decorationStyle: TextDecorationStyle.solid),
                               ),
-                              const SizedBox(height: 24),
-                              /*** CERTIFICATIONS ***/
-                              Column(
-                                mainAxisSize: MainAxisSize.min,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children:
-                                    _buildCertificationList(context, index),
-                              ),
-                              const SizedBox(height: 32),
-                              /*** CARD_BUTTON ***/
-                              Column(
-                                mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                children: [
-                                  TextButton(
-                                    onPressed: () {},
-                                    style: TextButton.styleFrom(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 24, horizontal: 24),
-                                      backgroundColor: AppColors.amber,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      elevation: 5,
-                                    ),
-                                    child: const Text(
-                                      "Détails de la formation",
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold,
-                                        shadows: [
-                                          Shadow(
-                                            blurRadius: 2.0,
-                                            color: Colors.black54,
-                                            offset: Offset(1.0, 1.0),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              )
                             ],
                           ),
-                        ),
+                          const SizedBox(height: 8),
+                          /*** CARD_DESCRIPTION ***/
+                          Expanded(
+                            child: Text(
+                              trainingData[index].description ?? "",
+                              style: TextStyle(
+                                  fontStyle: FontStyle.normal,
+                                  color: Colors.white70,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize:
+                                      _responsiveFontSize(context, 12, 16, 425),
+                                  decorationStyle: TextDecorationStyle.solid),
+                            ),
+                          ),
+                          const SizedBox(height: 18),
+                          const Divider(
+                            height: 1,
+                            color: AppColors.grey,
+                          ),
+                          const SizedBox(height: 24),
+                          /*** CERTIFICATIONS ***/
+                          Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: _buildCertificationList(context, index),
+                          ),
+                          const SizedBox(height: 32),
+                          /*** CARD_BUTTON ***/
+                          Column(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              TextButton(
+                                onPressed: () {},
+                                style: TextButton.styleFrom(
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 24, horizontal: 24),
+                                  backgroundColor: AppColors.amber,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  elevation: 5,
+                                ),
+                                child: const Text(
+                                  "Détails de la formation",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    shadows: [
+                                      Shadow(
+                                        blurRadius: 2.0,
+                                        color: Colors.black54,
+                                        offset: Offset(1.0, 1.0),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          )
+                        ],
                       ),
                     ),
-                  ],
+                  ),
                 ),
-              );
-            }));
+              ],
+            ),
+          );
+        });
 
     return SizedBox(
       height: MediaQuery.of(context).size.height,
@@ -541,7 +536,7 @@ class TrainingSection extends StatelessWidget {
                 fontFamily: "Instrument Sans",
                 fontWeight: FontWeight.w600,
                 fontStyle: FontStyle.normal,
-                fontSize: _responsiveFontSize(context, 12, 21, 425),
+                fontSize: _responsiveFontSize(context, 24, 28, 425),
                 height: 1.5,
                 color: Colors.black),
           ),
@@ -561,8 +556,8 @@ class TrainingSection extends StatelessWidget {
                     constraints: const BoxConstraints(maxWidth: 350),
                     child: mobileView)
                 : Container(
-                constraints: const BoxConstraints(maxWidth: 850),
-                child: tabletView),
+                    constraints: const BoxConstraints(maxWidth: 850),
+                    child: tabletView),
           ),
         ],
       ),
@@ -582,7 +577,7 @@ class TestimonialSection extends StatelessWidget {
         fontStyle: FontStyle.italic,
         color: Colors.amberAccent);
 
-    List<Widget> buildTestimonialListWidget() {
+    List<Widget> buildTestimonialListWidgetForMobile() {
       return testimonialData
           .map((t) => Padding(
                 padding: const EdgeInsets.only(bottom: 10),
@@ -636,17 +631,96 @@ class TestimonialSection extends StatelessWidget {
           .toList();
     }
 
+    Widget buildTestimonialListWidgetForTablet() {
+      return GridView.builder(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: 16,
+          mainAxisSpacing: 16,
+        ),
+        itemCount: testimonialData.length,
+        itemBuilder: (BuildContext context, int index) {
+          return Padding(
+            padding: const EdgeInsets.only(bottom: 10),
+            child: Container(
+              margin: const EdgeInsets.symmetric(vertical: 14, horizontal: 18),
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                      color: Colors.black.withOpacity(.5),
+                      blurRadius: 2.0,
+                      offset: const Offset(1, 1))
+                ],
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    Icons.format_quote,
+                    size: 24.0.sp,
+                    color: Colors.amberAccent,
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  Text(
+                    textAlign: TextAlign.justify,
+                    testimonialData[index].text,
+                    style: const TextStyle(
+                        fontSize: 14,
+                        fontFamily: "Instrument Sans",
+                        fontWeight: FontWeight.bold,
+                        fontStyle: FontStyle.italic,
+                        color: Colors.amberAccent),
+                  ),
+                  const SizedBox(
+                    height: 12,
+                  ),
+                  Text(testimonialData[index].author, style: const TextStyle(
+                      fontSize: 12,
+                      fontFamily: "Instrument Sans",
+                      fontWeight: FontWeight.bold,
+                      fontStyle: FontStyle.italic,
+                      color: Colors.amberAccent)),
+                  Text(
+                    testimonialData[index].position,
+                    style: const TextStyle(
+                        fontSize: 12,
+                        fontFamily: "Instrument Sans",
+                        fontWeight: FontWeight.bold,
+                        fontStyle: FontStyle.italic,
+                        color: Colors.amberAccent),
+                  )
+                ],
+              ),
+            ),
+          );
+        },
+      );
+    }
+
     return SizedBox(
       width: double.infinity,
       child: Column(
-        mainAxisSize: MainAxisSize.max,
+        mainAxisSize: MainAxisSize.min,
         children: [
           const SizedBox(
             height: 30,
           ),
-          Text(
+          const Text(
             "LEURS TÉMOIGNAGES",
-            style: AppTypography.headingS(Colors.black),
+            style: TextStyle(
+                fontFamily: "Instrument Sans",
+                fontWeight: FontWeight.w600,
+                fontStyle: FontStyle.normal,
+                fontSize: 28,
+                height: 1.5,
+                color: Colors.black),
           ),
           const SizedBox(
             height: 5,
@@ -659,10 +733,19 @@ class TestimonialSection extends StatelessWidget {
             height: 50,
           ),
           /*** TESTIMONIALS_LIST ***/
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            children: buildTestimonialListWidget(),
-          ),
+          if (ResponsiveUtil.isOnMobile(context))
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: buildTestimonialListWidgetForMobile(),
+            )
+          else
+            Container(
+              constraints: const BoxConstraints(
+                maxWidth: 850
+              ),
+              height: 500,
+
+                child: buildTestimonialListWidgetForTablet()),
         ],
       ),
     );

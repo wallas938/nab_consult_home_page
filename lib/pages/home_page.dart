@@ -32,7 +32,7 @@ List<Widget> _buildCertificationList(BuildContext context, int firstIndex) {
       style: TextStyle(
         fontStyle: FontStyle.normal,
         color: AppColors.amber,
-        fontSize: _responsiveFontSize(context, 12, 16, 425),
+        fontSize: _responsiveFontSize(context, 12, 16, mobileWidthLimit),
       ),
     );
 
@@ -46,7 +46,7 @@ List<Widget> _buildCertificationList(BuildContext context, int firstIndex) {
             style: TextStyle(
               fontStyle: FontStyle.italic,
               color: AppColors.white,
-              fontSize: _responsiveFontSize(context, 12, 16, 425),
+              fontSize: _responsiveFontSize(context, 12, 16, mobileWidthLimit),
             ),
           ),
         ),
@@ -88,13 +88,13 @@ class MyHomePage extends StatelessWidget {
         child: const Column(
           children: [
             /*** HERO_SECTION ***/
-            HeroSection(),
+            // HeroSection(),
             /*** FORMATIONS_SECTION ***/
-            TrainingSection(),
+            // TrainingSection(),
             /*** TESTIMONIALS_SECTION ***/
-            TestimonialSection(),
+            // TestimonialSection(),
             /*** FEATURES_SECTION ***/
-            // FeatureSection()
+            FeatureSection()
           ],
         ),
       ),
@@ -265,7 +265,7 @@ class TrainingSection extends StatelessWidget {
                                       color: AppColors.white,
                                       fontWeight: FontWeight.w700,
                                       fontSize: _responsiveFontSize(
-                                          context, 12, 16, 425),
+                                          context, 12, 16, mobileWidthLimit),
                                       decorationStyle:
                                           TextDecorationStyle.solid),
                                 ),
@@ -280,7 +280,7 @@ class TrainingSection extends StatelessWidget {
                                     color: AppColors.amber,
                                     fontWeight: FontWeight.w700,
                                     fontSize: _responsiveFontSize(
-                                        context, 11.5, 14, 425),
+                                        context, 11.5, 14, mobileWidthLimit),
                                     decorationStyle: TextDecorationStyle.solid),
                               ),
                             ],
@@ -295,8 +295,8 @@ class TrainingSection extends StatelessWidget {
                                   fontStyle: FontStyle.normal,
                                   color: Colors.white70,
                                   fontWeight: FontWeight.w500,
-                                  fontSize:
-                                      _responsiveFontSize(context, 12, 16, 425),
+                                  fontSize: _responsiveFontSize(
+                                      context, 12, 16, mobileWidthLimit),
                                   decorationStyle: TextDecorationStyle.solid),
                             ),
                           ),
@@ -431,7 +431,7 @@ class TrainingSection extends StatelessWidget {
                                       color: AppColors.white,
                                       fontWeight: FontWeight.w700,
                                       fontSize: _responsiveFontSize(
-                                          context, 12, 16, 425),
+                                          context, 12, 16, mobileWidthLimit),
                                       decorationStyle:
                                           TextDecorationStyle.solid),
                                 ),
@@ -446,7 +446,7 @@ class TrainingSection extends StatelessWidget {
                                     color: AppColors.amber,
                                     fontWeight: FontWeight.w700,
                                     fontSize: _responsiveFontSize(
-                                        context, 11.5, 14, 425),
+                                        context, 11.5, 14, mobileWidthLimit),
                                     decorationStyle: TextDecorationStyle.solid),
                               ),
                             ],
@@ -460,8 +460,8 @@ class TrainingSection extends StatelessWidget {
                                   fontStyle: FontStyle.normal,
                                   color: Colors.white70,
                                   fontWeight: FontWeight.w500,
-                                  fontSize:
-                                      _responsiveFontSize(context, 12, 16, 425),
+                                  fontSize: _responsiveFontSize(
+                                      context, 12, 16, mobileWidthLimit),
                                   decorationStyle: TextDecorationStyle.solid),
                             ),
                           ),
@@ -536,7 +536,8 @@ class TrainingSection extends StatelessWidget {
                 fontFamily: "Instrument Sans",
                 fontWeight: FontWeight.w600,
                 fontStyle: FontStyle.normal,
-                fontSize: _responsiveFontSize(context, 24, 28, 425),
+                fontSize:
+                    _responsiveFontSize(context, 18, 26, mobileWidthLimit),
                 height: 1.5,
                 color: Colors.black),
           ),
@@ -681,12 +682,13 @@ class TestimonialSection extends StatelessWidget {
                   const SizedBox(
                     height: 12,
                   ),
-                  Text(testimonialData[index].author, style: const TextStyle(
-                      fontSize: 12,
-                      fontFamily: "Instrument Sans",
-                      fontWeight: FontWeight.bold,
-                      fontStyle: FontStyle.italic,
-                      color: Colors.amberAccent)),
+                  Text(testimonialData[index].author,
+                      style: const TextStyle(
+                          fontSize: 12,
+                          fontFamily: "Instrument Sans",
+                          fontWeight: FontWeight.bold,
+                          fontStyle: FontStyle.italic,
+                          color: Colors.amberAccent)),
                   Text(
                     testimonialData[index].position,
                     style: const TextStyle(
@@ -712,13 +714,13 @@ class TestimonialSection extends StatelessWidget {
           const SizedBox(
             height: 30,
           ),
-          const Text(
+          Text(
             "LEURS TÉMOIGNAGES",
             style: TextStyle(
                 fontFamily: "Instrument Sans",
                 fontWeight: FontWeight.w600,
                 fontStyle: FontStyle.normal,
-                fontSize: 28,
+                fontSize: _responsiveFontSize(context, 18, 26, 425),
                 height: 1.5,
                 color: Colors.black),
           ),
@@ -740,11 +742,8 @@ class TestimonialSection extends StatelessWidget {
             )
           else
             Container(
-              constraints: const BoxConstraints(
-                maxWidth: 850
-              ),
-              height: 500,
-
+                constraints: const BoxConstraints(maxWidth: tabletWidthLimit),
+                height: 500,
                 child: buildTestimonialListWidgetForTablet()),
         ],
       ),
@@ -755,7 +754,7 @@ class TestimonialSection extends StatelessWidget {
 class FeatureSection extends StatelessWidget {
   const FeatureSection({super.key});
 
-  List<Widget> buildFeatureListWidget() {
+  List<Widget> buildMobileFeatureListWidget(BuildContext context) {
     return features
         .map((f) =>
             /*** FEATURE_CARD_CONTAINER ***/
@@ -795,8 +794,8 @@ class FeatureSection extends StatelessWidget {
                           /*** FEATURE_NAME ***/
                           Text(
                             f.name,
-                            style: TextStyle(
-                              fontSize: 15.sp,
+                            style: const TextStyle(
+                              fontSize: 16,
                               decoration: TextDecoration.underline,
                               fontStyle: FontStyle.italic,
                               fontFamily: "Instrument Sans",
@@ -809,8 +808,8 @@ class FeatureSection extends StatelessWidget {
                           /*** FEATURE_DESCRIPTION ***/
                           Expanded(
                             child: Text(f.description,
-                                style: TextStyle(
-                                  fontSize: 13.sp,
+                                style: const TextStyle(
+                                  fontSize: 14,
                                   fontFamily: "Instrument Sans",
                                   fontWeight: FontWeight.w500,
                                 )),
@@ -825,6 +824,83 @@ class FeatureSection extends StatelessWidget {
         .toList();
   }
 
+  Widget buildTabletFeatureListWidget() {
+    return GridView.builder(
+        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+          mainAxisExtent: 480,
+          crossAxisSpacing: 16,
+          mainAxisSpacing: 16,
+          maxCrossAxisExtent: 400,
+        ),
+        itemCount: features.length,
+        padding: const EdgeInsets.all(24),
+        itemBuilder: (context, index) {
+          return Container(
+            margin: const EdgeInsets.only(bottom: 16),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(8),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  offset: const Offset(0, 1),
+                  blurRadius: 4,
+                  spreadRadius: 1,
+                ),
+              ],
+            ),
+            child: Column(
+              children: [
+                /*** FEATURE_IMAGE ***/
+                Expanded(
+                  child: Image.asset(
+                      width: double.infinity,
+                      features[index].imagePath,
+                      fit: BoxFit.fill),
+                ),
+                /*** FEATURE_BODY ***/
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(
+                          height: 8,
+                        ),
+                        /*** FEATURE_NAME ***/
+                        Text(
+                          features[index].name,
+                          style: const TextStyle(
+                            fontSize: 18,
+                            decoration: TextDecoration.underline,
+                            fontStyle: FontStyle.italic,
+                            fontFamily: "Instrument Sans",
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 18,
+                        ),
+                        /*** FEATURE_DESCRIPTION ***/
+                        Expanded(
+                          child: Text(features[index].description,
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontFamily: "Instrument Sans",
+                                fontWeight: FontWeight.w500,
+                              )),
+                        ),
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            ),
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -834,7 +910,13 @@ class FeatureSection extends StatelessWidget {
         ),
         Text(
           "VOS OUTILS DU QUOTIDIEN",
-          style: AppTypography.headingS(Colors.black),
+          style: TextStyle(
+              fontFamily: "Instrument Sans",
+              fontWeight: FontWeight.w600,
+              fontStyle: FontStyle.normal,
+              fontSize: _responsiveFontSize(context, 18, 26, mobileWidthLimit),
+              height: 1.5,
+              color: Colors.black),
         ),
         const SizedBox(
           height: 5,
@@ -846,10 +928,15 @@ class FeatureSection extends StatelessWidget {
         const SizedBox(
           height: 50,
         ),
-        Column(
-          mainAxisSize: MainAxisSize.max,
-          children: buildFeatureListWidget(),
-        )
+        ResponsiveUtil.isOnMobile(context)
+            ? Column(
+                mainAxisSize: MainAxisSize.max,
+                children: buildMobileFeatureListWidget(context),
+              )
+            : Container(
+                constraints: const BoxConstraints(maxWidth: 850),
+                height: 500,
+                child: buildTabletFeatureListWidget()),
       ],
     );
   }

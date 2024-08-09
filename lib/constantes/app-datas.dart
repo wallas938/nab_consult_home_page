@@ -68,7 +68,7 @@ final List<FeatureItem> features = [
       name: "Questionnaire de satisfaction",
       imagePath: "assets/images/image_calendar.webp",
       description:
-          "Toutes nos formations arrivées à terme sont soumises à un formulaire de satisfaction concernant l'environnement, les outils et l'efficacité de nos formateurs afin de pouvoir être en capacité de toujours proposer ce qu'il y a de mieux à nos clients"),
+          "Toutes nos formations arrivées à terme sont soumises à un formulaire de satisfaction concernant l'environnement, les outils et l'efficacité de nos formateurs afin de pouvoir être en capacité de toujours proposer ce qu'il y a de mieux à nos clients."),
   FeatureItem(
       name: "Feuille d'émergement numérique",
       imagePath: "assets/images/image_calendar.webp",
@@ -215,3 +215,7 @@ final List<TrainingData> trainingData = [
       trainingImagePath: "assets/images/image_amiante.webp",
       certifications: []),
 ];
+
+const mobileWidthLimit = 425.0;
+const tabletWidthLimit = 850.0;
+const desktopWidthLimit = 1280.0;

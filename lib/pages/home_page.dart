@@ -110,17 +110,22 @@ class HeroSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: double.maxFinite,
+      width: double.infinity,
       child: Stack(
         children: [
           /*** IMAGE ***/
-          Image.asset(
-            "assets/images/hero_image_4.webp",
-            colorBlendMode: BlendMode.overlay,
+          SizedBox(
+            child: Image.asset(
+              "assets/images/hero_image_4.webp",
+              colorBlendMode: BlendMode.overlay,
+              fit: BoxFit.fill,
+              width: double.infinity,
+            ),
           ),
           /*** IMAGE_WITH_BLACK_SCREEN_OPACITY ***/
           Positioned.fill(
             child: Container(
+              width: double.infinity,
               color: Colors.black.withOpacity(.1),
             ),
           ),
@@ -661,9 +666,9 @@ class TestimonialSection extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.format_quote,
-                    size: 24.0.sp,
+                    size: 24,
                     color: Colors.amberAccent,
                   ),
                   const SizedBox(

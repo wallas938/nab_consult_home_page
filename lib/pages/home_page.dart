@@ -88,11 +88,11 @@ class MyHomePage extends StatelessWidget {
         child: const Column(
           children: [
             /*** HERO_SECTION ***/
-            // HeroSection(),
+            HeroSection(),
             /*** FORMATIONS_SECTION ***/
-            // TrainingSection(),
+            TrainingSection(),
             /*** TESTIMONIALS_SECTION ***/
-            // TestimonialSection(),
+            TestimonialSection(),
             /*** FEATURES_SECTION ***/
             FeatureSection()
           ],

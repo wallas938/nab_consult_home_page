@@ -72,7 +72,7 @@ class _HomePageState extends State<HomePage> {
                       ]
                     : [],
                 title: const Text("Nab Consult"),
-                leading: !ResponsiveUtil.isOnDesktop(context)
+                leading: ResponsiveUtil.isOnMobile(context)
                     ? Builder(
                         builder: (context) {
                           return IconButton(
@@ -86,7 +86,7 @@ class _HomePageState extends State<HomePage> {
                     : null,
               ),
               drawer:
-                  ResponsiveUtil.isOnDesktop(context) ? null : const MyDrawer(),
+                  ResponsiveUtil.isOnMobile(context) ? const MyDrawer() : null,
               body: const MyHomePage(),
             ),
             debugShowCheckedModeBanner: false,

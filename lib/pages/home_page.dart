@@ -62,7 +62,7 @@ List<Widget> _buildCertificationList(BuildContext context, int firstIndex) {
 
 double _responsiveFontSize(BuildContext context, double fontsize,
     double fontMaxSize, double screenMaxSize) {
-  double screenWidth = MediaQuery.of(context).size.width;
+  double screenWidth = MediaQuery.of(context).size.width; // 425
   return screenWidth >= screenMaxSize ? fontMaxSize : fontsize.sp;
 }
 
@@ -269,8 +269,7 @@ class TrainingSection extends StatelessWidget {
                                       fontStyle: FontStyle.italic,
                                       color: AppColors.white,
                                       fontWeight: FontWeight.w700,
-                                      fontSize: _responsiveFontSize(
-                                          context, 12, 16, mobileWidthLimit),
+                                      fontSize: 12.sp,
                                       decorationStyle:
                                           TextDecorationStyle.solid),
                                 ),
@@ -366,9 +365,9 @@ class TrainingSection extends StatelessWidget {
           );
         });
     Widget tabletView = GridView.builder(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          mainAxisExtent: 900,
+        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+          maxCrossAxisExtent: 500,
+          mainAxisExtent: 1100,
         ),
         itemCount: trainingData.length,
         itemBuilder: (context, index) {
@@ -391,7 +390,7 @@ class TrainingSection extends StatelessWidget {
               children: [
                 /*** CARD_HEADER ***/
                 Expanded(
-                  flex: 3,
+                  flex: 2,
                   child: Container(
                     width: double.infinity,
                     decoration: BoxDecoration(
@@ -425,21 +424,23 @@ class TrainingSection extends StatelessWidget {
                         children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               /*** TRAINING_TITLE ***/
                               Expanded(
                                 child: Text(
                                   trainingData[index].trainingTitle,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       fontStyle: FontStyle.italic,
                                       color: AppColors.white,
                                       fontWeight: FontWeight.w700,
-                                      fontSize: _responsiveFontSize(
-                                          context, 12, 16, mobileWidthLimit),
+                                      fontSize: 22,
                                       decorationStyle:
                                           TextDecorationStyle.solid),
                                 ),
+                              ),
+                              const SizedBox(
+                                height: 100,
                               ),
                               /*** TRAINING_DURATION ***/
                               Text(
@@ -461,12 +462,11 @@ class TrainingSection extends StatelessWidget {
                           Expanded(
                             child: Text(
                               trainingData[index].description ?? "",
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontStyle: FontStyle.normal,
                                   color: Colors.white70,
                                   fontWeight: FontWeight.w500,
-                                  fontSize: _responsiveFontSize(
-                                      context, 12, 16, mobileWidthLimit),
+                                  fontSize: 18.5,
                                   decorationStyle: TextDecorationStyle.solid),
                             ),
                           ),
@@ -559,10 +559,11 @@ class TrainingSection extends StatelessWidget {
           Expanded(
             child: ResponsiveUtil.isOnMobile(context)
                 ? Container(
-                    constraints: const BoxConstraints(maxWidth: 350),
+                    constraints:
+                        const BoxConstraints(maxWidth: mobileWidthLimit),
                     child: mobileView)
                 : Container(
-                    constraints: const BoxConstraints(maxWidth: 850),
+                    constraints: const BoxConstraints(maxWidth: tabletWidthLimit),
                     child: tabletView),
           ),
         ],

@@ -212,10 +212,12 @@ final List<TrainingData> trainingData = [
           "Article R4412-1 : Détermine que les règles de prévention des risques chimiques sont fixées par décret en Conseil d'État, prenant en compte les situations de polyexpositions."),
   TrainingData(
       trainingTitle: "Risque amiante",
+      description:
+          "L'amiante constitue un problème majeur de santé publique et de santé au travail: ce matériau aux multiples qualités s'est révélé hautement toxique. Il a été massivement utilisé et le nombre de cancers qu'il a induits ne cesse d'augmenter. Interdit en France depuis 1997, il reste présent dans de nombreux bâtiments et équipements. Dans les bâtiments construits avant 1997, l’amiantes est présente partout.",
       trainingImagePath: "assets/images/image_amiante.webp",
       certifications: []),
 ];
 
 const mobileWidthLimit = 425.0;
-const tabletWidthLimit = 850.0;
+const tabletWidthLimit = 980.0;
 const desktopWidthLimit = 1280.0;

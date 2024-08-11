@@ -68,7 +68,7 @@ final List<FeatureItem> features = [
       name: "Questionnaire de satisfaction",
       imagePath: "assets/images/image_calendar.webp",
       description:
-          "Toutes nos formations arrivées à terme sont soumises à un formulaire de satisfaction concernant l'environnement, les outils et l'efficacité de nos formateurs afin de pouvoir être en capacité de toujours proposer ce qu'il y a de mieux à nos clients"),
+          "Toutes nos formations arrivées à terme sont soumises à un formulaire de satisfaction concernant l'environnement, les outils et l'efficacité de nos formateurs afin de pouvoir être en capacité de toujours proposer ce qu'il y a de mieux à nos clients."),
   FeatureItem(
       name: "Feuille d'émergement numérique",
       imagePath: "assets/images/image_calendar.webp",
@@ -127,7 +127,7 @@ final List<TrainingData> trainingData = [
       trainingTitle: "Habilitation électrique BT/HT : NFC 18-510",
       trainingImagePath: "assets/images/image_bt_ht.webp",
       description:
-          "Les certifications électriques garantissent la conformité aux normes de sécurité, protègent les employés et les clients, et renforcent la réputation de l'entreprise. Elles sont essentielles pour assurer la légalité, la sécurité, et la compétitivité sur le marché.\n\nL’article 4544-9 du code du travail précise que : « Les opérations sur les installations électriques ou dans leur voisinage ne peuvent être effectuées que par des travailleurs habilités. »\n\nL'article R. 4544-10 du même code prévoit que : « Un travailleur est habilité dans les limites des attributions qui lui sont confiées.",
+          "L’article 4544-9 du code du travail précise que : « Les opérations sur les installations électriques ou dans leur voisinage ne peuvent être effectuées que par des travailleurs habilités. »\nL'article R. 4544-10 du même code prévoit que : « Un travailleur est habilité dans les limites des attributions qui lui sont confiées.",
       certifications: [
         CertificationData(
           name: "B0/H0 – H0V",
@@ -215,3 +215,7 @@ final List<TrainingData> trainingData = [
       trainingImagePath: "assets/images/image_amiante.webp",
       certifications: []),
 ];
+
+const mobileWidthLimit = 425.0;
+const tabletWidthLimit = 850.0;
+const desktopWidthLimit = 1280.0;

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nab_consult_home_page/constantes/app-datas.dart';
 import 'package:nab_consult_home_page/constantes/theme.colors.dart';
-import 'package:nab_consult_home_page/constantes/theme.typo.dart';
 import 'package:nab_consult_home_page/util/responsive.dart';
 
 TextStyle cardTitleStyle = TextStyle(
@@ -137,24 +136,7 @@ class HeroSection extends StatelessWidget {
                 text: TextSpan(
                   children: [
                     TextSpan(
-                      text: 'Avec ',
-                      style: TextStyle(
-                        fontFamily: "Instrument Sans",
-                        fontStyle: FontStyle.italic,
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.white,
-                        fontSize: 14.sp,
-                        shadows: [
-                          Shadow(
-                            offset: const Offset(1.5, 1.5),
-                            blurRadius: 2.0,
-                            color: Colors.black.withOpacity(0.8),
-                          ),
-                        ],
-                      ),
-                    ),
-                    TextSpan(
-                      text: 'NAB Consult\n\n',
+                      text: 'NAB Consult\n',
                       style: TextStyle(
                         fontFamily: "Instrument Sans",
                         letterSpacing: 1.5,
@@ -172,7 +154,7 @@ class HeroSection extends StatelessWidget {
                     ),
                     TextSpan(
                       text:
-                          'Élevez vos standards\net formez vous et vos équipes\nà la sécurité électrique\n',
+                          '\nVotre organisme de formation à la sécurité,\n la santé et la prévention\ndes risques professionnels.',
                       style: TextStyle(
                         fontFamily: "Instrument Sans",
                         fontStyle: FontStyle.italic,

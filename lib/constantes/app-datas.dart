@@ -219,4 +219,4 @@ final List<TrainingData> trainingData = [
 
 const mobileWidthLimit = 425.0;
 const tabletWidthLimit = 850.0;
-const desktopWidthLimit = 1280.0;
+const desktopWidthLimit = 1480.0;

@@ -27,8 +27,8 @@ class _HomePageState extends State<HomePage> {
   TextStyle styleCurrentLink(int index) {
     return _selectedIndex == index
         ? const TextStyle(
-      decoration: TextDecoration.underline,
-    )
+            decoration: TextDecoration.underline,
+          )
         : const TextStyle();
   }
 
@@ -49,26 +49,19 @@ class _HomePageState extends State<HomePage> {
                             onPressed: () {
                               _updatedIndex(0);
                             },
-                            child: Text(
-                              "Accueil",
-                              style: styleCurrentLink(0)
-                            )),
+                            child: Text("Accueil", style: styleCurrentLink(0))),
                         TextButton(
                             onPressed: () {
                               _updatedIndex(1);
                             },
-                            child: Text(
-                              "Qui sommes nous ?",
-                              style: styleCurrentLink(1)
-                            )),
+                            child: Text("Qui sommes nous ?",
+                                style: styleCurrentLink(1))),
                         TextButton(
                             onPressed: () {
                               _updatedIndex(2);
                             },
-                            child: Text(
-                              "Nous contacter",
-                              style: styleCurrentLink(2)
-                            )),
+                            child: Text("Nous contacter",
+                                style: styleCurrentLink(2))),
                       ]
                     : [],
                 title: const Text("Nab Consult"),
@@ -87,7 +80,15 @@ class _HomePageState extends State<HomePage> {
               ),
               drawer:
                   ResponsiveUtil.isOnMobile(context) ? const MyDrawer() : null,
-              body: const MyHomePage(),
+              body: Container(
+                  decoration: const BoxDecoration(
+                      gradient: LinearGradient(colors: [
+                        Color.fromRGBO(234, 234, 234, 1),
+                        Color.fromRGBO(219, 219, 219, 1),
+                        Color.fromRGBO(242, 242, 242, 1),
+                        Color.fromRGBO(173, 169, 150, 1)
+                      ], begin: Alignment.topLeft, end: Alignment.bottomRight)),
+                  child: const MyHomePage()),
             ),
             debugShowCheckedModeBanner: false,
           );

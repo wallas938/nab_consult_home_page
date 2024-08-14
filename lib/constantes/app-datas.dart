@@ -213,6 +213,7 @@ final List<TrainingData> trainingData = [
   TrainingData(
       trainingTitle: "Risque amiante",
       trainingImagePath: "assets/images/image_amiante.webp",
+      description: "L'amiante constitue un problème majeur de santé publique et de santé au travail: ce matériau aux multiples qualités s'est révélé hautement toxique. Il a été massivement utilisé et le nombre de cancers qu'il a induits ne cesse d'augmenter. Interdit en France depuis 1997, il reste présent dans de nombreux bâtiments et équipements. Dans les bâtiments construits avant 1997, l’amiantes est présente partout.",
       certifications: []),
 ];
 

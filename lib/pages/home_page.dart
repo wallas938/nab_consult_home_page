@@ -70,9 +70,6 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenH = MediaQuery.of(context).size.height;
-    final screenW = MediaQuery.of(context).size.width;
-
     return const SingleChildScrollView(
       physics: BouncingScrollPhysics(),
       child: Column(
@@ -492,6 +489,167 @@ class TrainingSection extends StatelessWidget {
             ),
           );
         });
+    Widget desktopView = GridView.builder(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3,
+          mainAxisExtent: 900,
+        ),
+        itemCount: trainingData.length,
+        itemBuilder: (context, index) {
+          return Container(
+            margin: const EdgeInsets.all(16),
+            width: double.infinity,
+            decoration: BoxDecoration(
+              boxShadow: const [
+                BoxShadow(
+                  color: Colors.black26,
+                  blurRadius: 4,
+                  offset: Offset(2, 2),
+                ),
+              ],
+              borderRadius: BorderRadius.circular(8),
+              color: Colors.grey[500],
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                /*** CARD_HEADER ***/
+                Expanded(
+                  flex: 3,
+                  child: Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image:
+                            AssetImage(trainingData[index].trainingImagePath),
+                        fit: BoxFit.cover,
+                      ),
+                      borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(8),
+                          topRight: Radius.circular(8)),
+                    ),
+                  ),
+                ),
+                /*** CARD_BODY ***/
+                Expanded(
+                  flex: 7,
+                  child: Container(
+                    width: double.infinity,
+                    decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(8),
+                            bottomRight: Radius.circular(8))),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 16, horizontal: 12),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              /*** TRAINING_TITLE ***/
+                              Expanded(
+                                child: Text(
+                                  trainingData[index].trainingTitle,
+                                  style: const TextStyle(
+                                      fontStyle: FontStyle.italic,
+                                      color: AppColors.white,
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 21,
+                                      decorationStyle:
+                                          TextDecorationStyle.solid),
+                                ),
+                              ),
+                              /*** TRAINING_DURATION ***/
+                              Text(
+                                trainingData[index].duration != null
+                                    ? "/${trainingData[index].duration} jour(s)"
+                                    : "",
+                                style: const TextStyle(
+                                    fontStyle: FontStyle.italic,
+                                    color: AppColors.amber,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 18,
+                                    decorationStyle: TextDecorationStyle.solid),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 8),
+                          /*** CARD_DESCRIPTION ***/
+                          Expanded(
+                            child: Text(
+                              trainingData[index].description ?? "",
+                              style: const TextStyle(
+                                  fontStyle: FontStyle.normal,
+                                  color: Colors.white70,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 18,
+                                  decorationStyle: TextDecorationStyle.solid),
+                            ),
+                          ),
+                          const SizedBox(height: 18),
+                          const Divider(
+                            height: 1,
+                            color: AppColors.grey,
+                          ),
+                          const SizedBox(height: 24),
+                          /*** CERTIFICATIONS ***/
+                          Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: _buildCertificationList(context, index),
+                          ),
+                          const SizedBox(height: 32),
+                          /*** CARD_BUTTON ***/
+                          Column(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              TextButton(
+                                onPressed: () {},
+                                style: TextButton.styleFrom(
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 24, horizontal: 24),
+                                  backgroundColor: AppColors.amber,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  elevation: 5,
+                                ),
+                                child: const Text(
+                                  "Détails de la formation",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    shadows: [
+                                      Shadow(
+                                        blurRadius: 2.0,
+                                        color: Colors.black54,
+                                        offset: Offset(1.0, 1.0),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
+        });
 
     return Column(
       children: [
@@ -522,9 +680,15 @@ class TrainingSection extends StatelessWidget {
             ? Container(
                 constraints: const BoxConstraints(maxWidth: mobileWidthLimit),
                 child: mobileView)
-            : Container(
-                constraints: const BoxConstraints(maxWidth: tabletWidthLimit),
-                child: tabletView),
+            : ResponsiveUtil.isOnTablet(context)
+                ? Container(
+                    constraints:
+                        const BoxConstraints(maxWidth: tabletWidthLimit),
+                    child: tabletView)
+                : Container(
+                    constraints:
+                        const BoxConstraints(maxWidth: desktopWidthLimit),
+                    child: desktopView)
       ],
     );
   }
@@ -535,45 +699,52 @@ class TestimonialSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextStyle testimonialStyle = TextStyle(
-        fontSize: 11.5.sp,
+    TextStyle testimonialTextStyle = TextStyle(
+        fontSize: 9.sp,
         fontFamily: "Instrument Sans",
         fontWeight: FontWeight.bold,
         fontStyle: FontStyle.italic,
-        color: Colors.amberAccent);
+        color: const Color.fromRGBO(50, 50, 50, 1));
+    TextStyle testimonialInfoStyle = TextStyle(
+        fontSize: 9.sp,
+        fontFamily: "Instrument Sans",
+        fontWeight: FontWeight.bold,
+        fontStyle: FontStyle.italic,
+        color: const Color.fromRGBO(70, 130, 180, 1));
 
     List<Widget> buildTestimonialListWidgetForMobile() {
       return testimonialData
-          .map((t) => Padding(
-                padding: const EdgeInsets.only(bottom: 10),
-                child: Container(
-                  width: 320,
-                  margin:
-                      const EdgeInsets.symmetric(vertical: 14, horizontal: 18),
-                  padding: const EdgeInsets.all(24),
-                  decoration: BoxDecoration(
-                    gradient: const LinearGradient(colors: [
-                      Color.fromRGBO(15, 32, 39, 1),
-                      Color.fromRGBO(32, 58, 67, 1),
-                      Color.fromRGBO(44, 83, 100, 1),
-                    ], begin: Alignment.topLeft, end: Alignment.bottomRight),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.black.withOpacity(.5),
-                          blurRadius: 2.0,
-                          offset: const Offset(1, 1))
-                    ],
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
+          .map((t) => Container(
+                width: double.infinity,
+                margin:
+                    const EdgeInsets.symmetric(vertical: 14,),
+                decoration: BoxDecoration(
+                  gradient: const LinearGradient(colors: [
+                    Color.fromRGBO(220, 220, 220, 1),
+                    Color.fromRGBO(245, 245, 245, 1),
+                    Color.fromRGBO(255, 255, 255, 1),
+                  ], begin: Alignment.topLeft, end: Alignment.bottomRight),
+                  boxShadow: [
+                    BoxShadow(
+                      color:
+                          Colors.black.withOpacity(0.15), // Ombre plus légère
+                      blurRadius: 4.0, // Légèrement plus flou
+                      offset: const Offset(2, 2), // Décalage plus prononcé
+                    ),
+                  ],
+                  color: Colors.white, // Fond blanc
+                  borderRadius:
+                      BorderRadius.circular(18), // Garde les bords arrondis
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.max,
                     children: [
                       Icon(
                         Icons.format_quote,
                         size: 28.0.sp,
-                        color: Colors.amberAccent,
+                        color: const Color.fromRGBO(70, 130, 180, 1),
                       ),
                       const SizedBox(
                         height: 8,
@@ -581,18 +752,18 @@ class TestimonialSection extends StatelessWidget {
                       Text(
                         textAlign: TextAlign.justify,
                         t.text,
-                        style: testimonialStyle,
+                        style: testimonialTextStyle,
                       ),
                       const SizedBox(
                         height: 12,
                       ),
-                      Text(t.author, style: testimonialStyle),
+                      Text(t.author, style: testimonialInfoStyle),
                       const SizedBox(
-                        height: 20,
+                        height: 4,
                       ),
                       Text(
                         t.position,
-                        style: testimonialStyle,
+                        style: testimonialInfoStyle,
                       )
                     ],
                   ),
@@ -617,18 +788,20 @@ class TestimonialSection extends StatelessWidget {
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
               gradient: const LinearGradient(colors: [
-                Color.fromRGBO(15, 32, 39, 1),
-                Color.fromRGBO(32, 58, 67, 1),
-                Color.fromRGBO(44, 83, 100, 1),
+                Color.fromRGBO(220, 220, 220, 1),
+                Color.fromRGBO(245, 245, 245, 1),
+                Color.fromRGBO(255, 255, 255, 1),
               ], begin: Alignment.topLeft, end: Alignment.bottomRight),
               boxShadow: [
                 BoxShadow(
-                    color: Colors.black.withOpacity(.5),
-                    blurRadius: 2.0,
-                    offset: const Offset(1, 1))
+                  color: Colors.black.withOpacity(0.15), // Ombre plus légère
+                  blurRadius: 4.0, // Légèrement plus flou
+                  offset: const Offset(2, 2), // Décalage plus prononcé
+                ),
               ],
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(8),
+              color: Colors.white, // Fond blanc
+              borderRadius:
+                  BorderRadius.circular(18), // Garde les bords arrondis
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -640,21 +813,24 @@ class TestimonialSection extends StatelessWidget {
                   child: Icon(
                     Icons.format_quote,
                     size: 44,
-                    color: Colors.yellowAccent,
+                    color: Color.fromRGBO(70, 130, 180, 1),
                   ),
                 ),
                 const SizedBox(
                   height: 8,
                 ),
-                Text(
-                  textAlign: TextAlign.justify,
-                  testimonialData[index].text,
-                  style: const TextStyle(
-                      fontSize: 14,
-                      fontFamily: "Instrument Sans",
-                      fontWeight: FontWeight.bold,
-                      fontStyle: FontStyle.italic,
-                      color: Colors.yellowAccent),
+                Flexible(
+                  fit: FlexFit.loose,
+                  child: Text(
+                    textAlign: TextAlign.justify,
+                    testimonialData[index].text,
+                    style: const TextStyle(
+                        fontSize: 16,
+                        fontFamily: "Instrument Sans",
+                        fontWeight: FontWeight.bold,
+                        fontStyle: FontStyle.italic,
+                        color: Color.fromRGBO(50, 50, 50, 1)),
+                  ),
                 ),
                 const SizedBox(
                   height: 12,
@@ -665,7 +841,7 @@ class TestimonialSection extends StatelessWidget {
                         fontFamily: "Instrument Sans",
                         fontWeight: FontWeight.bold,
                         fontStyle: FontStyle.italic,
-                        color: Colors.yellowAccent)),
+                        color: Color.fromRGBO(70, 130, 180, 1))),
                 Text(
                   testimonialData[index].position,
                   style: const TextStyle(
@@ -673,7 +849,90 @@ class TestimonialSection extends StatelessWidget {
                       fontFamily: "Instrument Sans",
                       fontWeight: FontWeight.bold,
                       fontStyle: FontStyle.italic,
-                      color: Colors.yellowAccent),
+                      color: Color.fromRGBO(70, 130, 180, 1)),
+                )
+              ],
+            ),
+          );
+        },
+      );
+    }
+
+    Widget buildTestimonialListWidgetForDesktop() {
+      return GridView.builder(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 1,
+            crossAxisSpacing: 16,
+            mainAxisSpacing: 16,
+            mainAxisExtent: 400),
+        itemCount: testimonialData.length,
+        itemBuilder: (BuildContext context, int index) {
+          return Container(
+            margin: const EdgeInsets.symmetric(vertical: 14, horizontal: 18),
+            padding: const EdgeInsets.all(18),
+            decoration: BoxDecoration(
+              gradient: const LinearGradient(colors: [
+                Color.fromRGBO(220, 220, 220, 1),
+                Color.fromRGBO(245, 245, 245, 1),
+                Color.fromRGBO(255, 255, 255, 1),
+              ], begin: Alignment.topLeft, end: Alignment.bottomRight),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.15), // Ombre plus légère
+                  blurRadius: 4.0, // Légèrement plus flou
+                  offset: const Offset(2, 2), // Décalage plus prononcé
+                ),
+              ],
+              color: Colors.white, // Fond blanc
+              borderRadius:
+                  BorderRadius.circular(18), // Garde les bords arrondis
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Align(
+                  alignment: Alignment.centerRight,
+                  child: Icon(
+                    Icons.format_quote,
+                    size: 72,
+                    color: Color.fromRGBO(70, 130, 180, 1),
+                  ),
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                Text(
+                  textAlign: TextAlign.justify,
+                  testimonialData[index].text,
+                  style: const TextStyle(
+                      fontSize: 21,
+                      fontFamily: "Instrument Sans",
+                      fontWeight: FontWeight.bold,
+                      fontStyle: FontStyle.italic,
+                      color: Color.fromRGBO(50, 50, 50, 1)),
+                ),
+                const SizedBox(
+                  height: 12,
+                ),
+                Text(testimonialData[index].author,
+                    style: const TextStyle(
+                        fontSize: 18,
+                        fontFamily: "Instrument Sans",
+                        fontWeight: FontWeight.bold,
+                        fontStyle: FontStyle.italic,
+                        color: Color.fromRGBO(70, 130, 180, 1))),
+                Text(
+                  testimonialData[index].position,
+                  style: const TextStyle(
+                      fontSize: 18,
+                      fontFamily: "Instrument Sans",
+                      fontWeight: FontWeight.bold,
+                      fontStyle: FontStyle.italic,
+                      color: Color.fromRGBO(70, 130, 180, 1)),
                 )
               ],
             ),
@@ -712,14 +971,20 @@ class TestimonialSection extends StatelessWidget {
           ),
           /*** TESTIMONIALS_LIST ***/
           if (ResponsiveUtil.isOnMobile(context))
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              children: buildTestimonialListWidgetForMobile(),
-            )
-          else
+            Container(
+                constraints: const BoxConstraints(maxWidth: mobileWidthLimit),
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: buildTestimonialListWidgetForMobile(),
+                ))
+          else if (ResponsiveUtil.isOnTablet(context))
             Container(
                 constraints: const BoxConstraints(maxWidth: tabletWidthLimit),
-                child: buildTestimonialListWidgetForTablet()),
+                child: buildTestimonialListWidgetForTablet())
+          else
+            Container(
+                constraints: const BoxConstraints(maxWidth: desktopWidthLimit),
+                child: buildTestimonialListWidgetForDesktop())
         ],
       ),
     );
@@ -733,67 +998,76 @@ class FeatureSection extends StatelessWidget {
     return features
         .map((f) =>
             /*** FEATURE_CARD_CONTAINER ***/
-            Container(
-              width: 280,
-              height: 420,
-              margin: const EdgeInsets.only(bottom: 16),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(8),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    offset: const Offset(0, 1),
-                    blurRadius: 4,
-                    spreadRadius: 1,
-                  ),
-                ],
-              ),
-              child: Column(
-                children: [
-                  /*** FEATURE_IMAGE ***/
-                  Expanded(
-                    child: Image.asset(
-                        width: double.infinity, f.imagePath, fit: BoxFit.fill),
-                  ),
-                  /*** FEATURE_BODY ***/
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const SizedBox(
-                            height: 8,
-                          ),
-                          /*** FEATURE_NAME ***/
-                          Text(
-                            f.name,
-                            style: const TextStyle(
-                              fontSize: 16,
-                              decoration: TextDecoration.underline,
-                              fontStyle: FontStyle.italic,
-                              fontFamily: "Instrument Sans",
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 18,
-                          ),
-                          /*** FEATURE_DESCRIPTION ***/
-                          Expanded(
-                            child: Text(f.description,
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  fontFamily: "Instrument Sans",
-                                  fontWeight: FontWeight.w500,
-                                )),
-                          ),
-                        ],
-                      ),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(18),
+              child: Container(
+                width: double.infinity,
+                height: 420,
+                margin: const EdgeInsets.only(bottom: 16),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(18),
+                  gradient: const LinearGradient(colors: [
+                    Color.fromRGBO(220, 220, 220, 1),
+                    Color.fromRGBO(245, 245, 245, 1),
+                    Color.fromRGBO(255, 255, 255, 1),
+                  ], begin: Alignment.topLeft, end: Alignment.bottomRight),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.15),
+                      blurRadius: 4.0,
+                      offset: const Offset(2, 2),
                     ),
-                  )
-                ],
+                  ],
+                  color: Colors.white,
+
+                ),
+                child: Column(
+                  children: [
+                    /*** FEATURE_IMAGE ***/
+                    Expanded(
+                      child: Image.asset(
+                          width: double.infinity, f.imagePath, fit: BoxFit.fill, ),
+                    ),
+                    /*** FEATURE_BODY ***/
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(
+                              height: 8,
+                            ),
+                            /*** FEATURE_NAME ***/
+                            Text(
+                              f.name,
+                              style: const TextStyle(
+                                fontSize: 21,
+                                decoration: TextDecoration.underline,
+                                fontStyle: FontStyle.italic,
+                                fontFamily: "Instrument Sans",
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 18,
+                            ),
+                            /*** FEATURE_DESCRIPTION ***/
+                            Expanded(
+                              child: Text(f.description,
+                                  textAlign: TextAlign.justify,
+                                  style: const TextStyle(
+                                    fontSize: 16,
+                                    fontFamily: "Instrument Sans",
+                                    fontWeight: FontWeight.w500,
+                                  )),
+                            ),
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
+                ),
               ),
             ))
         .toList();
@@ -811,67 +1085,180 @@ class FeatureSection extends StatelessWidget {
         itemCount: features.length,
         padding: const EdgeInsets.all(24),
         itemBuilder: (context, index) {
-          return Container(
-            margin: const EdgeInsets.only(bottom: 16),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(8),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  offset: const Offset(0, 1),
-                  blurRadius: 4,
-                  spreadRadius: 1,
-                ),
-              ],
-            ),
-            child: Column(
-              children: [
-                /*** FEATURE_IMAGE ***/
-                Expanded(
-                  child: Image.asset(
-                      width: double.infinity,
-                      features[index].imagePath,
-                      fit: BoxFit.fill),
-                ),
-                /*** FEATURE_BODY ***/
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        /*** FEATURE_NAME ***/
-                        Text(
-                          features[index].name,
-                          style: const TextStyle(
-                            fontSize: 18,
-                            decoration: TextDecoration.underline,
-                            fontStyle: FontStyle.italic,
-                            fontFamily: "Instrument Sans",
-                            fontWeight: FontWeight.bold,
+          return ClipRRect(
+            borderRadius: BorderRadius.circular(18),
+            child: Container(
+              margin: const EdgeInsets.only(bottom: 16),
+              decoration: BoxDecoration(
+                gradient: const LinearGradient(colors: [
+                  Color.fromRGBO(220, 220, 220, 1),
+                  Color.fromRGBO(245, 245, 245, 1),
+                  Color.fromRGBO(255, 255, 255, 1),
+                ], begin: Alignment.topLeft, end: Alignment.bottomRight),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.15),
+                    blurRadius: 4.0,
+                    offset: const Offset(2, 2),
+                  ),
+                ],
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(18),
+              ),
+              child: Column(
+                children: [
+                  /*** FEATURE_IMAGE ***/
+                  Expanded(
+                    child: Image.asset(
+                        width: double.infinity,
+                        features[index].imagePath,
+                        fit: BoxFit.fill),
+                  ),
+                  /*** FEATURE_BODY ***/
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(12),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(
+                            height: 8,
                           ),
-                        ),
-                        const SizedBox(
-                          height: 18,
-                        ),
-                        /*** FEATURE_DESCRIPTION ***/
-                        Expanded(
-                          child: Text(features[index].description,
-                              style: const TextStyle(
-                                fontSize: 16,
-                                fontFamily: "Instrument Sans",
-                                fontWeight: FontWeight.w500,
-                              )),
-                        ),
-                      ],
+                          /*** FEATURE_NAME ***/
+                          Text(
+                            features[index].name,
+                            style: const TextStyle(
+                              fontSize: 18,
+                              decoration: TextDecoration.underline,
+                              fontStyle: FontStyle.italic,
+                              fontFamily: "Instrument Sans",
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 18,
+                          ),
+                          /*** FEATURE_DESCRIPTION ***/
+                          Expanded(
+                            child: Text(features[index].description,
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontFamily: "Instrument Sans",
+                                  fontWeight: FontWeight.w500,
+                                )),
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
+  Widget buildDesktopFeatureListWidget() {
+    return GridView.builder(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            mainAxisSpacing: 38, crossAxisCount: 1, mainAxisExtent: 450),
+        itemCount: features.length,
+        padding: const EdgeInsets.all(24),
+        itemBuilder: (context, index) {
+          return ClipRRect(
+            borderRadius: BorderRadius.circular(18),
+            child: Container(
+              margin: const EdgeInsets.only(bottom: 16),
+              decoration: BoxDecoration(
+                gradient: const LinearGradient(colors: [
+                  Color.fromRGBO(220, 220, 220, 1),
+                  Color.fromRGBO(245, 245, 245, 1),
+                  Color.fromRGBO(255, 255, 255, 1),
+                ], begin: Alignment.topLeft, end: Alignment.bottomRight),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.15), // Ombre plus légère
+                    blurRadius: 4.0, // Légèrement plus flou
+                    offset: const Offset(2, 2), // Décalage plus prononcé
+                  ),
+                ],
+                color: Colors.white, // Fond blanc
+                borderRadius:
+                    BorderRadius.circular(18), // Garde les bords arrondis
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                textDirection:
+                    index % 2 == 0 ? TextDirection.rtl : TextDirection.ltr,
+                children: [
+                  /*** FEATURE_BODY ***/
+                  Expanded(
+                    flex: 7,
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(
+                            height: 8,
+                          ),
+                          /*** FEATURE_NAME ***/
+                          Align(
+                            alignment: index % 2 == 0
+                                ? Alignment.centerRight
+                                : Alignment.centerLeft,
+                            child: Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Text(
+                                features[index].name,
+                                style: const TextStyle(
+                                  fontSize: 28,
+                                  decoration: TextDecoration.underline,
+                                  fontStyle: FontStyle.italic,
+                                  fontFamily: "Instrument Sans",
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 58,
+                          ),
+                          /*** FEATURE_DESCRIPTION ***/
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Text(features[index].description,
+                                  textAlign: index % 2 == 0
+                                      ? TextAlign.end
+                                      : TextAlign.start,
+                                  style: const TextStyle(
+                                    fontSize: 24,
+                                    fontFamily: "Instrument Sans",
+                                    fontWeight: FontWeight.w500,
+                                  )),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                )
-              ],
+                  /*** FEATURE_IMAGE ***/
+                  Expanded(
+                    flex: 5,
+                    child: SizedBox(
+                      height: double.maxFinite,
+                      child: Image.asset(
+                          width: double.infinity,
+                          features[index].imagePath,
+                          fit: BoxFit.fill),
+                    ),
+                  ),
+                ],
+              ),
             ),
           );
         });
@@ -905,13 +1292,21 @@ class FeatureSection extends StatelessWidget {
           height: 50,
         ),
         ResponsiveUtil.isOnMobile(context)
-            ? Column(
-                mainAxisSize: MainAxisSize.max,
-                children: buildMobileFeatureListWidget(context),
-              )
-            : Container(
-                constraints: const BoxConstraints(maxWidth: tabletWidthLimit),
-                child: buildTabletFeatureListWidget()),
+            ? Container(
+                constraints: const BoxConstraints(maxWidth: mobileWidthLimit),
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: buildMobileFeatureListWidget(context),
+                ))
+            : ResponsiveUtil.isOnTablet(context)
+                ? Container(
+                    constraints:
+                        const BoxConstraints(maxWidth: tabletWidthLimit),
+                    child: buildTabletFeatureListWidget())
+                : Container(
+                    constraints:
+                        const BoxConstraints(maxWidth: desktopWidthLimit),
+                    child: buildDesktopFeatureListWidget()),
       ],
     );
   }

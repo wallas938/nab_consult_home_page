@@ -41,7 +41,7 @@ class _HomePageState extends State<HomePage> {
             home: Scaffold(
               backgroundColor: Colors.white,
               appBar: PreferredSize(
-                preferredSize: const Size.fromHeight(80),
+                preferredSize: !ResponsiveUtil.isOnDesktop(context) ? const Size.fromHeight(50) : const Size.fromHeight(80),
                 child: AppBar(
                   flexibleSpace: Padding(
                     padding: const EdgeInsets.all(18.0),
@@ -90,7 +90,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               drawer:
-                  ResponsiveUtil.isOnMobile(context) ? const MyDrawer() : null,
+                  !ResponsiveUtil.isOnDesktop(context) ? const MyDrawer() : null,
               body: Container(
                   decoration: const BoxDecoration(
                       gradient: LinearGradient(colors: [

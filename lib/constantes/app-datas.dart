@@ -220,3 +220,7 @@ final List<TrainingData> trainingData = [
 const mobileWidthLimit = 425.0;
 const tabletWidthLimit = 850.0;
 const desktopWidthLimit = 1480.0;
+
+const mobilePadding = EdgeInsets.all(12);
+const tabletPadding = EdgeInsets.all(24);
+const desktopPadding = EdgeInsets.all(32);

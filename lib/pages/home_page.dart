@@ -60,6 +60,52 @@ List<Widget> _buildCertificationList(BuildContext context, int firstIndex) {
   return items;
 }
 
+Widget _buildSectionHeader(String title, BuildContext context) {
+  return Wrap(
+    children: [
+      SizedBox(
+        width: double.infinity,
+        height: ResponsiveUtil.isOnMobile(context)
+            ? 30
+            : ResponsiveUtil.isOnTablet(context)
+                ? 70
+                : 120,
+      ),
+      Align(
+        alignment: Alignment.center,
+        child: Text(
+          title,
+          style: TextStyle(
+              fontFamily: "Instrument Sans",
+              fontWeight: FontWeight.w600,
+              fontStyle: FontStyle.normal,
+              fontSize: ResponsiveUtil.isOnMobile(context)
+                  ? 18
+                  : ResponsiveUtil.isOnTablet(context)
+                      ? 24
+                      : 32,
+              height: 1.5,
+              color: Colors.black),
+        ),
+      ),
+      const SizedBox(
+        height: 5,
+      ),
+      const Divider(
+        height: .1,
+        color: AppColors.grey,
+      ),
+      SizedBox(
+        height: ResponsiveUtil.isOnMobile(context)
+            ? 20
+            : ResponsiveUtil.isOnTablet(context)
+                ? 50
+                : 70,
+      ),
+    ],
+  );
+}
+
 double _responsiveFontSize(BuildContext context, double fontsize,
     double fontMaxSize, double screenMaxSize) {
   double screenWidth = MediaQuery.of(context).size.width;
@@ -76,15 +122,15 @@ class MyHomePage extends StatelessWidget {
       child: Column(
         children: [
           /*** HERO_SECTION ***/
-          // HeroSection(),
+          HeroSection(),
           /*** FORMATIONS_SECTION ***/
-          // TrainingSection(),
-          /*** TESTIMONIALS_SECTION ***/
-          // TestimonialSection(),
-          /*** FEATURES_SECTION ***/
-          // FeatureSection(),
+          TrainingSection(),
           /*** NUMBERS_SECTION ***/
-          NumbersSection()
+          NumbersSection(),
+          /*** FEATURES_SECTION ***/
+          FeatureSection(),
+          /*** TESTIMONIALS_SECTION ***/
+          TestimonialSection(),
         ],
       ),
     );
@@ -100,97 +146,285 @@ class NumbersSection extends StatefulWidget {
 
 class _NumbersSectionState extends State<NumbersSection> {
   final int successValue = 98;
-  final int internNumber = 600;
+  final int internNumber = 600 * 5;
+
+  Widget _numbersSectionForMobile() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        /*** SUCCESS_RATE ***/
+        TweenAnimationBuilder(
+          tween: IntTween(begin: 0, end: successValue),
+          duration: const Duration(milliseconds: 1500),
+          builder: (BuildContext context, int value, Widget? child) {
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                const Text(
+                  "Taux de réussite",
+                  style: TextStyle(
+                      color: Color.fromRGBO(70, 130, 180, 1),
+                      fontFamily: "Instrument Sans",
+                      fontSize: 21,
+                      fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(
+                  width: 18,
+                ),
+                Text(
+                  "$value %",
+                  style: const TextStyle(
+                      color: Colors.amber,
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold),
+                ),
+              ],
+            );
+          },
+        ),
+        const SizedBox(
+          height: 18,
+        ),
+        const Text(
+          "ET",
+          style: TextStyle(
+              color: Color.fromRGBO(70, 130, 180, 1),
+              fontSize: 21,
+              fontWeight: FontWeight.bold),
+        ),
+        const SizedBox(
+          height: 18,
+        ),
+        /*** INNERS_NUMBER ***/
+        TweenAnimationBuilder(
+          tween: IntTween(begin: 0, end: internNumber),
+          duration: const Duration(milliseconds: 1500),
+          builder: (BuildContext context, int value, Widget? child) {
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text(
+                  "+ de $value",
+                  style: const TextStyle(
+                      color: Colors.amber,
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(
+                  width: 18,
+                ),
+                const Text(
+                  "Participants",
+                  style: TextStyle(
+                      color: Color.fromRGBO(70, 130, 180, 1),
+                      fontSize: 21,
+                      fontWeight: FontWeight.bold),
+                ),
+              ],
+            );
+          },
+        ),
+      ],
+    );
+  }
+
+  Widget _numbersSectionForTablet() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        /*** SUCCESS_RATE ***/
+        TweenAnimationBuilder(
+          tween: IntTween(begin: 0, end: successValue),
+          duration: const Duration(milliseconds: 1500),
+          builder: (BuildContext context, int value, Widget? child) {
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                const Text(
+                  "Taux de réussite",
+                  style: TextStyle(
+                      color: Color.fromRGBO(70, 130, 180, 1),
+                      fontFamily: "Instrument Sans",
+                      fontSize: 32,
+                      fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  "$value %",
+                  style: const TextStyle(
+                      color: Colors.amber,
+                      fontSize: 42,
+                      fontWeight: FontWeight.bold),
+                ),
+              ],
+            );
+          },
+        ),
+        const SizedBox(
+          height: 18,
+        ),
+        const Text(
+          "ET",
+          style: TextStyle(
+              color: Color.fromRGBO(70, 130, 180, 1),
+              fontSize: 32,
+              fontWeight: FontWeight.bold),
+        ),
+        const SizedBox(
+          height: 18,
+        ),
+        /*** INNERS_NUMBER ***/
+        TweenAnimationBuilder(
+          tween: IntTween(begin: 0, end: internNumber),
+          duration: const Duration(milliseconds: 1500),
+          builder: (BuildContext context, int value, Widget? child) {
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text(
+                  "+ de $value",
+                  style: const TextStyle(
+                      color: Colors.amber,
+                      fontSize: 48,
+                      fontWeight: FontWeight.bold),
+                ),
+                const Text(
+                  "Participants",
+                  style: TextStyle(
+                      color: Color.fromRGBO(70, 130, 180, 1),
+                      fontSize: 32,
+                      fontWeight: FontWeight.bold),
+                ),
+              ],
+            );
+          },
+        ),
+      ],
+    );
+  }
+
+  Widget _numbersSectionForDesktop() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 28.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          const SizedBox(
+            width: 24,
+          ),
+          /*** SUCCESS_RATE ***/
+          TweenAnimationBuilder(
+            tween: IntTween(begin: 0, end: successValue),
+            duration: const Duration(milliseconds: 1500),
+            builder: (BuildContext context, int value, Widget? child) {
+              return Row(
+                children: [
+                  const Text(
+                    "Taux de réussite",
+                    style: TextStyle(
+                        color: Color.fromRGBO(70, 130, 180, 1),
+                        fontFamily: "Instrument Sans",
+                        fontSize: 32,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(
+                    width: 24,
+                  ),
+                  Text(
+                    "$value %",
+                    style: const TextStyle(
+                        color: Colors.amber,
+                        fontSize: 42,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ],
+              );
+            },
+          ),
+          const SizedBox(
+            width: 24,
+          ),
+          const Text(
+            "ET",
+            style: TextStyle(
+                color: Color.fromRGBO(70, 130, 180, 1),
+                fontSize: 32,
+                fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(
+            width: 24,
+          ),
+          /*** INNERS_NUMBER ***/
+          TweenAnimationBuilder(
+            tween: IntTween(begin: 0, end: internNumber),
+            duration: const Duration(milliseconds: 1500),
+            builder: (BuildContext context, int value, Widget? child) {
+              return Row(
+                children: [
+                  Text(
+                    "+ de $value",
+                    style: const TextStyle(
+                        color: Colors.amber,
+                        fontSize: 48,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(
+                    width: 24,
+                  ),
+                  const Text(
+                    "Participants",
+                    style: TextStyle(
+                        color: Color.fromRGBO(70, 130, 180, 1),
+                        fontSize: 32,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ],
+              );
+            },
+          ),
+        ],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 48, horizontal: 16),
-      height: MediaQuery.of(context).size.height / 3,
+      padding: const EdgeInsets.symmetric(vertical: 16),
       width: double.infinity,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
+      height: ResponsiveUtil.isOnMobile(context)
+          ? 280
+          : ResponsiveUtil.isOnTablet(context)
+              ? 400
+              : 500,
+      child: Column(
         children: [
-          Expanded(
-            child: TweenAnimationBuilder(
-              tween: IntTween(begin: 0, end: successValue),
-              duration: const Duration(seconds: 2),
-              builder: (BuildContext context, int value, Widget? child) {
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            child: Text(
-                              "Réussite",
-                              style: TextStyle(
-                                  color: const Color.fromRGBO(70, 130, 180, 1),
-                                  fontSize: 21.sp,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                          const SizedBox(height: 8,),
-                          Expanded(
-                            child: Text(
-                              "$value %",
-                              style: TextStyle(
-                                  color: Colors.amber,
-                                  fontSize: 21.spMax,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        ],
+          _buildSectionHeader("QUELQUES CHIFFRES", context),
+          ResponsiveUtil.isOnMobile(context)
+              ? Container(
+                  constraints: const BoxConstraints(
+                    maxWidth: mobileWidthLimit,
+                  ),
+                  child: _numbersSectionForMobile(),
+                )
+              : ResponsiveUtil.isOnTablet(context)
+                  ? Container(
+                      constraints: const BoxConstraints(
+                        maxWidth: tabletWidthLimit,
                       ),
-                    ),
-                  ],
-                );
-              },
-            ),
-          ),
-          const SizedBox(width: 32,),
-          Expanded(
-            child: TweenAnimationBuilder(
-              tween: IntTween(begin: 0, end: internNumber),
-              duration: const Duration(seconds: 2),
-              builder: (BuildContext context, int value, Widget? child) {
-                return Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Expanded(
-                            child: Text(
-                              "Participants",
-                              style: TextStyle(
-                                  color: const Color.fromRGBO(70, 130, 180, 1),
-                                  fontSize: 21.sp,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                          const SizedBox(height: 8,),
-                          Expanded(
-                            child: Text(
-                              "+ $value",
-                              style: const TextStyle(
-                                  color: Colors.amber,
-                                  fontSize: 21,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        ],
+                      child: _numbersSectionForTablet(),
+                    )
+                  : Container(
+                      constraints: const BoxConstraints(
+                        maxWidth: desktopWidthLimit,
                       ),
-                    ),
-                  ],
-                );
-              },
-            ),
-          ),
+                      child: _numbersSectionForDesktop(),
+                    )
         ],
       ),
     );
@@ -286,7 +520,7 @@ class TrainingSection extends StatelessWidget {
         itemCount: trainingData.length,
         itemBuilder: (context, index) {
           return Container(
-            margin: const EdgeInsets.all(16),
+            margin: const EdgeInsets.symmetric(vertical: 12),
             width: double.infinity,
             decoration: BoxDecoration(
               boxShadow: const [
@@ -438,13 +672,11 @@ class TrainingSection extends StatelessWidget {
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          mainAxisExtent: 900,
-        ),
+            crossAxisCount: 2, mainAxisExtent: 950, crossAxisSpacing: 16),
         itemCount: trainingData.length,
         itemBuilder: (context, index) {
           return Container(
-            margin: const EdgeInsets.all(16),
+            margin: const EdgeInsets.symmetric(vertical: 16),
             width: double.infinity,
             decoration: BoxDecoration(
               boxShadow: const [
@@ -462,7 +694,7 @@ class TrainingSection extends StatelessWidget {
               children: [
                 /*** CARD_HEADER ***/
                 Expanded(
-                  flex: 3,
+                  flex: 2,
                   child: Container(
                     width: double.infinity,
                     decoration: BoxDecoration(
@@ -479,7 +711,7 @@ class TrainingSection extends StatelessWidget {
                 ),
                 /*** CARD_BODY ***/
                 Expanded(
-                  flex: 4,
+                  flex: 5,
                   child: Container(
                     width: double.infinity,
                     decoration: const BoxDecoration(
@@ -602,13 +834,11 @@ class TrainingSection extends StatelessWidget {
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3,
-          mainAxisExtent: 900,
-        ),
+            crossAxisCount: 3, mainAxisExtent: 900, crossAxisSpacing: 24),
         itemCount: trainingData.length,
         itemBuilder: (context, index) {
           return Container(
-            margin: const EdgeInsets.all(16),
+            margin: const EdgeInsets.symmetric(vertical: 24),
             width: double.infinity,
             decoration: BoxDecoration(
               boxShadow: const [
@@ -762,39 +992,20 @@ class TrainingSection extends StatelessWidget {
 
     return Column(
       children: [
-        const SizedBox(
-          height: 30,
-        ),
-        Text(
-          "DÉCOUVREZ NOS FORMATIONS",
-          style: TextStyle(
-              fontFamily: "Instrument Sans",
-              fontWeight: FontWeight.w600,
-              fontStyle: FontStyle.normal,
-              fontSize: _responsiveFontSize(context, 18, 26, mobileWidthLimit),
-              height: 1.5,
-              color: Colors.black),
-        ),
-        const SizedBox(
-          height: 5,
-        ),
-        const Divider(
-          height: .1,
-          color: AppColors.grey,
-        ),
-        const SizedBox(
-          height: 20,
-        ),
+        _buildSectionHeader("DÉCOUVREZ NOS FORMATIONS", context),
         ResponsiveUtil.isOnMobile(context)
             ? Container(
+                padding: mobilePadding,
                 constraints: const BoxConstraints(maxWidth: mobileWidthLimit),
                 child: mobileView)
             : ResponsiveUtil.isOnTablet(context)
                 ? Container(
+                    padding: tabletPadding,
                     constraints:
                         const BoxConstraints(maxWidth: tabletWidthLimit),
                     child: tabletView)
                 : Container(
+                    padding: desktopPadding,
                     constraints:
                         const BoxConstraints(maxWidth: desktopWidthLimit),
                     child: desktopView)
@@ -808,18 +1019,18 @@ class TestimonialSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextStyle testimonialTextStyle = TextStyle(
-        fontSize: 9.sp,
+    TextStyle testimonialTextStyle = const TextStyle(
+        fontSize: 14,
         fontFamily: "Instrument Sans",
         fontWeight: FontWeight.bold,
         fontStyle: FontStyle.italic,
-        color: const Color.fromRGBO(50, 50, 50, 1));
-    TextStyle testimonialInfoStyle = TextStyle(
-        fontSize: 9.sp,
+        color: Color.fromRGBO(50, 50, 50, 1));
+    TextStyle testimonialInfoStyle = const TextStyle(
+        fontSize: 12,
         fontFamily: "Instrument Sans",
         fontWeight: FontWeight.bold,
         fontStyle: FontStyle.italic,
-        color: const Color.fromRGBO(70, 130, 180, 1));
+        color: Color.fromRGBO(70, 130, 180, 1));
 
     List<Widget> buildTestimonialListWidgetForMobile() {
       return testimonialData
@@ -894,7 +1105,9 @@ class TestimonialSection extends StatelessWidget {
         itemCount: testimonialData.length,
         itemBuilder: (BuildContext context, int index) {
           return Container(
-            margin: const EdgeInsets.symmetric(vertical: 14, horizontal: 18),
+            margin: const EdgeInsets.symmetric(
+              vertical: 14,
+            ),
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
               gradient: const LinearGradient(colors: [
@@ -980,7 +1193,9 @@ class TestimonialSection extends StatelessWidget {
         itemCount: testimonialData.length,
         itemBuilder: (BuildContext context, int index) {
           return Container(
-            margin: const EdgeInsets.symmetric(vertical: 14, horizontal: 18),
+            margin: const EdgeInsets.symmetric(
+              vertical: 14,
+            ),
             padding: const EdgeInsets.all(18),
             decoration: BoxDecoration(
               gradient: const LinearGradient(colors: [
@@ -1056,32 +1271,11 @@ class TestimonialSection extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const SizedBox(
-            height: 30,
-          ),
-          Text(
-            "LEURS TÉMOIGNAGES",
-            style: TextStyle(
-                fontFamily: "Instrument Sans",
-                fontWeight: FontWeight.w600,
-                fontStyle: FontStyle.normal,
-                fontSize: _responsiveFontSize(context, 18, 26, 425),
-                height: 1.5,
-                color: Colors.black),
-          ),
-          const SizedBox(
-            height: 5,
-          ),
-          const Divider(
-            height: .1,
-            color: AppColors.grey,
-          ),
-          const SizedBox(
-            height: 50,
-          ),
+          _buildSectionHeader("LEURS TÉMOIGNAGES", context),
           /*** TESTIMONIALS_LIST ***/
           if (ResponsiveUtil.isOnMobile(context))
             Container(
+                padding: mobilePadding,
                 constraints: const BoxConstraints(maxWidth: mobileWidthLimit),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
@@ -1089,10 +1283,12 @@ class TestimonialSection extends StatelessWidget {
                 ))
           else if (ResponsiveUtil.isOnTablet(context))
             Container(
+                padding: tabletPadding,
                 constraints: const BoxConstraints(maxWidth: tabletWidthLimit),
                 child: buildTestimonialListWidgetForTablet())
           else
             Container(
+                padding: desktopPadding,
                 constraints: const BoxConstraints(maxWidth: desktopWidthLimit),
                 child: buildTestimonialListWidgetForDesktop())
         ],
@@ -1112,7 +1308,7 @@ class FeatureSection extends StatelessWidget {
               borderRadius: BorderRadius.circular(18),
               child: Container(
                 width: double.infinity,
-                height: 420,
+                height: 450,
                 margin: const EdgeInsets.only(bottom: 16),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(18),
@@ -1154,7 +1350,7 @@ class FeatureSection extends StatelessWidget {
                             Text(
                               f.name,
                               style: const TextStyle(
-                                fontSize: 21,
+                                fontSize: 14,
                                 decoration: TextDecoration.underline,
                                 fontStyle: FontStyle.italic,
                                 fontFamily: "Instrument Sans",
@@ -1169,7 +1365,7 @@ class FeatureSection extends StatelessWidget {
                               child: Text(f.description,
                                   textAlign: TextAlign.justify,
                                   style: const TextStyle(
-                                    fontSize: 16,
+                                    fontSize: 14,
                                     fontFamily: "Instrument Sans",
                                     fontWeight: FontWeight.w500,
                                   )),
@@ -1193,7 +1389,7 @@ class FeatureSection extends StatelessWidget {
             crossAxisSpacing: 16,
             mainAxisSpacing: 16,
             maxCrossAxisExtent: 400,
-            mainAxisExtent: 450),
+            mainAxisExtent: 500),
         itemCount: features.length,
         padding: const EdgeInsets.all(24),
         itemBuilder: (context, index) {
@@ -1380,31 +1576,10 @@ class FeatureSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const SizedBox(
-          height: 30,
-        ),
-        Text(
-          "VOS OUTILS DU QUOTIDIEN",
-          style: TextStyle(
-              fontFamily: "Instrument Sans",
-              fontWeight: FontWeight.w600,
-              fontStyle: FontStyle.normal,
-              fontSize: _responsiveFontSize(context, 18, 26, mobileWidthLimit),
-              height: 1.5,
-              color: Colors.black),
-        ),
-        const SizedBox(
-          height: 5,
-        ),
-        const Divider(
-          height: .1,
-          color: AppColors.grey,
-        ),
-        const SizedBox(
-          height: 50,
-        ),
+        _buildSectionHeader("VOS OUTILS DU QUOTIDIEN", context),
         ResponsiveUtil.isOnMobile(context)
             ? Container(
+                padding: mobilePadding,
                 constraints: const BoxConstraints(maxWidth: mobileWidthLimit),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
@@ -1412,10 +1587,12 @@ class FeatureSection extends StatelessWidget {
                 ))
             : ResponsiveUtil.isOnTablet(context)
                 ? Container(
+                    padding: tabletPadding,
                     constraints:
                         const BoxConstraints(maxWidth: tabletWidthLimit),
                     child: buildTabletFeatureListWidget())
                 : Container(
+                    padding: desktopPadding,
                     constraints:
                         const BoxConstraints(maxWidth: desktopWidthLimit),
                     child: buildDesktopFeatureListWidget()),

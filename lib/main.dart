@@ -72,6 +72,7 @@ class _HomePageState extends State<HomePage> {
                           : [],
                     ),
                   ),
+                  centerTitle: false,
                   title: ResponsiveUtil.isOnDesktop(context)
                       ? const Text("NAB CONSULT")
                       : null,

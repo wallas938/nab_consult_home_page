@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nab_consult_home_page/constantes/app-datas.dart';
 import 'package:nab_consult_home_page/constantes/theme.colors.dart';
@@ -75,13 +76,121 @@ class MyHomePage extends StatelessWidget {
       child: Column(
         children: [
           /*** HERO_SECTION ***/
-          HeroSection(),
+          // HeroSection(),
           /*** FORMATIONS_SECTION ***/
-          TrainingSection(),
+          // TrainingSection(),
           /*** TESTIMONIALS_SECTION ***/
-          TestimonialSection(),
+          // TestimonialSection(),
           /*** FEATURES_SECTION ***/
-          FeatureSection()
+          // FeatureSection(),
+          /*** NUMBERS_SECTION ***/
+          NumbersSection()
+        ],
+      ),
+    );
+  }
+}
+
+class NumbersSection extends StatefulWidget {
+  const NumbersSection({super.key});
+
+  @override
+  State<NumbersSection> createState() => _NumbersSectionState();
+}
+
+class _NumbersSectionState extends State<NumbersSection> {
+  final int successValue = 98;
+  final int internNumber = 600;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 48, horizontal: 16),
+      height: MediaQuery.of(context).size.height / 3,
+      width: double.infinity,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Expanded(
+            child: TweenAnimationBuilder(
+              tween: IntTween(begin: 0, end: successValue),
+              duration: const Duration(seconds: 2),
+              builder: (BuildContext context, int value, Widget? child) {
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              "Réussite",
+                              style: TextStyle(
+                                  color: const Color.fromRGBO(70, 130, 180, 1),
+                                  fontSize: 21.sp,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          const SizedBox(height: 8,),
+                          Expanded(
+                            child: Text(
+                              "$value %",
+                              style: TextStyle(
+                                  color: Colors.amber,
+                                  fontSize: 21.spMax,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                );
+              },
+            ),
+          ),
+          const SizedBox(width: 32,),
+          Expanded(
+            child: TweenAnimationBuilder(
+              tween: IntTween(begin: 0, end: internNumber),
+              duration: const Duration(seconds: 2),
+              builder: (BuildContext context, int value, Widget? child) {
+                return Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              "Participants",
+                              style: TextStyle(
+                                  color: const Color.fromRGBO(70, 130, 180, 1),
+                                  fontSize: 21.sp,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          const SizedBox(height: 8,),
+                          Expanded(
+                            child: Text(
+                              "+ $value",
+                              style: const TextStyle(
+                                  color: Colors.amber,
+                                  fontSize: 21,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                );
+              },
+            ),
+          ),
         ],
       ),
     );
@@ -716,8 +825,9 @@ class TestimonialSection extends StatelessWidget {
       return testimonialData
           .map((t) => Container(
                 width: double.infinity,
-                margin:
-                    const EdgeInsets.symmetric(vertical: 14,),
+                margin: const EdgeInsets.symmetric(
+                  vertical: 14,
+                ),
                 decoration: BoxDecoration(
                   gradient: const LinearGradient(colors: [
                     Color.fromRGBO(220, 220, 220, 1),
@@ -1019,14 +1129,16 @@ class FeatureSection extends StatelessWidget {
                     ),
                   ],
                   color: Colors.white,
-
                 ),
                 child: Column(
                   children: [
                     /*** FEATURE_IMAGE ***/
                     Expanded(
                       child: Image.asset(
-                          width: double.infinity, f.imagePath, fit: BoxFit.fill, ),
+                        width: double.infinity,
+                        f.imagePath,
+                        fit: BoxFit.fill,
+                      ),
                     ),
                     /*** FEATURE_BODY ***/
                     Expanded(

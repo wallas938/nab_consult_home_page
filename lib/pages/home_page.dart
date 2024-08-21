@@ -1,23 +1,21 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nab_consult_home_page/constantes/app-datas.dart';
 import 'package:nab_consult_home_page/constantes/theme.colors.dart';
 import 'package:nab_consult_home_page/util/responsive.dart';
 
-TextStyle cardTitleStyle = TextStyle(
+TextStyle cardTitleStyle = const TextStyle(
     fontStyle: FontStyle.italic,
     color: AppColors.white,
     fontWeight: FontWeight.w700,
-    fontSize: 12.sp,
+    fontSize: 12,
     decorationStyle: TextDecorationStyle.solid);
 
-TextStyle cardDescriptionStyle = TextStyle(
+TextStyle cardDescriptionStyle = const TextStyle(
     fontStyle: FontStyle.normal,
     color: Colors.white70,
     fontWeight: FontWeight.w500,
-    fontSize: 12.sp,
+    fontSize: 12,
     decorationStyle: TextDecorationStyle.solid);
 
 List<Widget> _buildCertificationList(BuildContext context, int firstIndex) {
@@ -109,7 +107,7 @@ Widget _buildSectionHeader(String title, BuildContext context) {
 double _responsiveFontSize(BuildContext context, double fontsize,
     double fontMaxSize, double screenMaxSize) {
   double screenWidth = MediaQuery.of(context).size.width;
-  return screenWidth >= screenMaxSize ? fontMaxSize : fontsize.sp;
+  return screenWidth >= screenMaxSize ? fontMaxSize : fontsize;
 }
 
 class MyHomePage extends StatelessWidget {
@@ -122,15 +120,17 @@ class MyHomePage extends StatelessWidget {
       child: Column(
         children: [
           /*** HERO_SECTION ***/
-          // HeroSection(),
+          HeroSection(),
           /*** FORMATIONS_SECTION ***/
-          // TrainingSection(),
+          TrainingSection(),
           /*** NUMBERS_SECTION ***/
-          // NumbersSection(),
+          NumbersSection(),
           /*** FEATURES_SECTION ***/
           FeatureSection(),
           /*** TESTIMONIALS_SECTION ***/
           TestimonialSection(),
+          /*** PARTNERS_SECTION ***/
+          PartnerSection(),
         ],
       ),
     );
@@ -459,8 +459,8 @@ class HeroSection extends StatelessWidget {
           ),
           /*** CATCHPHRASE ***/
           Positioned(
-              top: 45.sp,
-              left: 20.sp,
+              top: MediaQuery.of(context).size.width / 7.111,
+              left: MediaQuery.of(context).size.width / 16,
               child: RichText(
                 text: TextSpan(
                   children: [
@@ -471,7 +471,7 @@ class HeroSection extends StatelessWidget {
                         letterSpacing: 1.5,
                         fontWeight: FontWeight.bold,
                         color: AppColors.grey,
-                        fontSize: 18.sp,
+                        fontSize: MediaQuery.of(context).size.width / 17.8,
                         shadows: [
                           Shadow(
                             offset: const Offset(1.5, 1.5),
@@ -489,7 +489,7 @@ class HeroSection extends StatelessWidget {
                         fontStyle: FontStyle.italic,
                         fontWeight: FontWeight.w600,
                         color: Colors.white,
-                        fontSize: 14.spMax,
+                        fontSize: MediaQuery.of(context).size.width / 22.857,
                         shadows: [
                           Shadow(
                             offset: const Offset(1.5, 1.5),
@@ -1061,10 +1061,10 @@ class TestimonialSection extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.format_quote,
-                        size: 28.0.sp,
-                        color: const Color.fromRGBO(70, 130, 180, 1),
+                        size: 28.0,
+                        color: Color.fromRGBO(70, 130, 180, 1),
                       ),
                       const SizedBox(
                         height: 8,
@@ -1605,6 +1605,75 @@ class FeatureSection extends StatelessWidget {
                         const BoxConstraints(maxWidth: desktopWidthLimit),
                     child: buildDesktopFeatureListWidget()),
       ],
+    );
+  }
+}
+
+class PartnerSection extends StatelessWidget {
+  const PartnerSection({super.key});
+
+  Widget buildForMobile(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 16.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Image.asset("assets/images/image_bureau_veritas_logo.jpg",
+              width: MediaQuery.of(context).size.width / 3.2),
+          Image.asset("assets/images/image_temis_formation_logo.jpg",
+              width: MediaQuery.of(context).size.width / 3.2),
+        ],
+      ),
+    );
+  }
+
+  Widget buildForTablet(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 24),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset("assets/images/image_bureau_veritas_logo.jpg",
+              width: MediaQuery.of(context).size.width / 4.26),
+          const SizedBox(
+            width: 150,
+          ),
+          Image.asset("assets/images/image_temis_formation_logo.jpg", width: MediaQuery.of(context).size.width / 4.26),
+        ],
+      ),
+    );
+  }
+
+  Widget buildForDesktop(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(32.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset("assets/images/image_bureau_veritas_logo.jpg", width: MediaQuery.of(context).size.width / 4.26),
+          const SizedBox(
+            width: 150,
+          ),
+          Image.asset("assets/images/image_temis_formation_logo.jpg", width: MediaQuery.of(context).size.width / 4.26),
+        ],
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 16.0),
+      child: Column(
+        children: [
+          _buildSectionHeader("Ils nous font confiance", context),
+          ResponsiveUtil.isOnMobile(context)
+              ? buildForMobile(context)
+              : ResponsiveUtil.isOnTablet(context)
+                  ? buildForTablet(context)
+                  : buildForDesktop(context)
+        ],
+      ),
     );
   }
 }

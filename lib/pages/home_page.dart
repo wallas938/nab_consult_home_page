@@ -1608,3 +1608,13 @@ class FeatureSection extends StatelessWidget {
     );
   }
 }
+
+class PartnerSection extends StatelessWidget {
+  const PartnerSection({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Carousel;
+  }
+}
+

@@ -122,11 +122,11 @@ class MyHomePage extends StatelessWidget {
       child: Column(
         children: [
           /*** HERO_SECTION ***/
-          HeroSection(),
+          // HeroSection(),
           /*** FORMATIONS_SECTION ***/
-          TrainingSection(),
+          // TrainingSection(),
           /*** NUMBERS_SECTION ***/
-          NumbersSection(),
+          // NumbersSection(),
           /*** FEATURES_SECTION ***/
           FeatureSection(),
           /*** TESTIMONIALS_SECTION ***/
@@ -151,6 +151,7 @@ class _NumbersSectionState extends State<NumbersSection> {
   Widget _numbersSectionForMobile() {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
       children: [
         /*** SUCCESS_RATE ***/
@@ -160,7 +161,6 @@ class _NumbersSectionState extends State<NumbersSection> {
           builder: (BuildContext context, int value, Widget? child) {
             return Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 const Text(
                   "Taux de réussite",
@@ -204,7 +204,6 @@ class _NumbersSectionState extends State<NumbersSection> {
           builder: (BuildContext context, int value, Widget? child) {
             return Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
                   "+ de $value",
@@ -242,7 +241,7 @@ class _NumbersSectionState extends State<NumbersSection> {
           builder: (BuildContext context, int value, Widget? child) {
             return Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
-              crossAxisAlignment: CrossAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const Text(
                   "Taux de réussite",
@@ -283,7 +282,7 @@ class _NumbersSectionState extends State<NumbersSection> {
           builder: (BuildContext context, int value, Widget? child) {
             return Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
-              crossAxisAlignment: CrossAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
                   "+ de $value",
@@ -401,7 +400,7 @@ class _NumbersSectionState extends State<NumbersSection> {
           ? 280
           : ResponsiveUtil.isOnTablet(context)
               ? 400
-              : 500,
+              : 370,
       child: Column(
         children: [
           _buildSectionHeader("QUELQUES CHIFFRES", context),
@@ -1319,7 +1318,7 @@ class FeatureSection extends StatelessWidget {
                   ], begin: Alignment.topLeft, end: Alignment.bottomRight),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.15),
+                      color: Colors.black.withOpacity(0.7),
                       blurRadius: 4.0,
                       offset: const Offset(2, 2),
                     ),
@@ -1365,7 +1364,7 @@ class FeatureSection extends StatelessWidget {
                               child: Text(f.description,
                                   textAlign: TextAlign.justify,
                                   style: const TextStyle(
-                                    fontSize: 14,
+                                    fontSize: 16,
                                     fontFamily: "Instrument Sans",
                                     fontWeight: FontWeight.w500,
                                   )),
@@ -1559,10 +1558,19 @@ class FeatureSection extends StatelessWidget {
                     flex: 5,
                     child: SizedBox(
                       height: double.maxFinite,
-                      child: Image.asset(
-                          width: double.infinity,
-                          features[index].imagePath,
-                          fit: BoxFit.fill),
+                      child: ClipRRect(
+                        borderRadius: index % 2 == 0
+                            ? const BorderRadius.only(
+                                topLeft: Radius.circular(18),
+                                bottomLeft: Radius.circular(18))
+                            : const BorderRadius.only(
+                                topRight: Radius.circular(18),
+                                bottomRight: Radius.circular(18)),
+                        child: Image.asset(
+                            width: double.infinity,
+                            features[index].imagePath,
+                            fit: BoxFit.fill),
+                      ),
                     ),
                   ),
                 ],

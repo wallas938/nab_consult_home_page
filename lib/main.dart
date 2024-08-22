@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nab_consult_home_page/pages/home_page.dart';
+import 'package:nab_consult_home_page/pages/who_we_are.dart';
 import 'package:nab_consult_home_page/util/responsive.dart';
 import 'package:nab_consult_home_page/widgets/MyDrawer.dart';
 
@@ -95,7 +96,7 @@ class _HomePageState extends State<HomePage> {
               Color.fromRGBO(242, 242, 242, 1),
               Color.fromRGBO(173, 169, 150, 1)
             ], begin: Alignment.topLeft, end: Alignment.bottomRight)),
-            child: const MyHomePage()),
+            child: const WhoWeAre()),
       ),
       debugShowCheckedModeBanner: false,
     );

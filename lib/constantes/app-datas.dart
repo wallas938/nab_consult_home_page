@@ -12,9 +12,7 @@ class FeatureItem {
 class MenuItem {
   final Icon icon;
   final String title;
-  final VoidCallback onTap;
-
-  MenuItem({required this.icon, required this.title, required this.onTap});
+  MenuItem({required this.icon, required this.title,});
 }
 
 class TrainingData {
@@ -106,20 +104,17 @@ final List<MenuItem> menuData = [
       icon: const Icon(
         Icons.home,
       ),
-      title: 'Accueil',
-      onTap: () {}),
+      title: 'Accueil',),
   MenuItem(
       icon: const Icon(
         Icons.group,
       ),
-      title: 'Qui Sommes Nous ?',
-      onTap: () {}),
+      title: 'Qui Sommes Nous ?',),
   MenuItem(
       icon: const Icon(
         Icons.mail,
       ),
-      title: 'Nous Contacter',
-      onTap: () {})
+      title: 'Nous Contacter')
 ];
 
 final List<TrainingData> trainingData = [

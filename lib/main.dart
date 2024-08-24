@@ -86,15 +86,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         drawer: !ResponsiveUtil.isOnDesktop(context) ? const MyDrawer() : null,
-        body: Container(
-            decoration: const BoxDecoration(
-                gradient: LinearGradient(colors: [
-              Color.fromRGBO(234, 234, 234, 1),
-              Color.fromRGBO(219, 219, 219, 1),
-              Color.fromRGBO(242, 242, 242, 1),
-              Color.fromRGBO(173, 169, 150, 1)
-            ], begin: Alignment.topLeft, end: Alignment.bottomRight)),
-            child: const WhoWeAre()),
+        body:  const WhoWeAre(),
       ),
       debugShowCheckedModeBanner: false,
     );

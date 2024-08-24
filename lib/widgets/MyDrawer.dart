@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nab_consult_home_page/constantes/app-datas.dart';
 import 'package:nab_consult_home_page/constantes/theme.colors.dart';
 import 'package:nab_consult_home_page/constantes/theme.typo.dart';
+import 'package:nab_consult_home_page/main.dart';
+import 'package:nab_consult_home_page/pages/who_we_are.dart';
 
 class MyDrawer extends StatefulWidget {
   const MyDrawer({super.key});
@@ -25,6 +27,16 @@ class _MyDrawerState extends State<MyDrawer> {
         onTap: () {
           setState(() {
             _selected = index;
+            Navigator.of(context).pop();
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => menuData[index].title == "Accueil"
+                    ? const HomePage()
+                    : menuData[index].title == "Qui Sommes Nous ?"
+                        ? const WhoWeAre()
+                        : const HomePage(),
+              ),
+            );
           });
         },
       ));

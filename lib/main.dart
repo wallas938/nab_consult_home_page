@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:nab_consult_home_page/pages/home_page.dart';
+import 'package:nab_consult_home_page/pages/who_we_are.dart';
 import 'package:nab_consult_home_page/util/responsive.dart';
 import 'package:nab_consult_home_page/widgets/MyDrawer.dart';
 
@@ -87,15 +86,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         drawer: !ResponsiveUtil.isOnDesktop(context) ? const MyDrawer() : null,
-        body: Container(
-            decoration: const BoxDecoration(
-                gradient: LinearGradient(colors: [
-              Color.fromRGBO(234, 234, 234, 1),
-              Color.fromRGBO(219, 219, 219, 1),
-              Color.fromRGBO(242, 242, 242, 1),
-              Color.fromRGBO(173, 169, 150, 1)
-            ], begin: Alignment.topLeft, end: Alignment.bottomRight)),
-            child: const MyHomePage()),
+        body:  const WhoWeAre(),
       ),
       debugShowCheckedModeBanner: false,
     );

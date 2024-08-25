@@ -120,11 +120,11 @@ class MyHomePage extends StatelessWidget {
       child: Column(
         children: [
           /*** HERO_SECTION ***/
-          HeroSection(),
+          // HeroSection(),
           /*** FORMATIONS_SECTION ***/
-          TrainingSection(),
+          // TrainingSection(),
           /*** NUMBERS_SECTION ***/
-          NumbersSection(),
+          // NumbersSection(),
           /*** FEATURES_SECTION ***/
           FeatureSection(),
           /*** TESTIMONIALS_SECTION ***/
@@ -1346,14 +1346,17 @@ class FeatureSection extends StatelessWidget {
                               height: 8,
                             ),
                             /*** FEATURE_NAME ***/
-                            Text(
-                              f.name,
-                              style: const TextStyle(
-                                fontSize: 14,
-                                decoration: TextDecoration.underline,
-                                fontStyle: FontStyle.italic,
-                                fontFamily: "Instrument Sans",
-                                fontWeight: FontWeight.bold,
+                            Align(
+                              alignment: Alignment.center,
+                              child: Text(
+                                f.name,
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  color: AppColors.titleColor,
+                                  fontStyle: FontStyle.italic,
+                                  fontFamily: "Instrument Sans",
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
                             const SizedBox(
@@ -1364,9 +1367,8 @@ class FeatureSection extends StatelessWidget {
                               child: Text(f.description,
                                   textAlign: TextAlign.justify,
                                   style: const TextStyle(
-                                    fontSize: 16,
-                                    fontFamily: "Instrument Sans",
-                                    fontWeight: FontWeight.w500,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600,
                                   )),
                             ),
                           ],
@@ -1436,9 +1438,8 @@ class FeatureSection extends StatelessWidget {
                             features[index].name,
                             style: const TextStyle(
                               fontSize: 18,
-                              decoration: TextDecoration.underline,
+                              color: AppColors.titleColor,
                               fontStyle: FontStyle.italic,
-                              fontFamily: "Instrument Sans",
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -1523,9 +1524,8 @@ class FeatureSection extends StatelessWidget {
                                 features[index].name,
                                 style: const TextStyle(
                                   fontSize: 28,
-                                  decoration: TextDecoration.underline,
+                                  color: AppColors.titleColor,
                                   fontStyle: FontStyle.italic,
-                                  fontFamily: "Instrument Sans",
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),

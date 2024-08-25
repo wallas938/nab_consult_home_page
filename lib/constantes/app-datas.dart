@@ -59,17 +59,17 @@ final List<FeatureItem> features = [
           "Grâce à la synchronisation instantanée de votre calendrier interactif, restez informé à tout moment des réservations de vos futurs collaborateurs tout en gardant votre liberté d'accepter selon votre planning personnel."),
   FeatureItem(
       name: "QCM Dématerialisé",
-      imagePath: "assets/images/image_calendar.webp",
+      imagePath: "assets/images/image_qcm_feature.webp",
       description:
           "Vous aurez accès à un générateur de QCM sécurisé de dernière génération facilitant ainsi le suivi des compétences nouvellement acquises de vos collaborateurs."),
   FeatureItem(
       name: "Questionnaire de satisfaction",
-      imagePath: "assets/images/image_calendar.webp",
+      imagePath: "assets/images/image_satisfaction_client.webp",
       description:
           "Toutes nos formations arrivées à terme sont soumises à un formulaire de satisfaction concernant l'environnement, les outils et l'efficacité de nos formateurs afin de pouvoir être en capacité de toujours proposer ce qu'il y a de mieux à nos clients."),
   FeatureItem(
       name: "Feuille d'émergement numérique",
-      imagePath: "assets/images/image_calendar.webp",
+      imagePath: "assets/images/image_emerge.webp",
       description:
           "Dites au revoir aux feuilles d'émergements et accueillez les feuilles d'émergements en ligne sécurisées avec signature électronique pour plus de flexibilité et un gain de temps non négligeable."),
 ];

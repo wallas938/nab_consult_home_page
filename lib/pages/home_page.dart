@@ -1638,7 +1638,8 @@ class PartnerSection extends StatelessWidget {
           const SizedBox(
             width: 150,
           ),
-          Image.asset("assets/images/image_temis_formation_logo.jpg", width: MediaQuery.of(context).size.width / 4.26),
+          Image.asset("assets/images/image_temis_formation_logo.jpg",
+              width: MediaQuery.of(context).size.width / 4.26),
         ],
       ),
     );
@@ -1650,11 +1651,13 @@ class PartnerSection extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset("assets/images/image_bureau_veritas_logo.jpg", width: MediaQuery.of(context).size.width / 4.26),
+          Image.asset("assets/images/image_bureau_veritas_logo.jpg",
+              width: MediaQuery.of(context).size.width / 4.26),
           const SizedBox(
             width: 150,
           ),
-          Image.asset("assets/images/image_temis_formation_logo.jpg", width: MediaQuery.of(context).size.width / 4.26),
+          Image.asset("assets/images/image_temis_formation_logo.jpg",
+              width: MediaQuery.of(context).size.width / 4.26),
         ],
       ),
     );

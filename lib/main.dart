@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nab_consult_home_page/pages/home_page.dart';
 import 'package:nab_consult_home_page/pages/who_we_are.dart';
 import 'package:nab_consult_home_page/util/responsive.dart';
 import 'package:nab_consult_home_page/widgets/MyDrawer.dart';
@@ -86,7 +87,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         drawer: !ResponsiveUtil.isOnDesktop(context) ? const MyDrawer() : null,
-        body:  const WhoWeAre(),
+        body:  const MyHomePage(),
       ),
       debugShowCheckedModeBanner: false,
     );

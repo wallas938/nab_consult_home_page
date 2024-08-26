@@ -68,10 +68,10 @@ final List<FeatureItem> features = [
       description:
           "Toutes nos formations arrivées à terme sont soumises à un formulaire de satisfaction concernant l'environnement, les outils et l'efficacité de nos formateurs afin de pouvoir être en capacité de toujours proposer ce qu'il y a de mieux à nos clients."),
   FeatureItem(
-      name: "Feuille d'émergement numérique",
+      name: "Feuille d'émargement numérique",
       imagePath: "assets/images/image_calendar.webp",
       description:
-          "Dites au revoir aux feuilles d'émergements et accueillez les feuilles d'émergements en ligne sécurisées avec signature électronique pour plus de flexibilité et un gain de temps non négligeable."),
+          "Dites au revoir aux feuilles d'émargements et accueillez les feuilles d'émargements en ligne sécurisées avec signature électronique pour plus de flexibilité et un gain de temps non négligeable."),
 ];
 
 final List<Testimonial> testimonialData = [

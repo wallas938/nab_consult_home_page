@@ -23,17 +23,6 @@ List<Widget> _buildCertificationList(BuildContext context, int firstIndex) {
   for (int index = 0;
       index < trainingData[firstIndex].certifications.length;
       index++) {
-    Text durationText = Text(
-      trainingData[firstIndex].certifications[index].duration != null
-          ? " /${trainingData[firstIndex].certifications[index].duration} jour(s)"
-          : "",
-      style: TextStyle(
-        fontStyle: FontStyle.normal,
-        color: AppColors.amber,
-        fontSize: _responsiveFontSize(context, 12, 16, mobileWidthLimit),
-      ),
-    );
-
     items.add(Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -47,10 +36,6 @@ List<Widget> _buildCertificationList(BuildContext context, int firstIndex) {
               fontSize: _responsiveFontSize(context, 12, 16, mobileWidthLimit),
             ),
           ),
-        ),
-        Flexible(
-          fit: FlexFit.loose,
-          child: durationText,
         ),
       ],
     ));
@@ -581,19 +566,6 @@ class TrainingSection extends StatelessWidget {
                                     decorationStyle: TextDecorationStyle.solid),
                               ),
                             ),
-                            /*** TRAINING_DURATION ***/
-                            Text(
-                              trainingData[index].duration != null
-                                  ? "/${trainingData[index].duration} jour(s)"
-                                  : "",
-                              style: TextStyle(
-                                  fontStyle: FontStyle.italic,
-                                  color: AppColors.amber,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: _responsiveFontSize(
-                                      context, 11.5, 14, mobileWidthLimit),
-                                  decorationStyle: TextDecorationStyle.solid),
-                            ),
                           ],
                         ),
                         const SizedBox(height: 8),
@@ -743,19 +715,6 @@ class TrainingSection extends StatelessWidget {
                                           TextDecorationStyle.solid),
                                 ),
                               ),
-                              /*** TRAINING_DURATION ***/
-                              Text(
-                                trainingData[index].duration != null
-                                    ? "/${trainingData[index].duration} jour(s)"
-                                    : "",
-                                style: TextStyle(
-                                    fontStyle: FontStyle.italic,
-                                    color: AppColors.amber,
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: _responsiveFontSize(
-                                        context, 11.5, 14, mobileWidthLimit),
-                                    decorationStyle: TextDecorationStyle.solid),
-                              ),
                             ],
                           ),
                           const SizedBox(height: 8),
@@ -903,18 +862,6 @@ class TrainingSection extends StatelessWidget {
                                       decorationStyle:
                                           TextDecorationStyle.solid),
                                 ),
-                              ),
-                              /*** TRAINING_DURATION ***/
-                              Text(
-                                trainingData[index].duration != null
-                                    ? "/${trainingData[index].duration} jour(s)"
-                                    : "",
-                                style: const TextStyle(
-                                    fontStyle: FontStyle.italic,
-                                    color: AppColors.amber,
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 18,
-                                    decorationStyle: TextDecorationStyle.solid),
                               ),
                             ],
                           ),

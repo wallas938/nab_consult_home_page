@@ -95,27 +95,74 @@ double _responsiveFontSize(BuildContext context, double fontsize,
   return screenWidth >= screenMaxSize ? fontMaxSize : fontsize;
 }
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
 
   @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  final ScrollController scrollController = ScrollController();
+
+  bool isNumberSectionVisible = false;
+
+  final GlobalKey _widgetKey = GlobalKey();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    scrollController.addListener(_onScroll);
+  }
+
+  @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
+  }
+
+  void _onScroll() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (_isWidgetVisible()) {
+        setState(() {
+          isNumberSectionVisible = true;
+        });
+      }
+    });
+  }
+
+  bool _isWidgetVisible() {
+    final RenderBox renderBox =
+        _widgetKey.currentContext?.findRenderObject() as RenderBox;
+    final offset = renderBox.localToGlobal(Offset.zero);
+    return offset.dy >= 0 && offset.dy <= MediaQuery.of(context).size.height;
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return const SingleChildScrollView(
-      physics: BouncingScrollPhysics(),
+    return SingleChildScrollView(
+      controller: scrollController,
+      physics: const BouncingScrollPhysics(),
       child: Column(
         children: [
           /*** HERO_SECTION ***/
-          HeroSection(),
+          const HeroSection(),
           /*** FORMATIONS_SECTION ***/
-          TrainingSection(),
+          const TrainingSection(),
           /*** NUMBERS_SECTION ***/
-          NumbersSection(),
+          if (scrollController.hasClients)
+            Visibility(
+                key: _widgetKey,
+                visible: isNumberSectionVisible,
+                child: const NumbersSection()),
+          // NumbersSection(),
           /*** FEATURES_SECTION ***/
-          FeatureSection(),
+          const FeatureSection(),
           /*** TESTIMONIALS_SECTION ***/
-          TestimonialSection(),
+          const TestimonialSection(),
           /*** PARTNERS_SECTION ***/
-          PartnerSection(),
+          const PartnerSection(),
         ],
       ),
     );
@@ -132,86 +179,89 @@ class NumbersSection extends StatefulWidget {
 class _NumbersSectionState extends State<NumbersSection> {
   final int successValue = 98;
   final int internNumber = 600 * 5;
+  final GlobalKey key = GlobalKey();
 
   Widget _numbersSectionForMobile() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        /*** SUCCESS_RATE ***/
-        TweenAnimationBuilder(
-          tween: IntTween(begin: 0, end: successValue),
-          duration: const Duration(milliseconds: 1500),
-          builder: (BuildContext context, int value, Widget? child) {
-            return Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text(
-                  "Taux de réussite",
-                  style: TextStyle(
-                      color: Color.fromRGBO(70, 130, 180, 1),
-                      fontFamily: "Instrument Sans",
-                      fontSize: 21,
-                      fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(
-                  width: 18,
-                ),
-                Text(
-                  "$value %",
-                  style: const TextStyle(
-                      color: Colors.amber,
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold),
-                ),
-              ],
-            );
-          },
-        ),
-        const SizedBox(
-          height: 18,
-        ),
-        const Text(
-          "ET",
-          style: TextStyle(
-              color: Color.fromRGBO(70, 130, 180, 1),
-              fontSize: 21,
-              fontWeight: FontWeight.bold),
-        ),
-        const SizedBox(
-          height: 18,
-        ),
-        /*** INNERS_NUMBER ***/
-        TweenAnimationBuilder(
-          tween: IntTween(begin: 0, end: internNumber),
-          duration: const Duration(milliseconds: 1500),
-          builder: (BuildContext context, int value, Widget? child) {
-            return Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "+ de $value",
-                  style: const TextStyle(
-                      color: Colors.amber,
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(
-                  width: 18,
-                ),
-                const Text(
-                  "Participants",
-                  style: TextStyle(
-                      color: Color.fromRGBO(70, 130, 180, 1),
-                      fontSize: 21,
-                      fontWeight: FontWeight.bold),
-                ),
-              ],
-            );
-          },
-        ),
-      ],
+    return Visibility(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          /*** SUCCESS_RATE ***/
+          TweenAnimationBuilder(
+            tween: IntTween(begin: 0, end: successValue),
+            duration: const Duration(milliseconds: 1500),
+            builder: (BuildContext context, int value, Widget? child) {
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    "Taux de réussite",
+                    style: TextStyle(
+                        color: Color.fromRGBO(70, 130, 180, 1),
+                        fontFamily: "Instrument Sans",
+                        fontSize: 21,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(
+                    width: 18,
+                  ),
+                  Text(
+                    "$value %",
+                    style: const TextStyle(
+                        color: Colors.amber,
+                        fontSize: 28,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ],
+              );
+            },
+          ),
+          const SizedBox(
+            height: 18,
+          ),
+          const Text(
+            "ET",
+            style: TextStyle(
+                color: Color.fromRGBO(70, 130, 180, 1),
+                fontSize: 21,
+                fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(
+            height: 18,
+          ),
+          /*** INNERS_NUMBER ***/
+          TweenAnimationBuilder(
+            tween: IntTween(begin: 0, end: internNumber),
+            duration: const Duration(milliseconds: 1500),
+            builder: (BuildContext context, int value, Widget? child) {
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "+ de $value",
+                    style: const TextStyle(
+                        color: Colors.amber,
+                        fontSize: 28,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(
+                    width: 18,
+                  ),
+                  const Text(
+                    "Participants",
+                    style: TextStyle(
+                        color: Color.fromRGBO(70, 130, 180, 1),
+                        fontSize: 21,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ],
+              );
+            },
+          ),
+        ],
+      ),
     );
   }
 

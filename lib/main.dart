@@ -87,7 +87,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         drawer: !ResponsiveUtil.isOnDesktop(context) ? const MyDrawer() : null,
-        body: MyHomePage(),
+        body: const MyHomePage(),
       ),
       debugShowCheckedModeBanner: false,
     );

@@ -116,12 +116,6 @@ class _MyHomePageState extends State<MyHomePage> {
     scrollController.addListener(_onScroll);
   }
 
-  @override
-  void dispose() {
-    scrollController.dispose();
-    super.dispose();
-  }
-
   void _onScroll() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (_isWidgetVisible()) {
@@ -137,6 +131,12 @@ class _MyHomePageState extends State<MyHomePage> {
         _widgetKey.currentContext?.findRenderObject() as RenderBox;
     final offset = renderBox.localToGlobal(Offset.zero);
     return offset.dy >= 0 && offset.dy <= MediaQuery.of(context).size.height;
+  }
+
+  @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
   }
 
   @override
@@ -470,76 +470,166 @@ class HeroSection extends StatelessWidget {
     super.key,
   });
 
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
+  Widget heroBuildForMobile(BuildContext context) {
+    return Container(
+      constraints: const BoxConstraints(maxWidth: mobileWidthLimit),
+      padding: const EdgeInsets.symmetric(vertical: 92, horizontal: 42),
       width: double.infinity,
-      child: Stack(
-        children: [
-          /*** IMAGE ***/
-          SizedBox(
-            child: Image.asset(
-              "assets/images/hero_image_4.webp",
-              colorBlendMode: BlendMode.overlay,
-              fit: BoxFit.fill,
-              width: double.infinity,
+      child: RichText(
+        textAlign: TextAlign.center,
+        text: TextSpan(
+          children: [
+            TextSpan(
+              text: 'NAB Consult\n\n',
+              style: TextStyle(
+                fontFamily: "Instrument Sans",
+                letterSpacing: 1.5,
+                fontWeight: FontWeight.bold,
+                color: AppColors.titleColor,
+                // fontSize: MediaQuery.of(context).size.width / 17.8,
+                fontSize: 32,
+                shadows: [
+                  Shadow(
+                    offset: const Offset(1.5, 1.5),
+                    blurRadius: 2.0,
+                    color: Colors.black.withOpacity(0.8),
+                  ),
+                ],
+              ),
             ),
-          ),
-          /*** IMAGE_WITH_BLACK_SCREEN_OPACITY ***/
-          Positioned.fill(
-            child: Container(
-              width: double.infinity,
-              color: Colors.black.withOpacity(.1),
+            TextSpan(
+              text:
+                  'Votre organisme de formation à la\n\nSécurité,\n\nla Santé et la Prévention\n\ndes Risques Professionnels.',
+              style: TextStyle(
+                fontFamily: "Instrument Sans",
+                fontStyle: FontStyle.italic,
+                fontWeight: FontWeight.w600,
+                color: AppColors.textColor,
+                fontSize: MediaQuery.of(context).size.width / 22.857,
+                shadows: [
+                  Shadow(
+                    offset: const Offset(1.5, 1.5),
+                    blurRadius: 2.0,
+                    color: Colors.black.withOpacity(0.8),
+                  ),
+                ],
+              ),
             ),
-          ),
-          /*** CATCHPHRASE ***/
-          Positioned(
-              top: MediaQuery.of(context).size.width / 7.111,
-              left: MediaQuery.of(context).size.width / 16,
-              child: RichText(
-                text: TextSpan(
-                  children: [
-                    TextSpan(
-                      text: 'NAB Consult\n',
-                      style: TextStyle(
-                        fontFamily: "Instrument Sans",
-                        letterSpacing: 1.5,
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.grey,
-                        fontSize: MediaQuery.of(context).size.width / 17.8,
-                        shadows: [
-                          Shadow(
-                            offset: const Offset(1.5, 1.5),
-                            blurRadius: 2.0,
-                            color: Colors.black.withOpacity(0.8),
-                          ),
-                        ],
-                      ),
-                    ),
-                    TextSpan(
-                      text:
-                          '\nVotre organisme de formation à la sécurité,\n la santé et la prévention\ndes risques professionnels.',
-                      style: TextStyle(
-                        fontFamily: "Instrument Sans",
-                        fontStyle: FontStyle.italic,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white,
-                        fontSize: MediaQuery.of(context).size.width / 22.857,
-                        shadows: [
-                          Shadow(
-                            offset: const Offset(1.5, 1.5),
-                            blurRadius: 2.0,
-                            color: Colors.black.withOpacity(0.8),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ))
-        ],
+          ],
+        ),
       ),
     );
+  }
+  Widget heroBuildForTablet(BuildContext context) {
+    return Container(
+      constraints: const BoxConstraints(maxWidth: tabletWidthLimit),
+      padding: const EdgeInsets.symmetric(vertical: 92, horizontal: 52),
+      width: double.infinity,
+      child: RichText(
+        textAlign: TextAlign.center,
+        text: TextSpan(
+          children: [
+            TextSpan(
+              text: 'NAB Consult\n\n',
+              style: TextStyle(
+                fontFamily: "Instrument Sans",
+                fontStyle: FontStyle.italic,
+                letterSpacing: 1.5,
+                fontWeight: FontWeight.bold,
+                color: AppColors.titleColor,
+                // fontSize: MediaQuery.of(context).size.width / 17.8,
+                fontSize: 48,
+                shadows: [
+                  Shadow(
+                    offset: const Offset(1.5, 1.5),
+                    blurRadius: 2.0,
+                    color: Colors.black.withOpacity(0.8),
+                  ),
+                ],
+              ),
+            ),
+            TextSpan(
+              text:
+                  'Votre organisme de formation à la\n\nSécurité,\n\nla Santé et la Prévention\n\ndes Risques Professionnels.',
+              style: TextStyle(
+                fontFamily: "Instrument Sans",
+                fontStyle: FontStyle.italic,
+                fontWeight: FontWeight.w600,
+                color: AppColors.textColor,
+                fontSize: MediaQuery.of(context).size.width / 22.857,
+                shadows: [
+                  Shadow(
+                    offset: const Offset(1.5, 1.5),
+                    blurRadius: 2.0,
+                    color: Colors.black.withOpacity(0.8),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+  Widget heroBuildForDesktop(BuildContext context) {
+    return Container(
+      constraints: const BoxConstraints(maxWidth: desktopWidthLimit),
+      padding: const EdgeInsets.symmetric(vertical: 92, horizontal: 52),
+      width: double.infinity,
+      child: RichText(
+        textAlign: TextAlign.start,
+        text: TextSpan(
+          children: [
+            TextSpan(
+              text: 'NAB Consult\n\n',
+              style: TextStyle(
+                fontFamily: "Instrument Sans",
+                fontStyle: FontStyle.italic,
+                letterSpacing: 1.5,
+                fontWeight: FontWeight.bold,
+                color: AppColors.titleColor,
+                // fontSize: MediaQuery.of(context).size.width / 17.8,
+                fontSize: 85,
+                shadows: [
+                  Shadow(
+                    offset: const Offset(1.5, 1.5),
+                    blurRadius: 2.0,
+                    color: Colors.black.withOpacity(0.8),
+                  ),
+                ],
+              ),
+            ),
+            TextSpan(
+              text:
+                  'Votre organisme de formation à la Sécurité,\n\nla Santé et la Prévention des Risques Professionnels.',
+              style: TextStyle(
+                fontFamily: "Instrument Sans",
+                fontStyle: FontStyle.italic,
+                fontWeight: FontWeight.w600,
+                color: AppColors.textColor,
+                fontSize: 38,
+                shadows: [
+                  Shadow(
+                    offset: const Offset(1.5, 1.5),
+                    blurRadius: 2.0,
+                    color: Colors.black.withOpacity(0.8),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ResponsiveUtil.isOnMobile(context)
+        ? heroBuildForMobile(context)
+        : ResponsiveUtil.isOnTablet(context)
+            ? heroBuildForTablet(context)
+            : heroBuildForDesktop(context);
   }
 }
 

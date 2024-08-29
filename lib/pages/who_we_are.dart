@@ -101,7 +101,7 @@ class WhoWeAre extends StatelessWidget {
                               ),
                               TextSpan(
                                 text:
-                                    " permettant d’assurer à nos clients un suivi, une qualité et une disponibilité garantie de nos formateurs. Nous vous proposons de mettre à profils notre organisation ainsi que notre expérience à travers nos formations qualifiantes pour jeunes et adultes. Basé en IDF, nous intervenons sur demande dans tout l’hexagone. N’hésitez pas à nous contacter pour une éventuelle collaboration.",
+                                    " permettant d’assurer à nos clients un suivi, une qualité et une disponibilité garantie de nos formateurs.\n\nNous vous proposons de mettre à profils notre organisation ainsi que notre expérience à travers nos formations qualifiantes pour jeunes et adultes.\n\nBasé en IDF, nous intervenons sur demande dans tout l’hexagone. N’hésitez pas à nous contacter pour une éventuelle collaboration.",
                                 style: textStyle,
                               ),
                             ],
@@ -184,7 +184,7 @@ class WhoWeAre extends StatelessWidget {
                                   ),
                                   TextSpan(
                                     text:
-                                        " permettant d’assurer à nos clients un suivi, une qualité et une disponibilité garantie de nos formateurs. Nous vous proposons de mettre à profils notre organisation ainsi que notre expérience à travers nos formations qualifiantes pour jeunes et adultes. Basé en IDF, nous intervenons sur demande dans tout l’hexagone. N’hésitez pas à nous contacter pour une éventuelle collaboration.",
+                                        " permettant d’assurer à nos clients un suivi, une qualité et une disponibilité garantie de nos formateurs.\n\nNous vous proposons de mettre à profils notre organisation ainsi que notre expérience à travers nos formations qualifiantes pour jeunes et adultes.\n\nBasé en IDF, nous intervenons sur demande dans tout l’hexagone. N’hésitez pas à nous contacter pour une éventuelle collaboration.",
                                     style: textStyle,
                                   ),
                                 ],
@@ -266,7 +266,7 @@ class WhoWeAre extends StatelessWidget {
                                   ),
                                   TextSpan(
                                     text:
-                                        " permettant d’assurer à nos clients un suivi, une qualité et une disponibilité garantie de nos formateurs. Nous vous proposons de mettre à profils notre organisation ainsi que notre expérience à travers nos formations qualifiantes pour jeunes et adultes. Basé en IDF, nous intervenons sur demande dans tout l’hexagone. N’hésitez pas à nous contacter pour une éventuelle collaboration.",
+                                        " permettant d’assurer à nos clients un suivi, une qualité et une disponibilité garantie de nos formateurs.\n\nNous vous proposons de mettre à profils notre organisation ainsi que notre expérience à travers nos formations qualifiantes pour jeunes et adultes.\n\nBasé en IDF, nous intervenons sur demande dans tout l’hexagone. N’hésitez pas à nous contacter pour une éventuelle collaboration.",
                                     style: textStyle,
                                   ),
                                 ],

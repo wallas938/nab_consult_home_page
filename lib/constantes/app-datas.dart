@@ -20,11 +20,9 @@ class TrainingData {
   final String trainingImagePath;
   final List<CertificationData> certifications;
   final String? description;
-  final String? duration;
 
   TrainingData(
       {this.description,
-      this.duration,
       required this.trainingTitle,
       required this.trainingImagePath,
       required this.certifications});
@@ -32,10 +30,9 @@ class TrainingData {
 
 class CertificationData {
   final String name;
-  final String? duration;
   final String? description;
 
-  CertificationData({required this.name, this.duration, this.description});
+  CertificationData({required this.name, this.description});
 }
 
 class Testimonial {
@@ -71,7 +68,7 @@ final List<FeatureItem> features = [
       name: "Feuille d'émergement numérique",
       imagePath: "assets/images/image_emerge.webp",
       description:
-          "Dites au revoir aux feuilles d'émergements et accueillez les feuilles d'émergements en ligne sécurisées avec signature électronique pour plus de flexibilité et un gain de temps non négligeable."),
+          "Dites au revoir aux feuilles d'émargements et accueillez les feuilles d'émargements en ligne sécurisées avec signature électronique pour plus de flexibilité et un gain de temps non négligeable."),
 ];
 
 final List<Testimonial> testimonialData = [
@@ -127,15 +124,14 @@ final List<TrainingData> trainingData = [
         CertificationData(
           name: "B0/H0 – H0V",
           description: "à destination des non électriciens",
-          duration: "1",
         ),
-        CertificationData(name: "BS/BE Manœuvre", duration: "2"),
+        CertificationData(name: "BS/BE Manœuvre", ),
         CertificationData(
             name: "BR/BC/B1V/B2V/BE Essai – Vérification – Mesurage",
-            duration: "3"),
+            ),
         CertificationData(
             name: "HC/H1V/H2V/HE Essai – Vérification – Mesurage",
-            duration: "3")
+            )
       ]),
   TrainingData(
       trainingTitle: "Habilitation véhicule électrique: NFC 18-550",
@@ -143,9 +139,9 @@ final List<TrainingData> trainingData = [
       description:
           "La norme NFC-18-550 définit les différents symboles d’habilitation en fonction, entre autres, de la nature de l’opération et de l’environnement électrique.",
       certifications: [
-        CertificationData(name: "B0L", duration: "1"),
+        CertificationData(name: "B0L", ),
         CertificationData(
-            name: "B1VL/B2VL / BCL/ BEL ESSAI/BRL/B1XL/B2XL", duration: "2"),
+            name: "B1VL/B2VL / BCL/ BEL ESSAI/BRL/B1XL/B2XL", ),
       ]),
   TrainingData(
       trainingTitle:
@@ -153,7 +149,6 @@ final List<TrainingData> trainingData = [
       description:
           "Obligatoire depuis le 1er janvier 2018, cette formation vous permet d’acquérir des compétences et des connaissances dans la préparation ou l'exécution de travaux à proximité des réseaux.",
       trainingImagePath: "assets/images/image_aipr.webp",
-      duration: "1",
       certifications: []),
   TrainingData(
       trainingTitle:
@@ -164,7 +159,6 @@ final List<TrainingData> trainingData = [
       certifications: []),
   TrainingData(
       trainingTitle: "SST (Sauvetage secourisme du travail)",
-      duration: "2",
       trainingImagePath: "assets/images/image_sst.webp",
       description:
           "Cette formation vise à acquérir des compétences reconnues pour secourir en cas d’accident et pour être acteur de la prévention dans son entreprise.",
@@ -186,18 +180,18 @@ final List<TrainingData> trainingData = [
             name: "IRVE – formation de niveau 1",
             description:
                 "Cette formation vise l’installation de bornes de charge, sans configuration spécifique pour la communication ou la supervision.",
-            duration: "1"),
+            ),
         CertificationData(
             name: "IRVE – formation de niveau 2",
             description:
                 "Cette formation vise l’installation d’infrastructures de recharge en AC, avec configuration spécifique pour la communication ou la supervision.",
-            duration: "2"),
+            ),
         CertificationData(
             name:
                 "IRVE – formation de niveau 3 Charge Rapide ou à haute puissance",
             description:
                 "Cette formation vise l’installation d’infrastructure de recharge de véhicule électrique en charge rapide à haute puissance et en courant continu (DC) et de connaître les spécificités de ce type d’installations et les règles de sécurité applicables.",
-            duration: "3"),
+            ),
       ]),
   TrainingData(
       trainingTitle: "Gestion et prévention du risque Chimique",

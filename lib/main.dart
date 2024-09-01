@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nab_consult_home_page/constantes/theme.colors.dart';
 import 'package:nab_consult_home_page/pages/home_page.dart';
 import 'package:nab_consult_home_page/pages/who_we_are.dart';
 import 'package:nab_consult_home_page/util/responsive.dart';
@@ -40,8 +41,9 @@ class _HomePageState extends State<HomePage> {
               ? const Size.fromHeight(50)
               : const Size.fromHeight(80),
           child: AppBar(
+            backgroundColor: AppColors.white,
             flexibleSpace: Padding(
-              padding: const EdgeInsets.all(18.0),
+              padding: const EdgeInsets.only(top: 18.0, right: 40),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -70,7 +72,10 @@ class _HomePageState extends State<HomePage> {
             ),
             centerTitle: false,
             title: ResponsiveUtil.isOnDesktop(context)
-                ? const Text("NAB CONSULT")
+                ? Padding(
+                  padding: const EdgeInsets.only(top: 20, left: 8.0),
+                  child: Image.asset("assets/images/nab_consult_logo.png",height: 40,),
+                )
                 : null,
             leading: !ResponsiveUtil.isOnDesktop(context)
                 ? Builder(

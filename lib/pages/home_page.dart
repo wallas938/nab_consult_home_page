@@ -471,8 +471,7 @@ class HeroSection extends StatelessWidget {
   });
 
   Widget heroBuildForMobile(BuildContext context) {
-    return Container(
-      constraints: const BoxConstraints(maxWidth: mobileWidthLimit),
+    return SizedBox(
       width: double.infinity,
       child: Stack(
         children: [
@@ -486,50 +485,54 @@ class HeroSection extends StatelessWidget {
               fit: BoxFit.fill,
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 92, horizontal: 42),
-            child: Center(
-              child: RichText(
-                textAlign: TextAlign.center,
-                text: TextSpan(
-                  children: [
-                    TextSpan(
-                      text: 'NAB Consult\n\n',
-                      style: TextStyle(
-                        fontFamily: "Instrument Sans",
-                        letterSpacing: 1.5,
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.titleColor,
-                        // fontSize: MediaQuery.of(context).size.width / 17.8,
-                        fontSize: 32,
-                        shadows: [
-                          Shadow(
-                            offset: const Offset(1.5, 1.5),
-                            blurRadius: 2.0,
-                            color: Colors.black.withOpacity(0.8),
-                          ),
-                        ],
+          Center(
+            child: Container(
+              constraints: const BoxConstraints(maxWidth: mobileWidthLimit),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 92, horizontal: 42),
+                child: RichText(
+                  textAlign: TextAlign.center,
+                  text: TextSpan(
+                    children: [
+                      TextSpan(
+                        text: 'NAB Consult\n\n',
+                        style: TextStyle(
+                          fontFamily: "Instrument Sans",
+                          letterSpacing: 1.5,
+                          fontStyle: FontStyle.italic,
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.titleColor,
+                          // fontSize: MediaQuery.of(context).size.width / 17.8,
+                          fontSize: 32,
+                          shadows: [
+                            Shadow(
+                              offset: const Offset(1.5, 1.5),
+                              blurRadius: 2.0,
+                              color: Colors.black.withOpacity(0.8),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                    TextSpan(
-                      text:
-                          'Votre organisme de formation à la\n\nSécurité,\n\nla Santé et la Prévention\n\ndes Risques Professionnels.',
-                      style: TextStyle(
-                        fontFamily: "Instrument Sans",
-                        fontStyle: FontStyle.italic,
-                        fontWeight: FontWeight.w600,
-                        color: AppColors.white,
-                        fontSize: MediaQuery.of(context).size.width / 22.857,
-                        shadows: [
-                          Shadow(
-                            offset: const Offset(1.5, 1.5),
-                            blurRadius: 2.0,
-                            color: Colors.black.withOpacity(0.8),
-                          ),
-                        ],
+                      TextSpan(
+                        text:
+                            'Votre organisme de formation à la\n\nSécurité,\n\nla Santé et la Prévention\n\ndes Risques Professionnels.',
+                        style: TextStyle(
+                          fontFamily: "Instrument Sans",
+                          fontStyle: FontStyle.italic,
+                          fontWeight: FontWeight.w600,
+                          color: AppColors.white,
+                          fontSize: MediaQuery.of(context).size.width / 22.857,
+                          shadows: [
+                            Shadow(
+                              offset: const Offset(1.5, 1.5),
+                              blurRadius: 2.0,
+                              color: Colors.black.withOpacity(0.8),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -540,9 +543,9 @@ class HeroSection extends StatelessWidget {
   }
 
   Widget heroBuildForTablet(BuildContext context) {
-    return Container(
-        constraints: const BoxConstraints(maxWidth: tabletWidthLimit),
+    return SizedBox(
         width: double.infinity,
+        height: 750,
         child: Stack(children: [
           Positioned(
             top: 0,
@@ -554,9 +557,9 @@ class HeroSection extends StatelessWidget {
               fit: BoxFit.fill,
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 92, horizontal: 42),
-            child: Center(
+          Center(
+            child: Container(
+              constraints: const BoxConstraints(maxWidth: tabletWidthLimit),
               child: RichText(
                 textAlign: TextAlign.center,
                 text: TextSpan(
@@ -607,9 +610,9 @@ class HeroSection extends StatelessWidget {
   }
 
   Widget heroBuildForDesktop(BuildContext context) {
-    return Container(
-        constraints: const BoxConstraints(maxWidth: desktopWidthLimit),
+    return SizedBox(
         width: double.infinity,
+        height: 800,
         child: Stack(children: [
           Positioned(
             top: 0,
@@ -621,50 +624,53 @@ class HeroSection extends StatelessWidget {
               fit: BoxFit.fill,
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 92, horizontal: 42),
-            child: RichText(
-              textAlign: TextAlign.start,
-              text: TextSpan(
-                children: [
-                  TextSpan(
-                    text: 'NAB Consult\n\n',
-                    style: TextStyle(
-                      fontFamily: "Instrument Sans",
-                      fontStyle: FontStyle.italic,
-                      letterSpacing: 1.5,
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.titleColor,
-                      // fontSize: MediaQuery.of(context).size.width / 17.8,
-                      fontSize: 85,
-                      shadows: [
-                        Shadow(
-                          offset: const Offset(1.5, 1.5),
-                          blurRadius: 2.0,
-                          color: Colors.black.withOpacity(0.8),
-                        ),
-                      ],
+          Container(
+            constraints: const BoxConstraints(maxWidth: desktopWidthLimit),
+            child: Padding(
+              padding: const EdgeInsets.only(top: 180, left: 42),
+              child: RichText(
+                textAlign: TextAlign.start,
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: 'NAB Consult\n\n',
+                      style: TextStyle(
+                        fontFamily: "Instrument Sans",
+                        fontStyle: FontStyle.italic,
+                        letterSpacing: 1.5,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.titleColor,
+                        // fontSize: MediaQuery.of(context).size.width / 17.8,
+                        fontSize: 85,
+                        shadows: [
+                          Shadow(
+                            offset: const Offset(1.5, 1.5),
+                            blurRadius: 2.0,
+                            color: Colors.black.withOpacity(0.8),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  TextSpan(
-                    text:
-                        'Votre organisme de formation à la Sécurité,\n\nla Santé et la Prévention des Risques Professionnels.',
-                    style: TextStyle(
-                      fontFamily: "Instrument Sans",
-                      fontStyle: FontStyle.italic,
-                      fontWeight: FontWeight.w600,
-                      color: AppColors.white,
-                      fontSize: 38,
-                      shadows: [
-                        Shadow(
-                          offset: const Offset(1.5, 1.5),
-                          blurRadius: 2.0,
-                          color: Colors.black.withOpacity(0.8),
-                        ),
-                      ],
+                    TextSpan(
+                      text:
+                          'Votre organisme de formation à la Sécurité,\n\nla Santé et la Prévention des Risques\n\nProfessionnels.',
+                      style: TextStyle(
+                        fontFamily: "Instrument Sans",
+                        fontStyle: FontStyle.italic,
+                        fontWeight: FontWeight.w600,
+                        color: AppColors.white,
+                        fontSize: 48,
+                        shadows: [
+                          Shadow(
+                            offset: const Offset(1.5, 1.5),
+                            blurRadius: 2.0,
+                            color: Colors.black.withOpacity(0.8),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

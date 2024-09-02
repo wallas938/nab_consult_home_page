@@ -127,8 +127,11 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   bool _isWidgetVisible() {
-    final RenderBox renderBox =
-        _widgetKey.currentContext?.findRenderObject() as RenderBox;
+    final RenderBox? renderBox =
+        _widgetKey.currentContext?.findRenderObject() as RenderBox?;
+
+    if (renderBox == null) return true;
+
     final offset = renderBox.localToGlobal(Offset.zero);
     return offset.dy >= 0 && offset.dy <= MediaQuery.of(context).size.height;
   }
@@ -470,6 +473,11 @@ class HeroSection extends StatelessWidget {
     super.key,
   });
 
+  final String slogan =
+      "Des formateurs expérimentés\n\net disponibles, capables\n\nde répondre à vos besoins";
+  final String sloganForDesktop =
+      "Des formateurs expérimentés et disponibles,\n\ncapables de répondre à vos besoins";
+
   Widget heroBuildForMobile(BuildContext context) {
     return SizedBox(
       width: double.infinity,
@@ -489,7 +497,8 @@ class HeroSection extends StatelessWidget {
             child: Container(
               constraints: const BoxConstraints(maxWidth: mobileWidthLimit),
               child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 92, horizontal: 42),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 92, horizontal: 42),
                 child: RichText(
                   textAlign: TextAlign.center,
                   text: TextSpan(
@@ -514,8 +523,7 @@ class HeroSection extends StatelessWidget {
                         ),
                       ),
                       TextSpan(
-                        text:
-                            'Votre organisme de formation à la\n\nSécurité,\n\nla Santé et la Prévention\n\ndes Risques Professionnels.',
+                        text: slogan,
                         style: TextStyle(
                           fontFamily: "Instrument Sans",
                           fontStyle: FontStyle.italic,
@@ -584,8 +592,7 @@ class HeroSection extends StatelessWidget {
                       ),
                     ),
                     TextSpan(
-                      text:
-                          'Votre organisme de formation à la\n\nSécurité,\n\nla Santé et la Prévention\n\ndes Risques Professionnels.',
+                      text: slogan,
                       style: TextStyle(
                         fontFamily: "Instrument Sans",
                         fontStyle: FontStyle.italic,
@@ -652,8 +659,7 @@ class HeroSection extends StatelessWidget {
                       ),
                     ),
                     TextSpan(
-                      text:
-                          'Votre organisme de formation à la Sécurité,\n\nla Santé et la Prévention des Risques\n\nProfessionnels.',
+                      text: sloganForDesktop,
                       style: TextStyle(
                         fontFamily: "Instrument Sans",
                         fontStyle: FontStyle.italic,

@@ -159,7 +159,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 key: _widgetKey,
                 visible: isNumberSectionVisible,
                 child: const NumbersSection()),
-          // NumbersSection(),
           /*** FEATURES_SECTION ***/
           const FeatureSection(),
           /*** TESTIMONIALS_SECTION ***/
@@ -1760,52 +1759,331 @@ class PartnerSection extends StatelessWidget {
   const PartnerSection({super.key});
 
   Widget buildForMobile(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 16.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Image.asset("assets/images/image_bureau_veritas_logo.jpg",
-              width: MediaQuery.of(context).size.width / 3.2),
-          Image.asset("assets/images/image_temis_formation_logo.jpg",
-              width: MediaQuery.of(context).size.width / 3.2),
-        ],
+    return Container(
+      constraints: const BoxConstraints(maxWidth: 600),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Expanded(
+                  child: Center(
+                    child: Image.asset(
+                      "assets/images/axos_logo.png",
+                      width: MediaQuery.of(context).size.width / 3.2,
+                      height: MediaQuery.of(context).size.width / 6.4,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 100,
+                ),
+                Expanded(
+                  child: Center(
+                    child: Image.asset(
+                      "assets/images/alertis_logo.jpeg",
+                      width: MediaQuery.of(context).size.width / 3.2,
+                      height: MediaQuery.of(context).size.width / 6.4,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 100,
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Center(
+                  child: Expanded(
+                    child: Image.asset(
+                      "assets/images/image_bureau_veritas_logo.jpg",
+                      width: MediaQuery.of(context).size.width / 3.2,
+                      height: MediaQuery.of(context).size.width / 6.4,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 100,
+                ),
+                Expanded(
+                  child: Center(
+                    child: Image.asset(
+                      "assets/images/socotec_logo.png",
+                      width: MediaQuery.of(context).size.width / 3.2,
+                      height: MediaQuery.of(context).size.width / 6.4,
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Center(
+                    child: Image.asset(
+                      "assets/images/image_temis_formation_logo.jpg",
+                      width: MediaQuery.of(context).size.width / 3.2,
+                      height: MediaQuery.of(context).size.width / 6.4,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 130,
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: Center(
+                    child: Image.asset(
+                      "assets/images/institec_logo.png",
+                      width: MediaQuery.of(context).size.width / 3.2,
+                      height: MediaQuery.of(context).size.width / 6.4,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 130,
+                ),
+                Expanded(
+                  child: Center(
+                    child: Image.asset(
+                      "assets/images/vaillant_logo.webp",
+                      width: MediaQuery.of(context).size.width / 3.2,
+                      height: MediaQuery.of(context).size.width / 6.4,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 130,
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
 
   Widget buildForTablet(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 24),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset("assets/images/image_bureau_veritas_logo.jpg",
-              width: MediaQuery.of(context).size.width / 4.26),
-          const SizedBox(
-            width: 150,
-          ),
-          Image.asset("assets/images/image_temis_formation_logo.jpg",
-              width: MediaQuery.of(context).size.width / 4.26),
-        ],
+    return Container(
+      constraints: const BoxConstraints(maxWidth: tabletWidthLimit),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 24),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Expanded(
+                  child: Center(
+                    child: Image.asset(
+                      "assets/images/axos_logo.png",
+                      width: MediaQuery.of(context).size.width / 3.2,
+                      height: MediaQuery.of(context).size.width / 6.4,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 100,
+                ),
+                Expanded(
+                  child: Center(
+                    child: Image.asset(
+                      "assets/images/alertis_logo.jpeg",
+                      width: MediaQuery.of(context).size.width / 3.2,
+                      height: MediaQuery.of(context).size.width / 6.4,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 100,
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Center(
+                  child: Expanded(
+                    child: Image.asset(
+                      "assets/images/image_bureau_veritas_logo.jpg",
+                      width: MediaQuery.of(context).size.width / 3.2,
+                      height: MediaQuery.of(context).size.width / 6.4,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 100,
+                ),
+                Expanded(
+                  child: Center(
+                    child: Image.asset(
+                      "assets/images/socotec_logo.png",
+                      width: MediaQuery.of(context).size.width / 3.2,
+                      height: MediaQuery.of(context).size.width / 6.4,
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Center(
+                    child: Image.asset(
+                      "assets/images/image_temis_formation_logo.jpg",
+                      width: MediaQuery.of(context).size.width / 3.2,
+                      height: MediaQuery.of(context).size.width / 6.4,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 130,
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: Center(
+                    child: Image.asset(
+                      "assets/images/institec_logo.png",
+                      width: MediaQuery.of(context).size.width / 3.2,
+                      height: MediaQuery.of(context).size.width / 6.4,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 130,
+                ),
+                Expanded(
+                  child: Center(
+                    child: Image.asset(
+                      "assets/images/vaillant_logo.webp",
+                      width: MediaQuery.of(context).size.width / 3.2,
+                      height: MediaQuery.of(context).size.width / 6.4,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 130,
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
 
   Widget buildForDesktop(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(32.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset("assets/images/image_bureau_veritas_logo.jpg",
-              width: MediaQuery.of(context).size.width / 4.26),
-          const SizedBox(
-            width: 150,
-          ),
-          Image.asset("assets/images/image_temis_formation_logo.jpg",
-              width: MediaQuery.of(context).size.width / 4.26),
-        ],
+    return Container(
+      constraints: const BoxConstraints(maxWidth: desktopWidthLimit),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Expanded(
+                  child: Center(
+                    child: Image.asset(
+                      "assets/images/axos_logo.png",
+                      width: MediaQuery.of(context).size.width / 3.2,
+                      height: MediaQuery.of(context).size.width / 6.4,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 100,
+                ),
+                Expanded(
+                  child: Center(
+                    child: Image.asset(
+                      "assets/images/alertis_logo.jpeg",
+                      width: MediaQuery.of(context).size.width / 3.2,
+                      height: MediaQuery.of(context).size.width / 6.4,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 100,
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Center(
+                  child: Expanded(
+                    child: Image.asset(
+                      "assets/images/image_bureau_veritas_logo.jpg",
+                      width: MediaQuery.of(context).size.width / 3.2,
+                      height: MediaQuery.of(context).size.width / 6.4,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 100,
+                ),
+                Expanded(
+                  child: Center(
+                    child: Image.asset(
+                      "assets/images/socotec_logo.png",
+                      width: MediaQuery.of(context).size.width / 3.2,
+                      height: MediaQuery.of(context).size.width / 6.4,
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Center(
+                    child: Image.asset(
+                      "assets/images/image_temis_formation_logo.jpg",
+                      width: MediaQuery.of(context).size.width / 3.2,
+                      height: MediaQuery.of(context).size.width / 6.4,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 130,
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: Center(
+                    child: Image.asset(
+                      "assets/images/institec_logo.png",
+                      width: MediaQuery.of(context).size.width / 3.2,
+                      height: MediaQuery.of(context).size.width / 6.4,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 130,
+                ),
+                Expanded(
+                  child: Center(
+                    child: Image.asset(
+                      "assets/images/vaillant_logo.webp",
+                      width: MediaQuery.of(context).size.width / 3.2,
+                      height: MediaQuery.of(context).size.width / 6.4,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 130,
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

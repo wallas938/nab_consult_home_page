@@ -53,7 +53,7 @@ final List<FeatureItem> features = [
       name: "Calendrier interactif",
       imagePath: "assets/images/image_calendar.webp",
       description:
-          "Grâce à la synchronisation instantanée de votre calendrier interactif, restez informé à tout moment des réservations de vos futurs collaborateurs tout en gardant votre liberté d'accepter selon votre planning personnel."),
+          "Grace à la synchronisation instantanée du calendrier interactif des formateurs, réserver à tout moment  vos formations prévisionnelles ou de dernière minute."),
   FeatureItem(
       name: "QCM Dématerialisé",
       imagePath: "assets/images/image_qcm_feature.webp",

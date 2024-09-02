@@ -65,10 +65,10 @@ final List<FeatureItem> features = [
       description:
           "Toutes nos formations arrivées à terme sont soumises à un formulaire de satisfaction concernant l'environnement, les outils et l'efficacité de nos formateurs afin de pouvoir être en capacité de toujours proposer ce qu'il y a de mieux à nos clients."),
   FeatureItem(
-      name: "Feuille d'émergement numérique",
+      name: "Feuille d'émargement numérique",
       imagePath: "assets/images/image_emerge.webp",
       description:
-          "Dites au revoir aux feuilles d'émargements et accueillez les feuilles d'émargements en ligne sécurisées avec signature électronique pour plus de flexibilité et un gain de temps non négligeable."),
+          "Dites au revoir aux feuilles d'émargements et accueillez les feuilles de présence en ligne sécurisées avec signature électronique pour plus de flexibilité et un gain de temps non négligeable."),
 ];
 
 final List<Testimonial> testimonialData = [
@@ -177,18 +177,18 @@ final List<TrainingData> trainingData = [
           "La formation IRVE (Infrastructure de Recharge pour Véhicule Électrique) enseigne l'installation, la maintenance et la sécurité des bornes de recharge. Les participants apprennent les normes techniques, les réglementations en vigueur, et les bonnes pratiques pour assurer un service fiable et sécurisé. Cette formation est essentielle pour développer des infrastructures de recharge efficaces et conformes.",
       certifications: [
         CertificationData(
-            name: "IRVE – formation de niveau 1",
+            name: "IRVE – formation de niveau 1: Installation de bornes de charges",
             description:
                 "Cette formation vise l’installation de bornes de charge, sans configuration spécifique pour la communication ou la supervision.",
             ),
         CertificationData(
-            name: "IRVE – formation de niveau 2",
+            name: "IRVE – formation de niveau 2: Installation, configuration et supervision des",
             description:
                 "Cette formation vise l’installation d’infrastructures de recharge en AC, avec configuration spécifique pour la communication ou la supervision.",
             ),
         CertificationData(
             name:
-                "IRVE – formation de niveau 3 Charge Rapide ou à haute puissance",
+                "IRVE – formation de niveau 3: Installation d’infrastructure de recharge à haute puissance",
             description:
                 "Cette formation vise l’installation d’infrastructure de recharge de véhicule électrique en charge rapide à haute puissance et en courant continu (DC) et de connaître les spécificités de ce type d’installations et les règles de sécurité applicables.",
             ),
@@ -202,8 +202,18 @@ final List<TrainingData> trainingData = [
   TrainingData(
       trainingTitle: "Risque amiante",
       trainingImagePath: "assets/images/image_amiante.webp",
-      description: "L'amiante constitue un problème majeur de santé publique et de santé au travail: ce matériau aux multiples qualités s'est révélé hautement toxique. Il a été massivement utilisé et le nombre de cancers qu'il a induits ne cesse d'augmenter. Interdit en France depuis 1997, il reste présent dans de nombreux bâtiments et équipements. Dans les bâtiments construits avant 1997, l’amiantes est présente partout.",
-      certifications: []),
+      description: "Dans les bâtiments construits avant 1997, l'amiante est présente partout et constitue un problème majeur de santé publique et de santé au travail: ce matériau aux multiples qualités s'est révélé hautement toxique. Il a été massivement utilisé et le nombre de cancers qu'il a induits ne cesse d'augmenter. Interdit en France depuis 1997, il reste présent dans de nombreux bâtiments et équipements. Dans les bâtiments construits avant 1997, l’amiante est présente partout.",
+      certifications: [
+        CertificationData(
+          name:"Sous-section 3",
+          description: "Cette section vise le retrait ou le confinement de matériaux contenant de l'amiante.",
+        ),
+        CertificationData(
+          name:
+          "Sous-section 4",
+          description: "Cette section concerne les interventions de maintenance, de réparation ou encore d'entretien."
+        ),
+      ]),
 ];
 
 const mobileWidthLimit = 425.0;

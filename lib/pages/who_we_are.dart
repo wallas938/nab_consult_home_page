@@ -223,7 +223,7 @@ class WhoWeAre extends StatelessWidget {
                                   ),
                                   TextSpan(
                                     text:
-                                        "Organisme de formation spécialisé dans le domaine de la sécurité, la santé et la prévention des risques professionnels, ",
+                                        "Spécialisé dans le domaine de la sécurité, la santé et la prévention des risques professionnels, ",
                                     style: textStyle,
                                   ),
                                   TextSpan(

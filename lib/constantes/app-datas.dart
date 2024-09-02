@@ -12,7 +12,11 @@ class FeatureItem {
 class MenuItem {
   final Icon icon;
   final String title;
-  MenuItem({required this.icon, required this.title,});
+
+  MenuItem({
+    required this.icon,
+    required this.title,
+  });
 }
 
 class TrainingData {
@@ -63,7 +67,7 @@ final List<FeatureItem> features = [
       name: "Questionnaire de satisfaction",
       imagePath: "assets/images/image_satisfaction_client.webp",
       description:
-          "Toutes nos formations arrivées à terme sont soumises à un formulaire de satisfaction concernant l'environnement, les outils et l'efficacité de nos formateurs afin de pouvoir être en capacité de toujours proposer ce qu'il y a de mieux à nos clients."),
+          "Dans une démarche d’amélioration constante de nos prestations, toute nos formations sont soumises à un formulaire de satisfaction concernant l’environnement, les outils et la pédagogie de nos formateurs. L’objectif principal recherché est l’excellence en la matière."),
   FeatureItem(
       name: "Feuille d'émargement numérique",
       imagePath: "assets/images/image_emerge.webp",
@@ -98,15 +102,17 @@ final List<Testimonial> testimonialData = [
 
 final List<MenuItem> menuData = [
   MenuItem(
-      icon: const Icon(
-        Icons.home,
-      ),
-      title: 'Accueil',),
+    icon: const Icon(
+      Icons.home,
+    ),
+    title: 'Accueil',
+  ),
   MenuItem(
-      icon: const Icon(
-        Icons.group,
-      ),
-      title: 'Qui Sommes Nous ?',),
+    icon: const Icon(
+      Icons.group,
+    ),
+    title: 'Qui Sommes Nous ?',
+  ),
   MenuItem(
       icon: const Icon(
         Icons.mail,
@@ -125,13 +131,15 @@ final List<TrainingData> trainingData = [
           name: "B0/H0 – H0V",
           description: "à destination des non électriciens",
         ),
-        CertificationData(name: "BS/BE Manœuvre", ),
         CertificationData(
-            name: "BR/BC/B1V/B2V/BE Essai – Vérification – Mesurage",
-            ),
+          name: "BS/BE Manœuvre",
+        ),
         CertificationData(
-            name: "HC/H1V/H2V/HE Essai – Vérification – Mesurage",
-            )
+          name: "BR/BC/B1V/B2V/BE Essai – Vérification – Mesurage",
+        ),
+        CertificationData(
+          name: "HC/H1V/H2V/HE Essai – Vérification – Mesurage",
+        )
       ]),
   TrainingData(
       trainingTitle: "Habilitation véhicule électrique: NFC 18-550",
@@ -139,9 +147,12 @@ final List<TrainingData> trainingData = [
       description:
           "La norme NFC-18-550 définit les différents symboles d’habilitation en fonction, entre autres, de la nature de l’opération et de l’environnement électrique.",
       certifications: [
-        CertificationData(name: "B0L", ),
         CertificationData(
-            name: "B1VL/B2VL / BCL/ BEL ESSAI/BRL/B1XL/B2XL", ),
+          name: "B0L",
+        ),
+        CertificationData(
+          name: "B1VL/B2VL / BCL/ BEL ESSAI/BRL/B1XL/B2XL",
+        ),
       ]),
   TrainingData(
       trainingTitle:
@@ -177,21 +188,23 @@ final List<TrainingData> trainingData = [
           "La formation IRVE (Infrastructure de Recharge pour Véhicule Électrique) enseigne l'installation, la maintenance et la sécurité des bornes de recharge. Les participants apprennent les normes techniques, les réglementations en vigueur, et les bonnes pratiques pour assurer un service fiable et sécurisé. Cette formation est essentielle pour développer des infrastructures de recharge efficaces et conformes.",
       certifications: [
         CertificationData(
-            name: "IRVE – formation de niveau 1: Installation de bornes de charges",
-            description:
-                "Cette formation vise l’installation de bornes de charge, sans configuration spécifique pour la communication ou la supervision.",
-            ),
+          name:
+              "IRVE – formation de niveau 1 :\nInstallation de bornes de charges\n",
+          description:
+              "Cette formation vise l’installation de bornes de charge, sans configuration spécifique pour la communication ou la supervision.",
+        ),
         CertificationData(
-            name: "IRVE – formation de niveau 2: Installation, configuration et supervision des",
-            description:
-                "Cette formation vise l’installation d’infrastructures de recharge en AC, avec configuration spécifique pour la communication ou la supervision.",
-            ),
+          name:
+              "IRVE – formation de niveau 2 :\nInstallation, configuration et supervision des bornes communicantes\n",
+          description:
+              "Cette formation vise l’installation d’infrastructures de recharge en AC, avec configuration spécifique pour la communication ou la supervision.",
+        ),
         CertificationData(
-            name:
-                "IRVE – formation de niveau 3: Installation d’infrastructure de recharge à haute puissance",
-            description:
-                "Cette formation vise l’installation d’infrastructure de recharge de véhicule électrique en charge rapide à haute puissance et en courant continu (DC) et de connaître les spécificités de ce type d’installations et les règles de sécurité applicables.",
-            ),
+          name:
+              "IRVE – formation de niveau 3 :\nInstallation d’infrastructure de recharge à haute puissance",
+          description:
+              "Cette formation vise l’installation d’infrastructure de recharge de véhicule électrique en charge rapide à haute puissance et en courant continu (DC) et de connaître les spécificités de ce type d’installations et les règles de sécurité applicables.",
+        ),
       ]),
   TrainingData(
       trainingTitle: "Gestion et prévention du risque Chimique",
@@ -202,16 +215,18 @@ final List<TrainingData> trainingData = [
   TrainingData(
       trainingTitle: "Risque amiante",
       trainingImagePath: "assets/images/image_amiante.webp",
-      description: "Dans les bâtiments construits avant 1997, l'amiante est présente partout et constitue un problème majeur de santé publique et de santé au travail: ce matériau aux multiples qualités s'est révélé hautement toxique. Il a été massivement utilisé et le nombre de cancers qu'il a induits ne cesse d'augmenter. Interdit en France depuis 1997, il reste présent dans de nombreux bâtiments et équipements. Dans les bâtiments construits avant 1997, l’amiante est présente partout.",
+      description:
+          "Dans les bâtiments construits avant 1997, l'amiante est présente partout et constitue un problème majeur de santé publique et de santé au travail: ce matériau aux multiples qualités s'est révélé hautement toxique. Il a été massivement utilisé et le nombre de cancers qu'il a induits ne cesse d'augmenter. Interdit en France depuis 1997, il reste présent dans de nombreux bâtiments et équipements. Dans les bâtiments construits avant 1997, l’amiante est présente partout.",
       certifications: [
         CertificationData(
-          name:"Sous-section 3",
-          description: "Cette section vise le retrait ou le confinement de matériaux contenant de l'amiante.",
+          name:
+              "Sous-section 3 :\nCette section vise le retrait ou le confinement de matériaux contenant de l'amiante.\n",
+          // description: "Cette section vise le retrait ou le confinement de matériaux contenant de l'amiante.",
         ),
         CertificationData(
           name:
-          "Sous-section 4",
-          description: "Cette section concerne les interventions de maintenance, de réparation ou encore d'entretien."
+              "Sous-section 4 :\nCette section concerne les interventions de maintenance, de réparation ou encore d'entretien.",
+          // description: "Cette section concerne les interventions de maintenance, de réparation ou encore d'entretien."
         ),
       ]),
 ];

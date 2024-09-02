@@ -18,31 +18,6 @@ TextStyle cardDescriptionStyle = const TextStyle(
     fontSize: 12,
     decorationStyle: TextDecorationStyle.solid);
 
-List<Widget> _buildCertificationList(BuildContext context, int firstIndex) {
-  List<Widget> items = [];
-  for (int index = 0;
-      index < trainingData[firstIndex].certifications.length;
-      index++) {
-    items.add(Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Flexible(
-          fit: FlexFit.loose,
-          child: Text(
-            "- ${trainingData[firstIndex].certifications[index].name}",
-            style: TextStyle(
-              fontStyle: FontStyle.italic,
-              color: AppColors.white,
-              fontSize: _responsiveFontSize(context, 12, 16, mobileWidthLimit),
-            ),
-          ),
-        ),
-      ],
-    ));
-  }
-  return items;
-}
-
 Widget _buildSectionHeader(String title, BuildContext context) {
   return Wrap(
     children: [
@@ -87,12 +62,6 @@ Widget _buildSectionHeader(String title, BuildContext context) {
       ),
     ],
   );
-}
-
-double _responsiveFontSize(BuildContext context, double fontsize,
-    double fontMaxSize, double screenMaxSize) {
-  double screenWidth = MediaQuery.of(context).size.width;
-  return screenWidth >= screenMaxSize ? fontMaxSize : fontsize;
 }
 
 class MyHomePage extends StatefulWidget {
@@ -695,6 +664,38 @@ class HeroSection extends StatelessWidget {
 class TrainingSection extends StatelessWidget {
   const TrainingSection({super.key});
 
+  double _responsiveFontSize(BuildContext context, double fontsize,
+      double fontMaxSize, double screenMaxSize) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    return screenWidth >= screenMaxSize ? fontMaxSize : fontsize;
+  }
+
+  List<Widget> _buildCertificationList(BuildContext context, int firstIndex) {
+    List<Widget> items = [];
+    for (int index = 0;
+    index < trainingData[firstIndex].certifications.length;
+    index++) {
+      items.add(Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Flexible(
+            fit: FlexFit.loose,
+            child: Text(
+              "- ${trainingData[firstIndex].certifications[index].name}",
+              style: TextStyle(
+                fontStyle: FontStyle.italic,
+                color: AppColors.white,
+                fontSize: _responsiveFontSize(context, 12, 16, mobileWidthLimit),
+              ),
+            ),
+          ),
+        ],
+      ));
+    }
+    return items;
+  }
+
+
   @override
   Widget build(BuildContext context) {
     Widget mobileView = ListView.builder(
@@ -812,7 +813,7 @@ class TrainingSection extends StatelessWidget {
                                   elevation: 5,
                                 ),
                                 child: const Text(
-                                  "Détails de la formation",
+                                  "En savoir plus",
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 16,
@@ -961,7 +962,7 @@ class TrainingSection extends StatelessWidget {
                                   elevation: 5,
                                 ),
                                 child: const Text(
-                                  "Détails de la formation",
+                                  "En savoir plus",
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 16,
@@ -1108,7 +1109,7 @@ class TrainingSection extends StatelessWidget {
                                   elevation: 5,
                                 ),
                                 child: const Text(
-                                  "Détails de la formation",
+                                  "En savoir plus",
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 16,

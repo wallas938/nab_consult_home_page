@@ -47,6 +47,7 @@ class _MyDrawerState extends State<MyDrawer> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      backgroundColor: AppColors.white,
       child: ListView(
         // Important: Remove any padding from the ListView.
         padding: EdgeInsets.zero,
@@ -54,9 +55,8 @@ class _MyDrawerState extends State<MyDrawer> {
           DrawerHeader(
             padding: const EdgeInsets.all(20),
             decoration: const BoxDecoration(
-              color: AppColors.amberOpacityTo4,
             ),
-            child: Image.asset("assets/images/nab_consult.png"),
+            child: Image.asset("assets/images/nab_consult_logo.png"),
           ),
           Align(
             alignment: Alignment.topRight,
@@ -78,10 +78,10 @@ class _MyDrawerState extends State<MyDrawer> {
               iconColor: Colors.redAccent,
             ),
           ),
-          const Divider(
-            height: .1,
-            color: AppColors.grey,
-          ),
+          // const Divider(
+          //   height: .1,
+          //   color: AppColors.grey,
+          // ),
           const SizedBox(
             height: 20,
           ),
@@ -132,112 +132,3 @@ class _MyDrawerState extends State<MyDrawer> {
     );
   }
 }
-
-// Row(
-//   children: [
-//     const SizedBox(
-//       width: 20,
-//     ),
-//     const Icon(
-//       Icons.home,
-//       color: Color.fromRGBO(255, 193, 7, .9),
-//       size: 28,
-//     ),
-//     Expanded(
-//       child: Padding(
-//         padding: const EdgeInsets.only(right: 150),
-//         child: ListTile(
-//           title: Text(
-//             textAlign: TextAlign.center,
-//             'Accueil',
-//             style: AppTypography.headingS(Colors.black),
-//           ),
-//           focusColor: Colors.amber,
-//           selected: true,
-//           onTap: () {
-//             // Update the state of the app.
-//             // ...
-//           },
-//         ),
-//       ),
-//     ),
-//   ],
-// ),
-// const SizedBox(
-//   height: 10,
-// ),
-// /*** ABOUT_US_LINK ***/
-// Row(
-//   children: [
-//     const SizedBox(
-//       width: 20,
-//     ),
-//     const Icon(
-//       Icons.group,
-//       color: Color.fromRGBO(255, 193, 7, .9),
-//       size: 28,
-//     ),
-//     Expanded(
-//       child: Padding(
-//         padding: const EdgeInsets.only(right: 50),
-//         child: ListTile(
-//           title: Text(
-//             textAlign: TextAlign.center,
-//             'Qui Sommes Nous ?',
-//             style: AppTypography.headingS(Colors.black),
-//           ),
-//           focusColor: Colors.amber,
-//           selected: true,
-//           onTap: () {
-//             // Update the state of the app.
-//             // ...
-//           },
-//         ),
-//       ),
-//     ),
-//   ],
-// ),
-// const SizedBox(
-//   height: 10,
-// ),
-// /*** CONTACT_US_LINK ***/
-// Row(
-//   children: [
-//     const SizedBox(
-//       width: 20,
-//     ),
-//     const Icon(
-//       Icons.mail,
-//       color: Color.fromRGBO(255, 193, 7, .9),
-//       size: 28,
-//     ),
-//     Expanded(
-//       child: Padding(
-//         padding: const EdgeInsets.only(right: 83),
-//         child: ListTile(
-//           title: Text(
-//             textAlign: TextAlign.center,
-//             'Nous Contacter',
-//             style: AppTypography.headingS(Colors.black),
-//           ),
-//           focusColor: Colors.amber,
-//           selected: true,
-//           onTap: () {
-//             // Update the state of the app.
-//             // ...
-//           },
-//         ),
-//       ),
-//     ),
-//   ],
-// ),
-// SizedBox(
-//   height: 30.h,
-// ),
-// const Divider(
-//   color: Colors.black26,
-//   thickness: .3,
-// ),
-// const SizedBox(
-//   height: 15,
-// ),
